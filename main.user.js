@@ -3,8 +3,8 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.0
 // @description  Custom enhancements for Scale application with toggleable features (Modular Version)
-// @updateURL    https://raw.githubusercontent.com/Blake-goofy/ScalePlus/main/main.js
-// @downloadURL  https://raw.githubusercontent.com/Blake-goofy/ScalePlus/main/main.js
+// @updateURL    https://raw.githubusercontent.com/Blake-goofy/ScalePlus/main/main.user.js
+// @downloadURL  https://raw.githubusercontent.com/Blake-goofy/ScalePlus/main/main.user.js
 // @icon         https://scale20.byjasco.com/favicon.ico
 // @author       Blake, Nash
 // @match        https://scaleqa.byjasco.com/scale/*

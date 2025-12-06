@@ -1,12 +1,12 @@
 # ScalePlus Copilot Instructions
 
 ## Project Overview
-ScalePlus is a Tampermonkey userscript that enhances the Scale application UI with modular feature enhancements. It uses a modular architecture where `main.js` serves as an orchestrator loading independent feature modules from `modules/`.
+ScalePlus is a Tampermonkey userscript that enhances the Scale application UI with modular feature enhancements. It uses a modular architecture where `main.user.js` serves as an orchestrator loading independent feature modules from `modules/`.
 
 ## Architecture
 
 ### Module System
-- **Entry Point**: `main.js` loads all modules via `@require` directives and waits for them to initialize
+- **Entry Point**: `main.user.js` loads all modules via `@require` directives and waits for them to initialize
 - **Module Pattern**: Each module exports a namespace object to `window.ScalePlus*` (e.g., `window.ScalePlusDarkMode`, `window.ScalePlusFavorites`)
 - **Module Loading**: Main script uses `waitForModules()` promise to ensure all modules are loaded before initialization
 - **Module Structure**: Every module is a self-contained userscript with its own `@name`, `@namespace`, and IIFE wrapper
@@ -112,15 +112,15 @@ Dark mode styles use `body.scaleplus-dark-mode` class prefix for specificity.
 
 ### Adding New Features
 1. Create new module file in `modules/` directory
-2. Add `@require` directive in `main.js` for new module
-3. Add module check to `waitForModules()` promise in `main.js`
+2. Add `@require` directive in `main.user.js` for new module
+3. Add module check to `waitForModules()` promise in `main.user.js`
 4. Add setting key to `settings.js` SETTINGS and DEFAULTS objects
 5. Add UI toggle in `settings-ui.js` modal HTML
 6. Update README.md with feature documentation
 
 ### GitHub Distribution
 Script is distributed via raw GitHub URLs in `@require` and `@updateURL` directives. Main script URL:
-`https://raw.githubusercontent.com/Blake-goofy/ScalePlus/main/main.js`
+`https://raw.githubusercontent.com/Blake-goofy/ScalePlus/main/main.user.js`
 
 ## Important Context
 

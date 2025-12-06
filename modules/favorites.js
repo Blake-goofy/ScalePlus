@@ -559,71 +559,105 @@
         },
 
         checkForPendingFilter() {
-            if (!location.hash.includes('pendingFilter=')) return;
+            const hashParams = new URLSearchParams(window.location.hash.substring(1));
+            const pendingFilterName = hashParams.get('pendingFilter');
 
-            let filterName;
-            try {
-                filterName = decodeURIComponent(location.hash.split('pendingFilter=')[1].split('&')[0]);
-            } catch (e) {
-                console.warn('[ScalePlus Favorites] Could not parse pending filter from hash:', e);
-                return;
-            }
+            if (!pendingFilterName || this.hasProcessedPendingFilter) return;
 
-            if (!filterName || this.hasProcessedPendingFilter) return;
-
-            console.log('[ScalePlus Favorites] Pending filter detected:', filterName);
+            console.log('[ScalePlus Favorites] Pending filter detected:', pendingFilterName);
+            this.hasProcessedPendingFilter = true;
 
             let retryCount = 0;
-            const maxRetries = 10;
+            const maxRetries = 50;
 
-            const clickPendingFilter = () => {
+            const applyPendingFilter = () => {
                 const formId = window.ScalePlusUtilities?.getFormIdFromUrl();
-                if (!formId) {
+                
+                // Check if favorites dropdown exists
+                const favoritesDropdown = document.querySelector('#InsightMenuFavoritesDropdown');
+                if (!favoritesDropdown || !formId) {
                     retryCount++;
                     if (retryCount < maxRetries) {
-                        setTimeout(clickPendingFilter, 500);
+                        setTimeout(applyPendingFilter, 200);
+                    } else {
+                        console.warn('[ScalePlus Favorites] Timed out waiting for favorites dropdown');
                     }
                     return;
                 }
 
-                const findAndClickFavorite = () => {
-                    const favoriteLinks = document.querySelectorAll('a[id="SearchPaneMenuFavoritesChooseSearch"]');
-
-                    for (const link of favoriteLinks) {
-                        const linkText = link.querySelector('.deletesavedsearchtext')?.textContent?.trim();
-                        if (linkText === filterName) {
-                            setTimeout(() => {
-                                this.fetchSavedFilter(filterName).then(sf => {
-                                    this.applySavedFilters(sf, filterName);
-                                    const applyBtn = document.getElementById('InsightMenuApply');
-                                    if (applyBtn && window.ScalePlusUtilities?.isVisible(applyBtn)) {
-                                        applyBtn.click();
-                                    }
-                                    this.hasProcessedPendingFilter = true;
-                                }).catch(err => console.warn('[ScalePlus Favorites] Failed to fetch pending filter', err));
-                            }, 800);
-                            return;
-                        }
-                    }
-
+                // Wait for favorites to be loaded
+                const favoriteLinks = document.querySelectorAll('a[id="SearchPaneMenuFavoritesChooseSearch"]');
+                if (favoriteLinks.length === 0) {
                     retryCount++;
                     if (retryCount < maxRetries) {
-                        setTimeout(clickPendingFilter, favoriteLinks.length > 0 ? 500 : 1000);
+                        setTimeout(applyPendingFilter, 200);
                     } else {
-                        this.fetchSavedFilter(filterName).then(sf => {
-                            this.applySavedFilters(sf, filterName);
-                            const applyBtn = document.getElementById('InsightMenuApply');
-                            if (applyBtn && window.ScalePlusUtilities?.isVisible(applyBtn)) {
-                                applyBtn.click();
-                            }
-                        }).catch(err => console.warn('[ScalePlus Favorites] Failed to fetch pending filter', err));
+                        console.warn('[ScalePlus Favorites] No favorite links found');
                     }
-                };
+                    return;
+                }
 
-                findAndClickFavorite();
+                // Find the matching favorite
+                let foundFavorite = null;
+                for (const link of favoriteLinks) {
+                    const linkText = link.querySelector('.deletesavedsearchtext')?.textContent?.trim();
+                    if (linkText === pendingFilterName) {
+                        foundFavorite = link;
+                        break;
+                    }
+                }
+
+                if (!foundFavorite) {
+                    console.warn('[ScalePlus Favorites] Pending filter not found in favorites:', pendingFilterName);
+                    // Clean up URL even if filter not found
+                    this.cleanupPendingFilterFromUrl();
+                    return;
+                }
+
+                // Fetch and apply the saved filter
+                this.fetchSavedFilter(pendingFilterName).then(savedFilters => {
+                    console.log('[ScalePlus Favorites] Applying pending filter:', pendingFilterName);
+                    
+                    // Apply the filters
+                    this.applySavedFilters(savedFilters, pendingFilterName);
+                    
+                    // Click the Apply button after a short delay
+                    setTimeout(() => {
+                        const applyBtn = document.getElementById('InsightMenuApply');
+                        if (applyBtn && window.ScalePlusUtilities?.isVisible(applyBtn)) {
+                            console.log('[ScalePlus Favorites] Clicking Apply button for pending filter');
+                            applyBtn.click();
+                        }
+                        
+                        // Clean up the URL after applying
+                        setTimeout(() => this.cleanupPendingFilterFromUrl(), 500);
+                    }, 300);
+                }).catch(err => {
+                    console.warn('[ScalePlus Favorites] Failed to fetch pending filter:', err);
+                    this.cleanupPendingFilterFromUrl();
+                });
             };
 
-            clickPendingFilter();
+            applyPendingFilter();
+        },
+
+        cleanupPendingFilterFromUrl() {
+            if (!location.hash.includes('pendingFilter=')) return;
+
+            console.log('[ScalePlus Favorites] Cleaning up pendingFilter from URL');
+            
+            // Remove pendingFilter parameter from hash
+            const hashParams = new URLSearchParams(window.location.hash.substring(1));
+            hashParams.delete('pendingFilter');
+            
+            // Update URL without reloading
+            const newHash = hashParams.toString();
+            if (newHash) {
+                history.replaceState(null, '', '#' + newHash);
+            } else {
+                // If no other hash parameters, remove hash entirely
+                history.replaceState(null, '', location.pathname + location.search);
+            }
         }
     };
 

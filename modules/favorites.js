@@ -629,6 +629,11 @@
                             applyBtn.click();
                         }
                         
+                        // Re-enhance the clear filters button after pending filter is applied
+                        setTimeout(() => {
+                            this.enhanceClearFiltersButton();
+                        }, 100);
+                        
                         // Clean up the URL after applying
                         setTimeout(() => this.cleanupPendingFilterFromUrl(), 500);
                     }, 300);

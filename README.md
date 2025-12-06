@@ -164,7 +164,7 @@ The **Advanced Criteria Enhance** feature provides enhances the advanced criteri
    - Close and reopen your browser to ensure all settings are applied
 
 4. **Install ScalePlus Script**
-   - Click here: [main.js](https://github.com/Blake-goofy/ScalePlus/raw/refs/heads/main/main.user.js)
+   - Click here: [main.user.js](https://github.com/Blake-goofy/ScalePlus/raw/refs/heads/main/main.user.js)
    - Tampermonkey will automatically prompt you to install
    - Click **Install**
 

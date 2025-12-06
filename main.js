@@ -7,10 +7,7 @@
 // @downloadURL  https://raw.githubusercontent.com/Blake-goofy/ScalePlus/main/main.js
 // @icon         https://scale20.byjasco.com/favicon.ico
 // @author       Blake, Nash
-// @match        https://scaleqa.byjasco.com/scale/*
-// @match        https://scale20.byjasco.com/scale/*
-// @match        https://scaleqa.byjasco.com/RF/*
-// @match        https://scale20.byjasco.com/RF/*
+// @match        https://scale*
 // @require      https://raw.githubusercontent.com/Blake-goofy/ScalePlus/main/modules/settings.js
 // @require      https://raw.githubusercontent.com/Blake-goofy/ScalePlus/main/modules/dark-mode.js
 // @require      https://raw.githubusercontent.com/Blake-goofy/ScalePlus/main/modules/utilities.js
@@ -27,6 +24,15 @@
 
 (function () {
     'use strict';
+
+    // Check if we're on a valid Scale or RF page
+    const url = window.location.href;
+    const isValidPage = url.includes('/scale/') || url.includes('/Scale/') || url.includes('/RF/');
+    
+    if (!isValidPage) {
+        console.log('[ScalePlus] Not on Scale or RF page, skipping initialization');
+        return;
+    }
 
     console.log('[ScalePlus] Main script initializing - Modular version 1.0');
 

@@ -621,17 +621,17 @@
                     // Apply the filters
                     this.applySavedFilters(savedFilters, pendingFilterName);
                     
-                    // Clean up the URL first
-                    this.cleanupPendingFilterFromUrl();
-                    
-                    // Click the Apply button after a short delay
+                    // Click the Apply button after a delay to let filters fully render
                     setTimeout(() => {
                         const applyBtn = document.getElementById('InsightMenuApply');
                         if (applyBtn && window.ScalePlusUtilities?.isVisible(applyBtn)) {
                             console.log('[ScalePlus Favorites] Clicking Apply button for pending filter');
                             applyBtn.click();
                         }
-                    }, 300);
+                        
+                        // Clean up the URL after clicking Apply
+                        setTimeout(() => this.cleanupPendingFilterFromUrl(), 500);
+                    }, 800);
                 }).catch(err => {
                     console.warn('[ScalePlus Favorites] Failed to fetch pending filter:', err);
                     this.cleanupPendingFilterFromUrl();

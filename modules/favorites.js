@@ -621,6 +621,9 @@
                     // Apply the filters
                     this.applySavedFilters(savedFilters, pendingFilterName);
                     
+                    // Clean up the URL first
+                    this.cleanupPendingFilterFromUrl();
+                    
                     // Click the Apply button after a short delay
                     setTimeout(() => {
                         const applyBtn = document.getElementById('InsightMenuApply');
@@ -628,20 +631,6 @@
                             console.log('[ScalePlus Favorites] Clicking Apply button for pending filter');
                             applyBtn.click();
                         }
-                        
-                        // Re-enhance the clear filters button after pending filter is applied
-                        setTimeout(() => {
-                            // Remove the enhanced flag first so it can be re-enhanced
-                            const clearBtn = document.querySelector('#InsightMenuActionClearFilters');
-                            if (clearBtn) {
-                                clearBtn.removeAttribute('data-enhanced');
-                                this.enhanceClearFiltersButton();
-                                console.log('[ScalePlus Favorites] Re-enhanced clear filters button after pending filter');
-                            }
-                        }, 100);
-                        
-                        // Clean up the URL after applying
-                        setTimeout(() => this.cleanupPendingFilterFromUrl(), 500);
                     }, 300);
                 }).catch(err => {
                     console.warn('[ScalePlus Favorites] Failed to fetch pending filter:', err);
@@ -669,6 +658,12 @@
                 // If no other hash parameters, remove hash entirely
                 history.replaceState(null, '', location.pathname + location.search);
             }
+            
+            // Reset the flag after a short delay so clear filters will work properly
+            setTimeout(() => {
+                this.hasProcessedPendingFilter = false;
+                console.log('[ScalePlus Favorites] Reset hasProcessedPendingFilter flag - clear filters will now apply default filter');
+            }, 1000);
         }
     };
 

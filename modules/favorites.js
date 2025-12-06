@@ -631,7 +631,13 @@
                         
                         // Re-enhance the clear filters button after pending filter is applied
                         setTimeout(() => {
-                            this.enhanceClearFiltersButton();
+                            // Remove the enhanced flag first so it can be re-enhanced
+                            const clearBtn = document.querySelector('#InsightMenuActionClearFilters');
+                            if (clearBtn) {
+                                clearBtn.removeAttribute('data-enhanced');
+                                this.enhanceClearFiltersButton();
+                                console.log('[ScalePlus Favorites] Re-enhanced clear filters button after pending filter');
+                            }
                         }, 100);
                         
                         // Clean up the URL after applying

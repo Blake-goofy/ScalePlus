@@ -1,141 +1,21 @@
 # ScalePlus Copilot Instructions
 
-## Project Overview
-ScalePlus is a Tampermonkey userscript that enhances the Scale application UI with modular feature enhancements. It uses a modular architecture where `main.user.js` serves as an orchestrator loading independent feature modules from `modules/`.
-
-## Architecture
-
-### Module System
-- **Entry Point**: `main.user.js` loads all modules via `@require` directives and waits for them to initialize
-- **Module Pattern**: Each module exports a namespace object to `window.ScalePlus*` (e.g., `window.ScalePlusDarkMode`, `window.ScalePlusFavorites`)
-- **Module Loading**: Main script uses `waitForModules()` promise to ensure all modules are loaded before initialization
-- **Module Structure**: Every module is a self-contained userscript with its own `@name`, `@namespace`, and IIFE wrapper
-
-### Core Modules
-- `settings.js` - Central settings management with localStorage persistence
-- `utilities.js` - Shared helper functions (URL parsing, visibility checks, text normalization)
-- `settings-ui.js` - Modal-based settings interface, injects into Scale navigation
-- `dark-mode.js` - CSS injection for dark theme styling
-- `favorites.js` - Default filter management with user-scoped localStorage keys
-- `search-pane.js` - Auto-shows search pane on page load
-- `context-menu.js` - Right-click menus for grid items and favorites
-- `keyboard.js` - Custom keyboard shortcuts (Enter, F5) and mouse interactions
-- `environment-labels.js` - Visual environment indicators (QA/Production)
-- `advanced-criteria.js` - Enhances advanced search criteria UI
-- `tooltips.js` - Adds tooltips to UI elements
-
-## Coding Conventions
-
-### Module Initialization Pattern
-```javascript
-(function() {
-    'use strict';
-    
-    window.ScalePlusModuleName = {
-        init() {
-            console.log('[ScalePlus ModuleName] Module initialized');
-            // initialization code
-        },
-        // other methods
-    };
-    
-    window.ScalePlusModuleName.init();
-})();
-```
-
-### Settings Access
-- Always check if module is enabled: `window.ScalePlusSettings?.isEnabled(window.ScalePlusSettings.SETTINGS.SETTING_KEY)`
-- Settings keys defined in `SETTINGS` object, defaults in `DEFAULTS` object
-- Use `getSetting()` and `setSetting()` for direct localStorage access
-
-### Page Detection
-Every Scale-specific module should check environment:
-```javascript
-function isScalePage() {
-    const url = window.location.href;
-    return url.includes('/scale/') || url.includes('/Scale/');
-}
-```
-Skip initialization on RF pages (different UI structure).
-
-### User-Scoped Storage
-Favorites and user-specific settings use username from cookie:
-```javascript
-getUsernameFromCookie() {
-    const allCookies = document.cookie;
-    const cookie = allCookies.split('; ').find(row => row.startsWith('UserInformation='));
-    // parse UserName from cookie value
-}
-```
-Storage keys: `${formId}${FeatureName}${username}`
-
-### DOM Manipulation
-- Use `window.ScalePlusUtilities.isVisible(el)` to check element visibility (handles `offsetParent`, computed styles, disabled classes)
-- Wait for DOM elements with polling pattern: `const tryClick = () => { if (element) { ... } else { setTimeout(tryClick, 200); }}`
-- For mutations, use `MutationObserver` with specific target selectors
-
-### Style Injection and UI Integration
-**CRITICAL**: Always reference existing Scale application elements when adding UI components to ensure compatibility between different versions of Scale.
-
-```javascript
-// Style injection pattern
-const style = document.createElement('style');
-style.id = 'unique-style-id';
-style.textContent = `/* CSS here */`;
-document.head.appendChild(style);
-```
-
-**Scale UI Adoption Guidelines**:
-- **Extract colors from existing Scale elements**: Use `getComputedStyle()` to retrieve colors from Scale modals, buttons, or panels instead of hardcoding hex values
-- **Reuse Scale components**: Clone or reference existing Scale UI components (modals, toggles, buttons) for consistent styling
-- **Adopt Scale animations**: Match transition durations and animation styles from existing Scale elements
-- **Example**: When creating a modal, inspect an existing Scale modal's computed styles for background colors, border radius, shadows, and fonts
-
-```javascript
-// Example: Extract modal background color from existing Scale modal
-const existingModal = document.querySelector('.modal-content');
-if (existingModal) {
-    const bgColor = getComputedStyle(existingModal).backgroundColor;
-    const borderRadius = getComputedStyle(existingModal).borderRadius;
-    // Use these values in your custom styles
-}
-```
-
-Dark mode styles use `body.scaleplus-dark-mode` class prefix for specificity.
-
-## Development Workflow
-
-### Testing
-- Load script in Tampermonkey on Scale QA environment (`scaleqa.byjasco.com`)
-- Check browser console for `[ScalePlus ModuleName]` initialization logs
-- Test features via "Configure workstation" settings modal
-
-### Adding New Features
-1. Create new module file in `modules/` directory
-2. Add `@require` directive in `main.user.js` for new module
-3. Add module check to `waitForModules()` promise in `main.user.js`
-4. Add setting key to `settings.js` SETTINGS and DEFAULTS objects
-5. Add UI toggle in `settings-ui.js` modal HTML
-6. Update README.md with feature documentation
-
-### GitHub Distribution
-Script is distributed via raw GitHub URLs in `@require` and `@updateURL` directives. Main script URL:
-`https://raw.githubusercontent.com/Blake-goofy/ScalePlus/main/main.user.js`
-
-## Important Context
-
-### Target Application
-Scale is a web application with specific DOM structure:
-- Grid component: `#ListPaneDataGrid_scroll`
-- Navigation buttons: `#InsightMenuApply`, `#InsightMenuActionStopSearch`
-- Favorites: `.favoritefilters` container
-- Form identification: URL pattern `/insights/(\d+)` contains form ID
-
-### Userscript Constraints
-- No access to Scale's internal JavaScript (different execution context)
-- Must use DOM observation and mutation events to detect changes
-- localStorage is shared across all Scale pages for same domain
-- `@grant none` means running in page context, not isolated
-
-### Multi-User Environment
-Features must handle multiple users on same browser (shared computer scenarios). Use user-scoped localStorage keys via `getUsernameFromCookie()` for personalized settings like default filters.
+- **What this is**: A Tampermonkey userscript (`main.user.js`) that orchestrates many self-contained modules in `modules/` via `@require`. No build step; edits ship directly via the raw GitHub URLs referenced in the metadata headers.
+- **Module pattern**: Each module is an IIFE exporting `window.ScalePlus<Feature>` and calls `init()` immediately. Most modules gate on `isScalePage()` (presence of `/scale/` in URL) and log `[ScalePlus <Module>]` when skipping or starting.
+- **Orchestration**: `main.user.js` waits for all `window.ScalePlus*` namespaces (settings, dark mode, utilities, search pane, favorites, context menu, keyboard, environment labels, advanced criteria, tooltips, checkbox size, settings UI) before final log. Modules are responsible for their own initialization logic and guards.
+- **Settings backbone**: `modules/settings.js` defines `SETTINGS` keys and `DEFAULTS` (stored in `localStorage`). `isEnabled(key)` treats any value other than `'false'` as on; some defaults are set dynamically (env labels default on for QA, off for prod; F5/tab duplicator forced false on first run). Always read via `ScalePlusSettings.isEnabled` before acting.
+- **Settings UI**: `modules/settings-ui.js` injects a modal (`#scaleplus-settings-modal`) and toggles per setting. On non-Scale pages it exposes a no-op `ScalePlusSettingsUI` to avoid breakage. Add new toggles here when adding settings.
+- **Utilities**: `modules/utilities.js` offers `isVisible(el)` (checks display, visibility, pointer-events, disabled classes), whitespace normalization, form-id parsing from `/insights/<id>`, and a simple username cookie lookup. Prefer these helpers before DOM actions.
+- **Favorites/default filters**: `modules/favorites.js` stores per-user defaults with keys `${formId}DefaultFilter${username}` using the `UserInformation` cookie. It injects star icons in the favorites dropdown, auto-applies defaults on page load/clear, respects `#pendingFilter=` hashes for cross-tab opens, fetches saved searches via `_webUi`/`_webSession` Scale APIs, and applies advanced/combobox criteria plus kicks `InsightMenuApply` after pending filters. Cleanup routines remove stale localStorage entries and deleted favorites.
+- **Keyboard & mouse**: `modules/keyboard.js` handles Enter/F5 overrides, middle-click copy, Ctrl+left or middle-click to open favorites in new tab, and clipboard tooltips. It defers to `ScalePlusSettings` flags (`CUSTOM_ENTER`, `F5_BEHAVIOR`, `MIDDLE_CLICK`, `TAB_DUPLICATOR`). Uses `isVisible` before clicking Apply/Stop.
+- **Context menu**: `modules/context-menu.js` adds a right-click menu for grid cells and favorites (copy + set/remove default) gated by `RIGHT_CLICK_MENU`. It highlights cells via `.scaleplus-context-highlight` and reuses `ScalePlusKeyboard.copyInnerText`.
+- **Search pane**: `modules/search-pane.js` clicks `a[data-toggle="search"]` if the pane is hidden, controlled by `SHOW_SEARCH_PANE` with a retry/poll pattern.
+- **Advanced criteria**: `modules/advanced-criteria.js` shows a count in the accordion header and toggles the `Condition` column plus widths in `#SearchPaneAdvCritAdvCritGrid` using jQuery `igGrid`. Only runs when `ADV_CRITERIA_ENHANCEMENT` is enabled.
+- **Dark mode**: `modules/dark-mode.js` toggles `body.scaleplus-dark-mode` (plus instant RF-page guard) and injects scoped styles for grid, scrollbars, loading spinner, and RF forms. Works alongside other modules (context menu, checkbox size) via the body class.
+- **Checkbox size**: `modules/checkbox-size.js` extracts native checkbox colors then injects styles and adds `body.scaleplus-bigger-checkboxes` when `BIGGER_CHECKBOXES` is on; targets `span[name="chk"][data-role="checkbox"]` row selectors.
+- **Environment labels**: `modules/environment-labels.js` reads `ENV_LABELS` plus custom names (`ENV_QA_NAME`, `ENV_PROD_NAME`) and injects a centered banner, also tinting `#topNavigationBar` border.
+- **Tooltips**: `modules/tooltips.js` assigns titles to key nav/actions (Apply, Stop, Clear, favorites, search/detail toggles, menus) and re-applies via a `MutationObserver` when menus re-render.
+- **DOM/Selector expectations**: Features rely on Scale IDs/classes such as `#ListPaneDataGrid_scroll`, `#InsightMenuApply`, `#InsightMenuFavoritesDropdown`, `#SearchPaneMenuFavoritesChooseSearch`, and `#topNavigationBar`. Many behaviors use polling (`setTimeout` loops) or `MutationObserver` to wait for dynamic content.
+- **Page types**: Several modules skip RF pages using `isScalePage()`; dark mode explicitly supports RF via a separate style block. Ensure new features guard appropriately and add RF handling only when intentionally supported.
+- **Adding a module/feature**: Create `modules/<name>.js` IIFE exporting `window.ScalePlusX`. Add `@require` in `main.user.js`, include namespace in `waitForModules`, add setting key + default in `settings.js`, wire toggle in `settings-ui.js`, and document any new selectors/side effects. Respect existing patterns for user-scoped storage and body classes.
+- **Distribution/testing**: The userscript runs directly in-page (`@grant none`). Test by loading in Tampermonkey on QA (`scaleqa.byjasco.com`) or prod, watch console for module logs, and verify settings via the "Configure workstation" modal. Raw distribution URL: `https://raw.githubusercontent.com/Blake-goofy/ScalePlus/main/main.user.js`.

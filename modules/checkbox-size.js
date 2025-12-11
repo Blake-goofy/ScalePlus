@@ -13,9 +13,12 @@
     window.ScalePlusCheckboxSize = {
         init() {
             console.log('[ScalePlus Checkbox Size] Module initialized');
+            this.sizes = { checkbox: 30, icon: 26 };
             this.extractColors();
             this.injectStyles();
             this.applyCheckboxSize();
+            // Re-measure after rows render to avoid gaps on varying row heights
+            this.waitForRowHeader();
         },
 
         isScalePage() {
@@ -52,22 +55,53 @@
                     
                     console.log('[ScalePlus Checkbox Size] Extracted colors:', this.colors);
                     
-                    // Re-inject styles with correct colors
-                    const oldStyle = document.getElementById('scaleplus-checkbox-size-styles');
-                    if (oldStyle) {
-                        oldStyle.remove();
-                    }
-                    this.injectStyles();
+                        // Recompute sizing and re-inject styles with measured values/colors
+                        this.recomputeSizesAndStyles();
                 }
             }, 500);
         },
 
+        measureSizes() {
+            // Derive checkbox and icon sizes from the live row header height to avoid gaps
+            const fallbackCheckbox = 30;
+            const fallbackIcon = 26;
+
+            let checkboxSize = fallbackCheckbox;
+            let iconSize = fallbackIcon;
+
+            const rowHeader = document.querySelector('th.ui-iggrid-rowselector-class');
+            if (rowHeader) {
+                const rect = rowHeader.getBoundingClientRect();
+                if (rect && rect.height) {
+                    // Leave a tiny margin to avoid forcing row expansion
+                    checkboxSize = Math.max(20, Math.round(rect.height - 2));
+                    iconSize = Math.max(checkboxSize - 4, Math.round(checkboxSize * 0.85));
+                }
+            } else {
+                // Fall back to any checkbox we can find
+                const checkbox = document.querySelector('span[name="chk"][data-role="checkbox"]');
+                if (checkbox) {
+                    const rect = checkbox.getBoundingClientRect();
+                    if (rect && rect.height) {
+                        checkboxSize = Math.max(20, Math.round(rect.height));
+                        iconSize = Math.max(checkboxSize - 4, Math.round(checkboxSize * 0.85));
+                    }
+                }
+            }
+
+            this.sizes = { checkbox: checkboxSize, icon: iconSize };
+        },
+
         injectStyles() {
+            this.measureSizes();
+
             // Use extracted colors or fallbacks
             const uncheckedBg = this.colors?.uncheckedBg || '#f4f4f8';
             const uncheckedBorder = this.colors?.uncheckedBorder || '#6f6f6f';
             const checkedBg = this.colors?.checkedBg || '#3875d7';
             const checkedBorder = this.colors?.checkedBorder || '#3875d7';
+            const checkboxSize = this.sizes?.checkbox || 30;
+            const iconSize = this.sizes?.icon || 26;
             
             const checkboxStyles = `
         /* Bigger Checkboxes - Make row selection checkboxes larger and easier to click */
@@ -104,10 +138,10 @@
         /* Remove top/bottom borders to fill full 31.36px height with no gaps */
         /* Make it square - reduce height by 1px to prevent row expansion */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] {
-            width: 30.36px !important;
-            height: 30.36px !important;
-            min-width: 30.36px !important;
-            min-height: 30.36px !important;
+            width: ${checkboxSize}px !important;
+            height: ${checkboxSize}px !important;
+            min-width: ${checkboxSize}px !important;
+            min-height: ${checkboxSize}px !important;
             display: inline-block !important;
             padding: 0 !important;
             margin: 0 !important;
@@ -121,10 +155,10 @@
         
         /* Scale the inner icon to fill the checkbox */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] .ui-icon {
-            width: 26px !important;
-            height: 26px !important;
+            width: ${iconSize}px !important;
+            height: ${iconSize}px !important;
             display: block !important;
-            background-size: 26px 26px !important;
+            background-size: ${iconSize}px ${iconSize}px !important;
             margin: 0 !important;
             position: absolute !important;
             top: 50% !important;
@@ -196,10 +230,48 @@
         }
             `;
 
+            const oldStyle = document.getElementById('scaleplus-checkbox-size-styles');
+            if (oldStyle) {
+                oldStyle.remove();
+            }
+
             const styleElement = document.createElement('style');
             styleElement.id = 'scaleplus-checkbox-size-styles';
             styleElement.textContent = checkboxStyles;
             document.head.appendChild(styleElement);
+        },
+
+        waitForRowHeader() {
+            const attempt = () => {
+                const header = document.querySelector('th.ui-iggrid-rowselector-class');
+                if (header) {
+                    const rect = header.getBoundingClientRect();
+                    if (rect && rect.height > 0) {
+                        this.recomputeSizesAndStyles();
+                        return true;
+                    }
+                }
+                return false;
+            };
+
+            if (attempt()) return;
+
+            const observer = new MutationObserver(() => {
+                if (attempt()) {
+                    observer.disconnect();
+                }
+            });
+
+            observer.observe(document.body, { childList: true, subtree: true });
+
+            // Safety timeout to avoid long-lived observers if rows never render
+            setTimeout(() => observer.disconnect(), 6000);
+        },
+
+        recomputeSizesAndStyles() {
+            this.measureSizes();
+            this.injectStyles();
+            this.applyCheckboxSize();
         },
 
         applyCheckboxSize() {

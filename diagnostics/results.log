@@ -1,0 +1,31 @@
+=== ROW HEADER HTML ===
+<th role="rowheader" tabindex="0" class="ui-iggrid-rowselector-class ui-iggrid-selectedcell ui-state-active"><span class="ui-icon ui-icon-triangle-1-e" style="margin-left: -5px"></span><span name="chk" data-chk="on" data-role="checkbox" class="ui-state-default ui-corner-all ui-igcheckbox-normal " tabindex="0 "><span class="ui-icon ui-icon-check ui-igcheckbox-normal-on"></span></span></th>
+
+=== ROW HEADER STYLES ===
+height: 32.7812px
+padding: 0px
+margin: 0px
+line-height: 0px
+box-sizing: border-box
+
+=== CHECKBOX HTML (UNCHECKED) ===
+<span name="chk" data-chk="on" data-role="checkbox" class="ui-state-default ui-corner-all ui-igcheckbox-normal " tabindex="0 "><span class="ui-icon ui-icon-check ui-igcheckbox-normal-on"></span></span>
+
+=== CHECKBOX STYLES (UNCHECKED) ===
+width: 30.3594px
+height: 30.3594px
+padding: 0px
+margin: 0px
+border: 
+border-width: 0px 1px
+background-color: rgb(42, 42, 42)
+border-color: rgb(58, 58, 58)
+box-sizing: border-box
+
+=== CHECKED CHECKBOX (NATURAL STATE) ===
+background-color: rgb(42, 42, 42)
+border-color: rgb(58, 58, 58)
+border-width: 0px 1px
+
+=== FULL ROW HTML ===
+<tr data-id="1868636204" role="row" tabindex="0" aria-selected="true" class="ui-iggrid-activerow ui-state-focus"><th role="rowheader" tabindex="0" class="ui-iggrid-rowselector-class ui-iggrid-selectedcell ui-state-active"><span class="ui-icon ui-icon-triangle-1-e" style="margin-left: -5px"></span><span name="chk" data-chk="on" data-role="checkbox" class="ui-state-default ui-corner-all ui-igcheckbox-normal " tabindex="0 "><span class="ui-icon ui-icon-check ui-igcheckbox-normal-on"></span></span></th><td role="gridcell" aria-readonly="false" aria-describedby="ListPaneDataGrid_ICON" tabindex="0" class="ui-iggrid-selectedcell ui-state-active"></td><td role="gridcell" aria-readonly="false" aria-describedby="ListPaneDataGrid_FROZEN" tabindex="0" class="ui-iggrid-selectedcell ui-state-active"><span class="ui-igcheckbox-container" style="display:inline-block;" role="checkbox" aria-disabled="true" aria-checked="false" aria-label="Frozen" tabindex="0"><span class="" style="display:inline-block"><span style="display:block" class="ui-igcheckbox-small-off ui-icon ui-icon-check ui-igcheckbox-small-on"></span></span></span></td><td role="gridcell" aria-readonly="false" aria-describedby="ListPaneDataGrid_LOCATION" tabindex="0" data-vscr-padding-icrement="0" style="padding-right: 4px;" class="ui-iggrid-selectedcell ui-state-active">R02605</td></tr>

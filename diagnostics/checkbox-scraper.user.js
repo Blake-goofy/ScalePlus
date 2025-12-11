@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         ScalePlus Checkbox Diagnostic Tool
 // @namespace    http://tampermonkey.net/
-// @version      1.1
-// @description  Scrapes checkbox HTML and computed styles for debugging - Enhanced to capture checked state colors
+// @version      1.2
+// @description  Scrapes checkbox HTML
 // @author       Blake
 // @match        https://scaleqa.byjasco.com/scale/*
 // @match        https://scale20.byjasco.com/scale/*
@@ -14,7 +14,7 @@
 
     // Wait for page to load
     setTimeout(() => {
-        console.log('=== ScalePlus Checkbox Diagnostic Tool v1.1 ===');
+        console.log('=== ScalePlus Checkbox Diagnostic Tool v1.2 - State Change Detection ===');
         
         // Find first few rows
         const rows = document.querySelectorAll('tr[data-id]');
@@ -25,97 +25,101 @@
             const rowHeader = firstRow.querySelector('th.ui-iggrid-rowselector-class');
             const checkbox = firstRow.querySelector('span[name="chk"][data-role="checkbox"]');
             
-            if (rowHeader) {
-                console.log('\n=== ROW HEADER (TH) ===');
-                console.log('HTML:', rowHeader.outerHTML);
-                const thStyles = window.getComputedStyle(rowHeader);
-                console.log('Computed Styles:');
-                console.log('  height:', thStyles.height);
-                console.log('  padding:', thStyles.padding);
-                console.log('  margin:', thStyles.margin);
-                console.log('  line-height:', thStyles.lineHeight);
-                console.log('  vertical-align:', thStyles.verticalAlign);
-                console.log('  display:', thStyles.display);
-                console.log('  box-sizing:', thStyles.boxSizing);
-            }
+            // Capture BEFORE state
+            console.log('\n=== BEFORE STATE (INITIAL) ===');
+            const beforeState = captureState(firstRow, rowHeader, checkbox, 'BEFORE');
             
             if (checkbox) {
-                console.log('\n=== CHECKBOX SPAN (UNCHECKED) ===');
-                console.log('HTML:', checkbox.outerHTML);
-                const cbStyles = window.getComputedStyle(checkbox);
-                console.log('Computed Styles:');
-                console.log('  width:', cbStyles.width);
-                console.log('  height:', cbStyles.height);
-                console.log('  padding:', cbStyles.padding);
-                console.log('  margin:', cbStyles.margin);
-                console.log('  border:', cbStyles.border);
-                console.log('  border-width:', cbStyles.borderWidth);
-                console.log('  background-color:', cbStyles.backgroundColor);
-                console.log('  display:', cbStyles.display);
-                console.log('  vertical-align:', cbStyles.verticalAlign);
-                console.log('  box-sizing:', cbStyles.boxSizing);
+                // Toggle checkbox state and capture AFTER
+                const wasChecked = checkbox.getAttribute('data-chk') === 'on';
                 
-                const icon = checkbox.querySelector('.ui-icon');
-                if (icon) {
-                    console.log('\n=== CHECKBOX ICON ===');
-                    console.log('HTML:', icon.outerHTML);
-                    const iconStyles = window.getComputedStyle(icon);
-                    console.log('Computed Styles:');
-                    console.log('  width:', iconStyles.width);
-                    console.log('  height:', iconStyles.height);
-                    console.log('  background-color:', iconStyles.backgroundColor);
-                    console.log('  background-image:', iconStyles.backgroundImage);
-                }
-            }
-            
-            // Get a checked checkbox if one exists
-            const checkedCheckbox = document.querySelector('span[name="chk"][data-chk="on"]');
-            if (checkedCheckbox) {
-                console.log('\n=== CHECKED CHECKBOX (NATURAL STATE) ===');
-                console.log('HTML:', checkedCheckbox.outerHTML);
-                const checkedStyles = window.getComputedStyle(checkedCheckbox);
-                console.log('Computed Styles:');
-                console.log('  background-color:', checkedStyles.backgroundColor);
-                console.log('  border:', checkedStyles.border);
-                console.log('  border-color:', checkedStyles.borderColor);
-                console.log('  border-width:', checkedStyles.borderWidth);
-            } else {
-                console.log('\n=== NO CHECKED CHECKBOX FOUND - SIMULATING ===');
-                // Temporarily check a checkbox to get its natural color
-                if (checkbox) {
-                    const originalChk = checkbox.getAttribute('data-chk');
+                console.log(`\n=== Toggling checkbox from ${wasChecked ? 'CHECKED' : 'UNCHECKED'} to ${wasChecked ? 'UNCHECKED' : 'CHECKED'} ===`);
+                
+                if (wasChecked) {
+                    checkbox.setAttribute('data-chk', '');
+                    checkbox.classList.remove('ui-state-active');
+                } else {
                     checkbox.setAttribute('data-chk', 'on');
                     checkbox.classList.add('ui-state-active');
-                    
-                    // Force style recalculation
-                    setTimeout(() => {
-                        const simulatedCheckedStyles = window.getComputedStyle(checkbox);
-                        console.log('Simulated Checked Styles:');
-                        console.log('  background-color:', simulatedCheckedStyles.backgroundColor);
-                        console.log('  border-color:', simulatedCheckedStyles.borderColor);
-                        console.log('  border-width:', simulatedCheckedStyles.borderWidth);
-                        
-                        // Restore original state
-                        checkbox.setAttribute('data-chk', originalChk);
-                        checkbox.classList.remove('ui-state-active');
-                        
-                        // Now create the modal
-                        createDiagnosticModal();
-                    }, 100);
-                    return; // Exit early, modal will be created in setTimeout
                 }
+                
+                // Wait for style recalculation
+                setTimeout(() => {
+                    console.log('\n=== AFTER STATE (TOGGLED) ===');
+                    const afterState = captureState(firstRow, rowHeader, checkbox, 'AFTER');
+                    
+                    // Show differences
+                    console.log('\n=== STATE COMPARISON ===');
+                    console.log('Row Header Height Change:', beforeState.rowHeight, '->', afterState.rowHeight);
+                    console.log('Checkbox Height Change:', beforeState.checkboxHeight, '->', afterState.checkboxHeight);
+                    console.log('Checkbox Border-Width Change:', beforeState.checkboxBorderWidth, '->', afterState.checkboxBorderWidth);
+                    console.log('Row Border Change:', beforeState.rowBorder, '->', afterState.rowBorder);
+                    
+                    // Restore original state
+                    if (wasChecked) {
+                        checkbox.setAttribute('data-chk', 'on');
+                        checkbox.classList.add('ui-state-active');
+                    } else {
+                        checkbox.setAttribute('data-chk', '');
+                        checkbox.classList.remove('ui-state-active');
+                    }
+                    
+                    // Create modal with both states
+                    createDiagnosticModal(beforeState, afterState);
+                }, 100);
+                return;
             }
-            
-            console.log('\n=== FULL ROW HTML (first row) ===');
-            console.log(firstRow.outerHTML);
         }
         
-        // Create a modal to display results
+        // Fallback if no rows found
         createDiagnosticModal();
         
     }, 2000);
     
-    function createDiagnosticModal() {
+    function captureState(row, rowHeader, checkbox, label) {
+        const state = {
+            label: label,
+            rowHeight: 'N/A',
+            rowBorder: 'N/A',
+            checkboxHeight: 'N/A',
+            checkboxWidth: 'N/A',
+            checkboxBorderWidth: 'N/A',
+            checkboxBorder: 'N/A',
+            checkboxBgColor: 'N/A',
+            checkboxMargin: 'N/A',
+            checkboxPadding: 'N/A',
+            rowHeaderHeight: 'N/A',
+            rowHeaderBorder: 'N/A'
+        };
+        
+        if (row) {
+            const rowStyles = window.getComputedStyle(row);
+            state.rowHeight = rowStyles.height;
+            state.rowBorder = rowStyles.border;
+        }
+        
+        if (rowHeader) {
+            const rhStyles = window.getComputedStyle(rowHeader);
+            state.rowHeaderHeight = rhStyles.height;
+            state.rowHeaderBorder = rhStyles.border;
+        }
+        
+        if (checkbox) {
+            const cbStyles = window.getComputedStyle(checkbox);
+            state.checkboxHeight = cbStyles.height;
+            state.checkboxWidth = cbStyles.width;
+            state.checkboxBorderWidth = cbStyles.borderWidth;
+            state.checkboxBorder = cbStyles.border;
+            state.checkboxBgColor = cbStyles.backgroundColor;
+            state.checkboxMargin = cbStyles.margin;
+            state.checkboxPadding = cbStyles.padding;
+        }
+        
+        console.log(`${label} State:`, state);
+        return state;
+    }
+    
+    function createDiagnosticModal(beforeState, afterState) {
         const modal = document.createElement('div');
         modal.id = 'checkbox-diagnostic-modal';
         modal.style.cssText = `
@@ -127,63 +131,51 @@
             border: 2px solid #333;
             padding: 20px;
             z-index: 10000;
-            max-width: 800px;
+            max-width: 900px;
             max-height: 600px;
             overflow: auto;
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         `;
         
-        const rows = document.querySelectorAll('tr[data-id]');
-        const firstRow = rows[0];
-        const rowHeader = firstRow?.querySelector('th.ui-iggrid-rowselector-class');
-        const checkbox = firstRow?.querySelector('span[name="chk"][data-role="checkbox"]');
-        const checkedCheckbox = document.querySelector('span[name="chk"][data-chk="on"]');
-        
-        let content = '<h2 style="margin-top:0;">Checkbox Diagnostic Results v1.1</h2>';
+        let content = '<h2 style="margin-top:0;">Checkbox State Change Diagnostic v1.2</h2>';
+        content += '<p style="color: #d9534f; font-weight: bold;">⚠️ Shows height changes when toggling checkbox state</p>';
         content += '<p>Check browser console for full details. Copy text below:</p>';
         content += '<textarea readonly style="width:100%; height:400px; font-family:monospace; font-size:11px;">';
         
-        if (rowHeader) {
-            content += '=== ROW HEADER HTML ===\n';
-            content += rowHeader.outerHTML + '\n\n';
+        if (beforeState && afterState) {
+            content += '=== STATE COMPARISON ===\n\n';
             
-            const thStyles = window.getComputedStyle(rowHeader);
-            content += '=== ROW HEADER STYLES ===\n';
-            content += `height: ${thStyles.height}\n`;
-            content += `padding: ${thStyles.padding}\n`;
-            content += `margin: ${thStyles.margin}\n`;
-            content += `line-height: ${thStyles.lineHeight}\n`;
-            content += `box-sizing: ${thStyles.boxSizing}\n\n`;
-        }
-        
-        if (checkbox) {
-            content += '=== CHECKBOX HTML (UNCHECKED) ===\n';
-            content += checkbox.outerHTML + '\n\n';
+            content += '--- ROW MEASUREMENTS ---\n';
+            content += `Row Height:         ${beforeState.rowHeight} -> ${afterState.rowHeight}\n`;
+            content += `Row Border:         ${beforeState.rowBorder} -> ${afterState.rowBorder}\n`;
+            content += `Row Header Height:  ${beforeState.rowHeaderHeight} -> ${afterState.rowHeaderHeight}\n`;
+            content += `Row Header Border:  ${beforeState.rowHeaderBorder} -> ${afterState.rowHeaderBorder}\n\n`;
             
-            const cbStyles = window.getComputedStyle(checkbox);
-            content += '=== CHECKBOX STYLES (UNCHECKED) ===\n';
-            content += `width: ${cbStyles.width}\n`;
-            content += `height: ${cbStyles.height}\n`;
-            content += `padding: ${cbStyles.padding}\n`;
-            content += `margin: ${cbStyles.margin}\n`;
-            content += `border: ${cbStyles.border}\n`;
-            content += `border-width: ${cbStyles.borderWidth}\n`;
-            content += `background-color: ${cbStyles.backgroundColor}\n`;
-            content += `border-color: ${cbStyles.borderColor}\n`;
-            content += `box-sizing: ${cbStyles.boxSizing}\n\n`;
-        }
-        
-        if (checkedCheckbox) {
-            content += '=== CHECKED CHECKBOX (NATURAL STATE) ===\n';
-            const checkedStyles = window.getComputedStyle(checkedCheckbox);
-            content += `background-color: ${checkedStyles.backgroundColor}\n`;
-            content += `border-color: ${checkedStyles.borderColor}\n`;
-            content += `border-width: ${checkedStyles.borderWidth}\n\n`;
-        }
-        
-        if (firstRow) {
-            content += '=== FULL ROW HTML ===\n';
-            content += firstRow.outerHTML;
+            content += '--- CHECKBOX MEASUREMENTS ---\n';
+            content += `Checkbox Height:      ${beforeState.checkboxHeight} -> ${afterState.checkboxHeight}\n`;
+            content += `Checkbox Width:       ${beforeState.checkboxWidth} -> ${afterState.checkboxWidth}\n`;
+            content += `Checkbox Border:      ${beforeState.checkboxBorder} -> ${afterState.checkboxBorder}\n`;
+            content += `Checkbox Border-Width: ${beforeState.checkboxBorderWidth} -> ${afterState.checkboxBorderWidth}\n`;
+            content += `Checkbox BG Color:    ${beforeState.checkboxBgColor} -> ${afterState.checkboxBgColor}\n`;
+            content += `Checkbox Margin:      ${beforeState.checkboxMargin} -> ${afterState.checkboxMargin}\n`;
+            content += `Checkbox Padding:     ${beforeState.checkboxPadding} -> ${afterState.checkboxPadding}\n\n`;
+            
+            content += '--- ANALYSIS ---\n';
+            if (beforeState.rowHeight !== afterState.rowHeight) {
+                content += `⚠️ ROW HEIGHT CHANGED: ${beforeState.rowHeight} -> ${afterState.rowHeight}\n`;
+            }
+            if (beforeState.rowHeaderHeight !== afterState.rowHeaderHeight) {
+                content += `⚠️ ROW HEADER HEIGHT CHANGED: ${beforeState.rowHeaderHeight} -> ${afterState.rowHeaderHeight}\n`;
+            }
+            if (beforeState.checkboxHeight !== afterState.checkboxHeight) {
+                content += `⚠️ CHECKBOX HEIGHT CHANGED: ${beforeState.checkboxHeight} -> ${afterState.checkboxHeight}\n`;
+            }
+            if (beforeState.checkboxBorderWidth !== afterState.checkboxBorderWidth) {
+                content += `⚠️ CHECKBOX BORDER WIDTH CHANGED: ${beforeState.checkboxBorderWidth} -> ${afterState.checkboxBorderWidth}\n`;
+            }
+        } else {
+            content += '=== NO STATE COMPARISON AVAILABLE ===\n';
+            content += 'Could not capture before/after states.\n';
         }
         
         content += '</textarea>';

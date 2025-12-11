@@ -171,30 +171,41 @@
         /* Light mode - Use dynamically extracted colors from Scale's native checkboxes */
         /* Only left/right borders to fill full row height with no gaps */
         /* Use a subtly darker gray background to make it visible as clickable */
-        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"]:not(.scaleplus-dark-mode *) {
+        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] {
             background-color: rgb(232, 232, 236) !important;
             border-left: 1px solid ${uncheckedBorder} !important;
             border-right: 1px solid ${uncheckedBorder} !important;
         }
         
         /* Light mode hover state - darker for feedback */
-        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"]:not(.scaleplus-dark-mode *):hover {
+        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"]:hover {
             background-color: rgb(215, 215, 220) !important;
             border-left-color: ${uncheckedBorder} !important;
             border-right-color: ${uncheckedBorder} !important;
         }
         
         /* Light mode checked state - Use extracted checkbox blue from Scale (keeps same border!) */
-        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"]:not(.scaleplus-dark-mode *),
-        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active:not(.scaleplus-dark-mode *) {
+        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"] {
+            background-color: ${checkedBg} !important;
+            border-left-color: ${checkedBorder} !important;
+            border-right-color: ${checkedBorder} !important;
+        }
+        
+        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active {
             background-color: ${checkedBg} !important;
             border-left-color: ${checkedBorder} !important;
             border-right-color: ${checkedBorder} !important;
         }
         
         /* Light mode checked hover state - slightly darker */
-        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"]:not(.scaleplus-dark-mode *):hover,
-        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active:not(.scaleplus-dark-mode *):hover {
+        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"]:hover {
+            background-color: ${checkedBg} !important;
+            border-left-color: ${checkedBorder} !important;
+            border-right-color: ${checkedBorder} !important;
+            filter: brightness(0.9) !important;
+        }
+        
+        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active:hover {
             background-color: ${checkedBg} !important;
             border-left-color: ${checkedBorder} !important;
             border-right-color: ${checkedBorder} !important;

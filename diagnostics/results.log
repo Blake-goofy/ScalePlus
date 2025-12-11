@@ -1,31 +1,67 @@
-=== ROW HEADER HTML ===
-<th role="rowheader" tabindex="0" class="ui-iggrid-rowselector-class ui-iggrid-selectedcell ui-state-active"><span class="ui-icon ui-icon-triangle-1-e" style="margin-left: -5px"></span><span name="chk" data-chk="on" data-role="checkbox" class="ui-state-default ui-corner-all ui-igcheckbox-normal " tabindex="0 "><span class="ui-icon ui-icon-check ui-igcheckbox-normal-on"></span></span></th>
+Shows height changes when toggling checkbox state
+=== STATE COMPARISON ===
 
-=== ROW HEADER STYLES ===
-height: 32.7812px
-padding: 0px
-margin: 0px
-line-height: 0px
-box-sizing: border-box
+--- ROW MEASUREMENTS ---
+Row Height:         35px -> 35px
+Row Border:         1px solid rgb(2, 99, 183) -> 1px solid rgb(2, 99, 183)
+Row Header Height:  35px -> 35px
+Row Header Border:   -> 
 
-=== CHECKBOX HTML (UNCHECKED) ===
-<span name="chk" data-chk="on" data-role="checkbox" class="ui-state-default ui-corner-all ui-igcheckbox-normal " tabindex="0 "><span class="ui-icon ui-icon-check ui-igcheckbox-normal-on"></span></span>
+--- CHECKBOX MEASUREMENTS ---
+Checkbox Height:      35px -> 35px
+Checkbox Width:       35px -> 35px
+Checkbox Border:       -> 
+Checkbox Border-Width: 0px 1px -> 0px 1px
+Checkbox BG Color:    rgb(79, 147, 228) -> rgb(232, 232, 236)
+Checkbox Margin:      0px -> 0px
+Checkbox Padding:     0px -> 0px
 
-=== CHECKBOX STYLES (UNCHECKED) ===
-width: 31px
-height: 31px
-padding: 0px
-margin: 0px
-border: 
-border-width: 0px 1px
-background-color: rgb(42, 42, 42)
-border-color: rgb(58, 58, 58)
-box-sizing: border-box
+--- ANALYSIS ---
 
-=== CHECKED CHECKBOX (NATURAL STATE) ===
-background-color: rgb(42, 42, 42)
-border-color: rgb(58, 58, 58)
-border-width: 0px 1px
-
-=== FULL ROW HTML ===
-<tr data-id="1868636204" role="row" tabindex="0" aria-selected="true" class="ui-iggrid-activerow ui-state-focus"><th role="rowheader" tabindex="0" class="ui-iggrid-rowselector-class ui-iggrid-selectedcell ui-state-active"><span class="ui-icon ui-icon-triangle-1-e" style="margin-left: -5px"></span><span name="chk" data-chk="on" data-role="checkbox" class="ui-state-default ui-corner-all ui-igcheckbox-normal " tabindex="0 "><span class="ui-icon ui-icon-check ui-igcheckbox-normal-on"></span></span></th><td class="ui-iggrid-selectedcell ui-state-active" role="gridcell" aria-readonly="false" aria-describedby="ListPaneDataGrid_ICON" tabindex="0"></td><td role="gridcell" aria-readonly="false" aria-describedby="ListPaneDataGrid_FROZEN" tabindex="0" class="ui-iggrid-selectedcell ui-state-active"><span class="ui-igcheckbox-container" style="display:inline-block;" role="checkbox" aria-disabled="true" aria-checked="false" aria-label="Frozen" tabindex="0"><span class="" style="display:inline-block"><span style="display:block" class="ui-igcheckbox-small-off ui-icon ui-icon-check ui-igcheckbox-small-on"></span></span></span></td><td role="gridcell" aria-readonly="false" aria-describedby="ListPaneDataGrid_LOCATION" tabindex="0" class="ui-iggrid-selectedcell ui-state-active" data-vscr-padding-icrement="0" style="padding-right: 4px;">R02605</td></tr>
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:66 [ScalePlus Settings] Module initialized
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:100 [ScalePlus Dark Mode] Module initialized
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:515 [ScalePlus Utilities] Module initialized
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:592 [ScalePlus Search Pane] Module initialized
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:612 [ScalePlus Search Pane] Search pane already visible, not clicking
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:659 [ScalePlus Favorites] Module initialized
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:744 [ScalePlus Favorites] Star set to yellow - default filter active for form 2723
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:1333 [ScalePlus Context Menu] Module initialized
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:1765 [ScalePlus Keyboard] Module initialized
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2097 [ScalePlus Environment Labels] Module initialized
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2152 [ScalePlus Environment Labels] Added Production label
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2200 [ScalePlus Advanced Criteria] Module initialized
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2295 [ScalePlus Advanced Criteria] Modified grid to show condition column
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2345 [ScalePlus Advanced Criteria] Observer set up
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2377 [ScalePlus Tooltips] Module initialized
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2481 [ScalePlus Checkbox Size] Module initialized
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2761 [ScalePlus Checkbox Size] Bigger checkboxes applied
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3491 [ScalePlus Settings UI] Module loaded
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3453 [ScalePlus Settings UI] Initializing...
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3454 [ScalePlus Settings UI] Document ready state: interactive
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3464 [ScalePlus Settings UI] Document already ready, trying immediately
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3412 [ScalePlus Settings UI] Looking for ConfigureWorkStation button... FOUND
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3420 [ScalePlus Settings UI] Intercepting ConfigureWorkStation button
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3446 [ScalePlus Settings UI] Configure Workstation button intercepted successfully
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3469 [ScalePlus Settings UI] Setting up MutationObserver to watch for button
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3527 [ScalePlus] Main script initializing - Modular version 1.1
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3556 [ScalePlus] All modules loaded successfully
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3561 [ScalePlus] Initialization complete
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2545 [ScalePlus Checkbox Size] Measured row header: 34.59375px, setting checkbox: 35px, icon: 31px
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2545 [ScalePlus Checkbox Size] Measured row header: 34.59375px, setting checkbox: 35px, icon: 31px
+userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2761 [ScalePlus Checkbox Size] Bigger checkboxes applied
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:18 === ScalePlus Checkbox Diagnostic Tool v1.2 - State Change Detection ===
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:22 Found 2 rows
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:30 
+=== BEFORE STATE (INITIAL) ===
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:119 BEFORE State: ObjectcheckboxBgColor: "rgb(79, 147, 228)"checkboxBorder: ""checkboxBorderWidth: "0px 1px"checkboxHeight: "35px"checkboxMargin: "0px"checkboxPadding: "0px"checkboxWidth: "35px"label: "BEFORE"rowBorder: "1px solid rgb(2, 99, 183)"rowHeaderBorder: ""rowHeaderHeight: "35px"rowHeight: "35px"[[Prototype]]: Object
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:37 
+=== Toggling checkbox from CHECKED to UNCHECKED ===
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 
+=== AFTER STATE (TOGGLED) ===
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:119 AFTER State: Object
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:53 
+=== STATE COMPARISON ===
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:54 Row Header Height Change: 35px -> 35px
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:55 Checkbox Height Change: 35px -> 35px
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:56 Checkbox Border-Width Change: 0px 1px -> 0px 1px
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:57 Row Border Change: 1px solid rgb(2, 99, 183) -> 1px solid rgb(2, 99, 183)

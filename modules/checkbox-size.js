@@ -13,6 +13,7 @@
     window.ScalePlusCheckboxSize = {
         init() {
             console.log('[ScalePlus Checkbox Size] Module initialized');
+            this.extractColors();
             this.injectStyles();
             this.applyCheckboxSize();
         },
@@ -22,7 +23,41 @@
             return url.includes('/scale/') || url.includes('/Scale/');
         },
 
+        extractColors() {
+            // Extract colors from existing Scale checkboxes
+            this.colors = {
+                uncheckedBg: '#f4f4f8',
+                uncheckedBorder: '#6f6f6f',
+                checkedBg: '#3875d7',
+                checkedBorder: '#3875d7'
+            };
+
+            // Try to find an existing checkbox to sample colors
+            const existingCheckbox = document.querySelector('span[name="chk"][data-role="checkbox"]');
+            if (existingCheckbox) {
+                const styles = window.getComputedStyle(existingCheckbox);
+                this.colors.uncheckedBg = styles.backgroundColor;
+                this.colors.uncheckedBorder = styles.borderColor;
+                
+                // Try to find a checked checkbox
+                const checkedCheckbox = document.querySelector('span[name="chk"][data-chk="on"]');
+                if (checkedCheckbox) {
+                    const checkedStyles = window.getComputedStyle(checkedCheckbox);
+                    this.colors.checkedBg = checkedStyles.backgroundColor;
+                    this.colors.checkedBorder = checkedStyles.borderColor;
+                }
+                
+                console.log('[ScalePlus Checkbox Size] Extracted colors:', this.colors);
+            }
+        },
+
         injectStyles() {
+            // Use extracted colors or fallbacks
+            const uncheckedBg = this.colors?.uncheckedBg || '#f4f4f8';
+            const uncheckedBorder = this.colors?.uncheckedBorder || '#6f6f6f';
+            const checkedBg = this.colors?.checkedBg || '#3875d7';
+            const checkedBorder = this.colors?.checkedBorder || '#3875d7';
+            
             const checkboxStyles = `
         /* Bigger Checkboxes - Make row selection checkboxes larger and easier to click */
         
@@ -55,17 +90,18 @@
         }
         
         /* Make checkbox container EXACTLY match the row height - fill 100% of cell */
+        /* Using calc to subtract border width so total height = row height */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] {
-            width: 31.36px !important;
-            height: 31.36px !important;
-            min-width: 31.36px !important;
-            min-height: 31.36px !important;
+            width: calc(31.36px - 2px) !important;
+            height: calc(31.36px - 2px) !important;
+            min-width: calc(31.36px - 2px) !important;
+            min-height: calc(31.36px - 2px) !important;
             display: inline-block !important;
             padding: 0 !important;
-            margin: 0 !important;
+            margin: 1px !important;
             cursor: pointer !important;
             vertical-align: top !important;
-            box-sizing: border-box !important;
+            box-sizing: content-box !important;
             position: relative !important;
         }
         
@@ -82,30 +118,28 @@
             transform: translate(-50%, -50%) !important;
         }
         
-        /* Light mode - Match the default checkbox border color (darker blue/gray) */
+        /* Light mode - Use dynamically extracted colors from Scale's native checkboxes */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"]:not(.scaleplus-dark-mode *) {
-            background-color: #e6e6e6 !important;
-            border: 1px solid #aaaaaa !important;
+            background-color: ${uncheckedBg} !important;
+            border: 1px solid ${uncheckedBorder} !important;
         }
         
-        /* Light mode hover state */
+        /* Light mode hover state - slightly darker */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"]:not(.scaleplus-dark-mode *):hover {
-            background-color: #d9d9d9 !important;
-            border-color: #888888 !important;
+            filter: brightness(0.95) !important;
         }
         
-        /* Light mode checked state - Use default checkbox blue */
+        /* Light mode checked state - Use extracted checkbox blue from Scale */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"]:not(.scaleplus-dark-mode *),
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active:not(.scaleplus-dark-mode *) {
-            background-color: #3875d7 !important;
-            border-color: #3875d7 !important;
+            background-color: ${checkedBg} !important;
+            border-color: ${checkedBorder} !important;
         }
         
-        /* Light mode checked hover state */
+        /* Light mode checked hover state - slightly darker */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"]:not(.scaleplus-dark-mode *):hover,
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active:not(.scaleplus-dark-mode *):hover {
-            background-color: #2a5bb3 !important;
-            border-color: #2a5bb3 !important;
+            filter: brightness(0.9) !important;
         }
         
         /* Dark mode - Keep existing dark mode styling but with larger size */

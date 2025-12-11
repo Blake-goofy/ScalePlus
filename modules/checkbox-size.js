@@ -26,26 +26,45 @@
             const checkboxStyles = `
         /* Bigger Checkboxes - Make row selection checkboxes larger and easier to click */
         
-        /* Scale checkbox container to match row height */
+        /* Make the row header cell fill vertically and remove padding/gaps */
+        body.scaleplus-bigger-checkboxes tr th.ui-iggrid-rowselector-class {
+            padding: 0 !important;
+            margin: 0 !important;
+            vertical-align: middle !important;
+            height: 100% !important;
+            line-height: 1 !important;
+        }
+        
+        /* Remove margin from the expand/collapse icon */
+        body.scaleplus-bigger-checkboxes tr th.ui-iggrid-rowselector-class .ui-icon-triangle-1-e {
+            margin: 0 !important;
+            padding: 0 !important;
+            vertical-align: middle !important;
+        }
+        
+        /* Make checkbox container fill the cell height and be square based on row height */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] {
-            width: 28px !important;
-            height: 28px !important;
-            min-width: 28px !important;
-            min-height: 28px !important;
+            width: 24px !important;
+            height: 24px !important;
+            min-width: 24px !important;
+            min-height: 24px !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
             padding: 0 !important;
-            margin: 2px !important;
+            margin: 0 !important;
             cursor: pointer !important;
+            vertical-align: middle !important;
+            box-sizing: border-box !important;
         }
         
-        /* Scale the inner icon */
+        /* Scale the inner icon to fill the checkbox */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] .ui-icon {
-            width: 24px !important;
-            height: 24px !important;
+            width: 20px !important;
+            height: 20px !important;
             display: inline-block !important;
-            background-size: 24px 24px !important;
+            background-size: 20px 20px !important;
+            margin: 0 !important;
         }
         
         /* Light mode - Add visual distinction with subtle background */
@@ -84,19 +103,6 @@
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active:hover {
             background-color: rgba(79, 147, 228, 0.3) !important;
             border-color: rgba(79, 147, 228, 0.6) !important;
-        }
-        
-        /* Ensure the checkbox cell has proper alignment */
-        body.scaleplus-bigger-checkboxes td.ui-iggrid-selectedcell,
-        body.scaleplus-bigger-checkboxes td[aria-describedby*="selection"] {
-            vertical-align: middle !important;
-            text-align: center !important;
-            padding: 2px !important;
-        }
-        
-        /* Make the entire cell area more clickable by reducing padding */
-        body.scaleplus-bigger-checkboxes tr.ui-iggrid-record td:first-child {
-            padding: 2px !important;
         }
             `;
 

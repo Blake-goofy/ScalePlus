@@ -87,6 +87,11 @@
                                 <input type="checkbox" id="dark-mode-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
                                 <span class="scaleplus-setting-desc">Apply dark theme to the results grid area</span>
                             </div>
+                            <div class="scaleplus-setting">
+                                <label for="bigger-checkboxes-toggle">Bigger checkboxes:</label>
+                                <input type="checkbox" id="bigger-checkboxes-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
+                                <span class="scaleplus-setting-desc">Enlarge row selection checkboxes for easier clicking</span>
+                            </div>
                         </div>
 
                         <div class="scaleplus-divider">
@@ -435,6 +440,12 @@
             darkModeToggle.checked = true;
         }
 
+        const biggerCheckboxesToggle = modal.querySelector('#bigger-checkboxes-toggle');
+        const currentBiggerCheckboxes = localStorage.getItem(SETTINGS.BIGGER_CHECKBOXES);
+        if (currentBiggerCheckboxes !== 'false') {
+            biggerCheckboxesToggle.checked = true;
+        }
+
         const qaNameInput = modal.querySelector('#qa-name');
         const prodNameInput = modal.querySelector('#prod-name');
 
@@ -528,6 +539,23 @@
             }
         });
 
+        $('#bigger-checkboxes-toggle').on('change', function(event) {
+            const state = this.checked;
+            localStorage.setItem(SETTINGS.BIGGER_CHECKBOXES, state.toString());
+            console.log(`[ScalePlus] Bigger checkboxes set to: ${state}`);
+            
+            // Apply or remove bigger checkboxes immediately
+            if (state) {
+                if (window.ScalePlusCheckboxSize && window.ScalePlusCheckboxSize.applyCheckboxSize) {
+                    window.ScalePlusCheckboxSize.applyCheckboxSize();
+                } else {
+                    document.body.classList.add('scaleplus-bigger-checkboxes');
+                }
+            } else {
+                document.body.classList.remove('scaleplus-bigger-checkboxes');
+            }
+        });
+
         $('#adv-criteria-indicator-toggle').on('change', function(event) {
             const state = this.checked;
             localStorage.setItem(SETTINGS.ADV_CRITERIA_ENHANCEMENT, state.toString());
@@ -595,7 +623,7 @@
         });
 
         // Initialize bootstrap toggles
-        $('#search-toggle, #enter-toggle, #middle-click-toggle, #right-click-toggle, #f5-toggle, #tab-duplicator-toggle, #default-filter-toggle, #env-labels-toggle, #adv-criteria-indicator-toggle, #dark-mode-toggle').bootstrapToggle();
+        $('#search-toggle, #enter-toggle, #middle-click-toggle, #right-click-toggle, #f5-toggle, #tab-duplicator-toggle, #default-filter-toggle, #env-labels-toggle, #adv-criteria-indicator-toggle, #dark-mode-toggle, #bigger-checkboxes-toggle').bootstrapToggle();
 
         // Set initial states explicitly
         $(searchToggle).bootstrapToggle(searchToggle.checked ? 'on' : 'off');

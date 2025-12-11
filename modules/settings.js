@@ -25,7 +25,8 @@
             F5_BEHAVIOR: 'scaleplus_f5_behavior',
             ENV_QA_NAME: 'scaleplus_env_qa_name',
             ENV_PROD_NAME: 'scaleplus_env_prod_name',
-            DARK_MODE: 'scaleplus_dark_mode'
+            DARK_MODE: 'scaleplus_dark_mode',
+            BIGGER_CHECKBOXES: 'scaleplus_bigger_checkboxes'
         },
 
         DEFAULTS: {
@@ -39,7 +40,8 @@
             scaleplus_f5_behavior: 'false',
             scaleplus_env_qa_name: 'QA ENVIRONMENT',
             scaleplus_env_prod_name: 'PRODUCTION ENVIRONMENT',
-            scaleplus_dark_mode: 'false'
+            scaleplus_dark_mode: 'false',
+            scaleplus_bigger_checkboxes: 'true'
         },
 
         init() {

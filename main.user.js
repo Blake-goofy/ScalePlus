@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScalePlus
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Custom enhancements for Scale application with toggleable features (Modular Version)
 // @updateURL    https://raw.githubusercontent.com/Blake-goofy/ScalePlus/main/main.user.js
 // @downloadURL  https://raw.githubusercontent.com/Blake-goofy/ScalePlus/main/main.user.js
@@ -21,6 +21,7 @@
 // @require      https://raw.githubusercontent.com/Blake-goofy/ScalePlus/main/modules/environment-labels.js
 // @require      https://raw.githubusercontent.com/Blake-goofy/ScalePlus/main/modules/advanced-criteria.js
 // @require      https://raw.githubusercontent.com/Blake-goofy/ScalePlus/main/modules/tooltips.js
+// @require      https://raw.githubusercontent.com/Blake-goofy/ScalePlus/main/modules/checkbox-size.js
 // @require      https://raw.githubusercontent.com/Blake-goofy/ScalePlus/main/modules/settings-ui.js
 // @grant        none
 // ==/UserScript==
@@ -28,7 +29,7 @@
 (function () {
     'use strict';
 
-    console.log('[ScalePlus] Main script initializing - Modular version 1.0');
+    console.log('[ScalePlus] Main script initializing - Modular version 1.1');
 
     // Wait for all required modules to be loaded
     function waitForModules() {
@@ -44,6 +45,7 @@
                     window.ScalePlusEnvironmentLabels &&
                     window.ScalePlusAdvancedCriteria &&
                     window.ScalePlusTooltips &&
+                    window.ScalePlusCheckboxSize &&
                     window.ScalePlusSettingsUI) {
                     resolve();
                 } else {

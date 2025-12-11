@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScalePlus Checkbox Size Module
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Enlarges grid row checkboxes for easier clicking
 // @author       Blake
 // @grant        none
@@ -73,9 +73,10 @@
             if (rowHeader) {
                 const rect = rowHeader.getBoundingClientRect();
                 if (rect && rect.height) {
-                    // Leave a tiny margin to avoid forcing row expansion
-                    checkboxSize = Math.max(20, Math.round(rect.height - 2));
+                    // Match the row height exactly - the checkbox fills the row
+                    checkboxSize = Math.max(20, Math.round(rect.height));
                     iconSize = Math.max(checkboxSize - 4, Math.round(checkboxSize * 0.85));
+                    console.log(`[ScalePlus Checkbox Size] Measured row header: ${rect.height}px, setting checkbox: ${checkboxSize}px, icon: ${iconSize}px`);
                 }
             } else {
                 // Fall back to any checkbox we can find
@@ -85,6 +86,7 @@
                     if (rect && rect.height) {
                         checkboxSize = Math.max(20, Math.round(rect.height));
                         iconSize = Math.max(checkboxSize - 4, Math.round(checkboxSize * 0.85));
+                        console.log(`[ScalePlus Checkbox Size] Measured existing checkbox: ${rect.height}px, setting checkbox: ${checkboxSize}px, icon: ${iconSize}px`);
                     }
                 }
             }

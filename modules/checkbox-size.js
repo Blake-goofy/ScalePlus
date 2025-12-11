@@ -17,7 +17,7 @@
             this.extractColors();
             this.injectStyles();
             this.applyCheckboxSize();
-            // Re-measure after rows render to avoid gaps on varying row heights
+            // Wait for rows to render, then measure and lock their height
             this.waitForRowHeader();
         },
 
@@ -105,8 +105,24 @@
             const checkboxSize = this.sizes?.checkbox || 30;
             const iconSize = this.sizes?.icon || 26;
             
+            // Lock row height to prevent layout shifts during checkbox state changes
+            // This is the key to eliminating the visual gap - enforce fixed height on all rows
+            const rowHeight = checkboxSize + 0.5; // Add 0.5px buffer for border
+            
             const checkboxStyles = `
         /* Bigger Checkboxes - Make row selection checkboxes larger and easier to click */
+        
+        /* LOCK ROW HEIGHT - Prevent Scale's layout engine from changing row height on checkbox state change */
+        body.scaleplus-bigger-checkboxes tr[data-id] {
+            height: ${rowHeight}px !important;
+            min-height: ${rowHeight}px !important;
+            max-height: ${rowHeight}px !important;
+            line-height: ${rowHeight}px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border-spacing: 0 !important;
+            overflow: hidden !important;
+        }
         
         /* Remove ALL spacing from rows and cells */
         body.scaleplus-bigger-checkboxes tr[data-id] {
@@ -137,8 +153,7 @@
         }
         
         /* Make checkbox container EXACTLY match the row height - fill 100% of cell */
-        /* Remove top/bottom borders to fill full 31.36px height with no gaps */
-        /* Make it square - reduce height by 1px to prevent row expansion */
+        /* Remove top/bottom borders to fill full height with no gaps */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] {
             width: ${checkboxSize}px !important;
             height: ${checkboxSize}px !important;

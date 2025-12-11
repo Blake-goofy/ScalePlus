@@ -25,30 +25,41 @@
 
         extractColors() {
             // Extract colors from existing Scale checkboxes
+            // Defaults based on Scale's natural colors from diagnostic
             this.colors = {
-                uncheckedBg: '#f4f4f8',
-                uncheckedBorder: '#6f6f6f',
-                checkedBg: '#3875d7',
-                checkedBorder: '#3875d7'
+                uncheckedBg: 'rgb(244, 244, 248)',
+                uncheckedBorder: 'rgb(111, 111, 111)',
+                checkedBg: 'rgb(79, 147, 228)',
+                checkedBorder: 'rgb(111, 111, 111)'  // Checked keeps same border as unchecked
             };
 
-            // Try to find an existing checkbox to sample colors
-            const existingCheckbox = document.querySelector('span[name="chk"][data-role="checkbox"]');
-            if (existingCheckbox) {
-                const styles = window.getComputedStyle(existingCheckbox);
-                this.colors.uncheckedBg = styles.backgroundColor;
-                this.colors.uncheckedBorder = styles.borderColor;
-                
-                // Try to find a checked checkbox
-                const checkedCheckbox = document.querySelector('span[name="chk"][data-chk="on"]');
-                if (checkedCheckbox) {
-                    const checkedStyles = window.getComputedStyle(checkedCheckbox);
-                    this.colors.checkedBg = checkedStyles.backgroundColor;
-                    this.colors.checkedBorder = checkedStyles.borderColor;
+            // Wait a bit for DOM to be ready, then try to extract colors
+            setTimeout(() => {
+                const existingCheckbox = document.querySelector('span[name="chk"][data-role="checkbox"]');
+                if (existingCheckbox) {
+                    const styles = window.getComputedStyle(existingCheckbox);
+                    this.colors.uncheckedBg = styles.backgroundColor;
+                    this.colors.uncheckedBorder = styles.borderColor;
+                    
+                    // Try to find a checked checkbox
+                    const checkedCheckbox = document.querySelector('span[name="chk"][data-chk="on"]');
+                    if (checkedCheckbox) {
+                        const checkedStyles = window.getComputedStyle(checkedCheckbox);
+                        this.colors.checkedBg = checkedStyles.backgroundColor;
+                        // Border stays the same as unchecked in Scale's design
+                        this.colors.checkedBorder = styles.borderColor;
+                    }
+                    
+                    console.log('[ScalePlus Checkbox Size] Extracted colors:', this.colors);
+                    
+                    // Re-inject styles with correct colors
+                    const oldStyle = document.getElementById('scaleplus-checkbox-size-styles');
+                    if (oldStyle) {
+                        oldStyle.remove();
+                    }
+                    this.injectStyles();
                 }
-                
-                console.log('[ScalePlus Checkbox Size] Extracted colors:', this.colors);
-            }
+            }, 500);
         },
 
         injectStyles() {
@@ -90,18 +101,18 @@
         }
         
         /* Make checkbox container EXACTLY match the row height - fill 100% of cell */
-        /* Using calc to subtract border width so total height = row height */
+        /* Total must equal 31.36px: border(2px) + content = 31.36px, so content = 29.36px */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] {
-            width: calc(31.36px - 2px) !important;
-            height: calc(31.36px - 2px) !important;
-            min-width: calc(31.36px - 2px) !important;
-            min-height: calc(31.36px - 2px) !important;
+            width: 29.36px !important;
+            height: 29.36px !important;
+            min-width: 29.36px !important;
+            min-height: 29.36px !important;
             display: inline-block !important;
             padding: 0 !important;
-            margin: 1px !important;
+            margin: 0 !important;
             cursor: pointer !important;
             vertical-align: top !important;
-            box-sizing: content-box !important;
+            box-sizing: border-box !important;
             position: relative !important;
         }
         
@@ -126,10 +137,12 @@
         
         /* Light mode hover state - slightly darker */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"]:not(.scaleplus-dark-mode *):hover {
+            background-color: ${uncheckedBg} !important;
+            border-color: ${uncheckedBorder} !important;
             filter: brightness(0.95) !important;
         }
         
-        /* Light mode checked state - Use extracted checkbox blue from Scale */
+        /* Light mode checked state - Use extracted checkbox blue from Scale (keeps same border!) */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"]:not(.scaleplus-dark-mode *),
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active:not(.scaleplus-dark-mode *) {
             background-color: ${checkedBg} !important;
@@ -139,6 +152,8 @@
         /* Light mode checked hover state - slightly darker */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"]:not(.scaleplus-dark-mode *):hover,
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active:not(.scaleplus-dark-mode *):hover {
+            background-color: ${checkedBg} !important;
+            border-color: ${checkedBorder} !important;
             filter: brightness(0.9) !important;
         }
         

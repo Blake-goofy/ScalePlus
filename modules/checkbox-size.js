@@ -37,43 +37,45 @@
         body.scaleplus-bigger-checkboxes tr th.ui-iggrid-rowselector-class {
             padding: 0 !important;
             margin: 0 !important;
-            vertical-align: middle !important;
+            vertical-align: top !important;
             height: 100% !important;
             line-height: 0 !important;
             border-spacing: 0 !important;
             font-size: 0 !important;
+            overflow: hidden !important;
         }
         
         /* Remove margin from the expand/collapse icon */
         body.scaleplus-bigger-checkboxes tr th.ui-iggrid-rowselector-class .ui-icon-triangle-1-e {
             margin: 0 !important;
             padding: 0 !important;
-            vertical-align: middle !important;
+            vertical-align: top !important;
             display: inline-block !important;
+            height: 100% !important;
         }
         
-        /* Make checkbox container fill the cell height and be square based on row height */
+        /* Make checkbox container EXACTLY match the row height - fill 100% of cell */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] {
-            width: 26px !important;
-            height: 26px !important;
-            min-width: 26px !important;
-            min-height: 26px !important;
+            width: 31.36px !important;
+            height: 31.36px !important;
+            min-width: 31.36px !important;
+            min-height: 31.36px !important;
             display: inline-block !important;
             padding: 0 !important;
             margin: 0 !important;
             cursor: pointer !important;
-            vertical-align: middle !important;
+            vertical-align: top !important;
             box-sizing: border-box !important;
             position: relative !important;
         }
         
         /* Scale the inner icon to fill the checkbox */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] .ui-icon {
-            width: 22px !important;
-            height: 22px !important;
+            width: 26px !important;
+            height: 26px !important;
             display: block !important;
-            background-size: 22px 22px !important;
-            margin: 2px !important;
+            background-size: 26px 26px !important;
+            margin: 0 !important;
             position: absolute !important;
             top: 50% !important;
             left: 50% !important;

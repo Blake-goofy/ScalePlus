@@ -101,12 +101,12 @@
         }
         
         /* Make checkbox container EXACTLY match the row height - fill 100% of cell */
-        /* Total must equal 31.36px: border(2px) + content = 31.36px, so content = 29.36px */
+        /* Remove top/bottom borders to fill full 31.36px height with no gaps */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] {
             width: 29.36px !important;
-            height: 29.36px !important;
+            height: 31.36px !important;
             min-width: 29.36px !important;
-            min-height: 29.36px !important;
+            min-height: 31.36px !important;
             display: inline-block !important;
             padding: 0 !important;
             margin: 0 !important;
@@ -114,6 +114,8 @@
             vertical-align: top !important;
             box-sizing: border-box !important;
             position: relative !important;
+            border-top: none !important;
+            border-bottom: none !important;
         }
         
         /* Scale the inner icon to fill the checkbox */
@@ -130,15 +132,18 @@
         }
         
         /* Light mode - Use dynamically extracted colors from Scale's native checkboxes */
+        /* Only left/right borders to fill full row height with no gaps */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"]:not(.scaleplus-dark-mode *) {
             background-color: ${uncheckedBg} !important;
-            border: 1px solid ${uncheckedBorder} !important;
+            border-left: 1px solid ${uncheckedBorder} !important;
+            border-right: 1px solid ${uncheckedBorder} !important;
         }
         
         /* Light mode hover state - slightly darker */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"]:not(.scaleplus-dark-mode *):hover {
             background-color: ${uncheckedBg} !important;
-            border-color: ${uncheckedBorder} !important;
+            border-left-color: ${uncheckedBorder} !important;
+            border-right-color: ${uncheckedBorder} !important;
             filter: brightness(0.95) !important;
         }
         
@@ -146,41 +151,47 @@
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"]:not(.scaleplus-dark-mode *),
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active:not(.scaleplus-dark-mode *) {
             background-color: ${checkedBg} !important;
-            border-color: ${checkedBorder} !important;
+            border-left-color: ${checkedBorder} !important;
+            border-right-color: ${checkedBorder} !important;
         }
         
         /* Light mode checked hover state - slightly darker */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"]:not(.scaleplus-dark-mode *):hover,
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active:not(.scaleplus-dark-mode *):hover {
             background-color: ${checkedBg} !important;
-            border-color: ${checkedBorder} !important;
+            border-left-color: ${checkedBorder} !important;
+            border-right-color: ${checkedBorder} !important;
             filter: brightness(0.9) !important;
         }
         
-        /* Dark mode - Keep existing dark mode styling but with larger size */
+        /* Dark mode - Keep existing dark mode styling but with larger size, only left/right borders */
         body.scaleplus-dark-mode.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] {
             background-color: rgba(255, 255, 255, 0.08) !important;
-            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            border-left: 1px solid rgba(255, 255, 255, 0.2) !important;
+            border-right: 1px solid rgba(255, 255, 255, 0.2) !important;
         }
         
         /* Dark mode hover state */
         body.scaleplus-dark-mode.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"]:hover {
             background-color: rgba(255, 255, 255, 0.12) !important;
-            border-color: rgba(255, 255, 255, 0.3) !important;
+            border-left-color: rgba(255, 255, 255, 0.3) !important;
+            border-right-color: rgba(255, 255, 255, 0.3) !important;
         }
         
         /* Dark mode checked state */
         body.scaleplus-dark-mode.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"],
         body.scaleplus-dark-mode.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active {
             background-color: rgba(79, 147, 228, 0.3) !important;
-            border-color: rgba(79, 147, 228, 0.6) !important;
+            border-left-color: rgba(79, 147, 228, 0.6) !important;
+            border-right-color: rgba(79, 147, 228, 0.6) !important;
         }
         
         /* Dark mode checked hover state */
         body.scaleplus-dark-mode.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"]:hover,
         body.scaleplus-dark-mode.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active:hover {
             background-color: rgba(79, 147, 228, 0.4) !important;
-            border-color: rgba(79, 147, 228, 0.7) !important;
+            border-left-color: rgba(79, 147, 228, 0.7) !important;
+            border-right-color: rgba(79, 147, 228, 0.7) !important;
         }
             `;
 

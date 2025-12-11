@@ -133,18 +133,20 @@
         
         /* Light mode - Use dynamically extracted colors from Scale's native checkboxes */
         /* Only left/right borders to fill full row height with no gaps */
+        /* Darken background slightly to make it clear it's clickable */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"]:not(.scaleplus-dark-mode *) {
             background-color: ${uncheckedBg} !important;
             border-left: 1px solid ${uncheckedBorder} !important;
             border-right: 1px solid ${uncheckedBorder} !important;
+            filter: brightness(0.92) !important;
         }
         
-        /* Light mode hover state - slightly darker */
+        /* Light mode hover state - even darker */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"]:not(.scaleplus-dark-mode *):hover {
             background-color: ${uncheckedBg} !important;
             border-left-color: ${uncheckedBorder} !important;
             border-right-color: ${uncheckedBorder} !important;
-            filter: brightness(0.95) !important;
+            filter: brightness(0.85) !important;
         }
         
         /* Light mode checked state - Use extracted checkbox blue from Scale (keeps same border!) */

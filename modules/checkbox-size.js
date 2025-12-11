@@ -102,10 +102,11 @@
         
         /* Make checkbox container EXACTLY match the row height - fill 100% of cell */
         /* Remove top/bottom borders to fill full 31.36px height with no gaps */
+        /* Make it square (31.36px x 31.36px) for better visual appearance */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] {
-            width: 29.36px !important;
+            width: 31.36px !important;
             height: 31.36px !important;
-            min-width: 29.36px !important;
+            min-width: 31.36px !important;
             min-height: 31.36px !important;
             display: inline-block !important;
             padding: 0 !important;
@@ -133,20 +134,18 @@
         
         /* Light mode - Use dynamically extracted colors from Scale's native checkboxes */
         /* Only left/right borders to fill full row height with no gaps */
-        /* Darken background slightly to make it clear it's clickable */
+        /* Use a darker gray background to make it clearly visible as clickable */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"]:not(.scaleplus-dark-mode *) {
-            background-color: ${uncheckedBg} !important;
+            background-color: rgb(220, 220, 224) !important;
             border-left: 1px solid ${uncheckedBorder} !important;
             border-right: 1px solid ${uncheckedBorder} !important;
-            filter: brightness(0.92) !important;
         }
         
         /* Light mode hover state - even darker */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"]:not(.scaleplus-dark-mode *):hover {
-            background-color: ${uncheckedBg} !important;
+            background-color: rgb(200, 200, 204) !important;
             border-left-color: ${uncheckedBorder} !important;
             border-right-color: ${uncheckedBorder} !important;
-            filter: brightness(0.85) !important;
         }
         
         /* Light mode checked state - Use extracted checkbox blue from Scale (keeps same border!) */

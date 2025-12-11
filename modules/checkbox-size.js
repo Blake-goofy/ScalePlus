@@ -26,13 +26,22 @@
             const checkboxStyles = `
         /* Bigger Checkboxes - Make row selection checkboxes larger and easier to click */
         
-        /* Make the row header cell fill vertically and remove padding/gaps */
+        /* Remove ALL spacing from rows and cells */
+        body.scaleplus-bigger-checkboxes tr[data-id] {
+            margin: 0 !important;
+            padding: 0 !important;
+            border-spacing: 0 !important;
+        }
+        
+        /* Make the row header cell fill vertically and remove ALL padding/gaps */
         body.scaleplus-bigger-checkboxes tr th.ui-iggrid-rowselector-class {
             padding: 0 !important;
             margin: 0 !important;
             vertical-align: middle !important;
             height: 100% !important;
-            line-height: 1 !important;
+            line-height: 0 !important;
+            border-spacing: 0 !important;
+            font-size: 0 !important;
         }
         
         /* Remove margin from the expand/collapse icon */
@@ -40,43 +49,61 @@
             margin: 0 !important;
             padding: 0 !important;
             vertical-align: middle !important;
+            display: inline-block !important;
         }
         
         /* Make checkbox container fill the cell height and be square based on row height */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] {
-            width: 24px !important;
-            height: 24px !important;
-            min-width: 24px !important;
-            min-height: 24px !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
+            width: 26px !important;
+            height: 26px !important;
+            min-width: 26px !important;
+            min-height: 26px !important;
+            display: inline-block !important;
             padding: 0 !important;
             margin: 0 !important;
             cursor: pointer !important;
             vertical-align: middle !important;
             box-sizing: border-box !important;
+            position: relative !important;
         }
         
         /* Scale the inner icon to fill the checkbox */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] .ui-icon {
-            width: 20px !important;
-            height: 20px !important;
-            display: inline-block !important;
-            background-size: 20px 20px !important;
-            margin: 0 !important;
+            width: 22px !important;
+            height: 22px !important;
+            display: block !important;
+            background-size: 22px 22px !important;
+            margin: 2px !important;
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
         }
         
-        /* Light mode - Add visual distinction with subtle background */
+        /* Light mode - Match the default checkbox border color (darker blue/gray) */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"]:not(.scaleplus-dark-mode *) {
-            background-color: rgba(0, 0, 0, 0.04) !important;
-            border: 1px solid rgba(0, 0, 0, 0.12) !important;
+            background-color: #e6e6e6 !important;
+            border: 1px solid #aaaaaa !important;
         }
         
         /* Light mode hover state */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"]:not(.scaleplus-dark-mode *):hover {
-            background-color: rgba(0, 0, 0, 0.08) !important;
-            border-color: rgba(0, 0, 0, 0.2) !important;
+            background-color: #d9d9d9 !important;
+            border-color: #888888 !important;
+        }
+        
+        /* Light mode checked state - Use default checkbox blue */
+        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"]:not(.scaleplus-dark-mode *),
+        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active:not(.scaleplus-dark-mode *) {
+            background-color: #3875d7 !important;
+            border-color: #3875d7 !important;
+        }
+        
+        /* Light mode checked hover state */
+        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"]:not(.scaleplus-dark-mode *):hover,
+        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active:not(.scaleplus-dark-mode *):hover {
+            background-color: #2a5bb3 !important;
+            border-color: #2a5bb3 !important;
         }
         
         /* Dark mode - Keep existing dark mode styling but with larger size */
@@ -91,18 +118,18 @@
             border-color: rgba(255, 255, 255, 0.3) !important;
         }
         
-        /* Checked state for both light and dark mode */
-        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"],
-        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active {
-            background-color: rgba(79, 147, 228, 0.2) !important;
-            border-color: rgba(79, 147, 228, 0.5) !important;
-        }
-        
-        /* Checked hover state */
-        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"]:hover,
-        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active:hover {
+        /* Dark mode checked state */
+        body.scaleplus-dark-mode.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"],
+        body.scaleplus-dark-mode.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active {
             background-color: rgba(79, 147, 228, 0.3) !important;
             border-color: rgba(79, 147, 228, 0.6) !important;
+        }
+        
+        /* Dark mode checked hover state */
+        body.scaleplus-dark-mode.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"]:hover,
+        body.scaleplus-dark-mode.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active:hover {
+            background-color: rgba(79, 147, 228, 0.4) !important;
+            border-color: rgba(79, 147, 228, 0.7) !important;
         }
             `;
 

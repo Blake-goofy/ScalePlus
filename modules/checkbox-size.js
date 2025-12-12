@@ -62,29 +62,33 @@
         },
 
         measureSizes() {
-            // Clamp to a sane, stable range regardless of what Scale does to row heights.
             const fallbackCheckbox = 35;
             const fallbackIcon = 30;
-            const minSize = 32;
-            const maxSize = 36;
 
             let checkboxSize = fallbackCheckbox;
             let iconSize = fallbackIcon;
 
-            // Try to find a checkbox and use its natural/computed height
-            const checkbox = document.querySelector('span[name="chk"][data-role="checkbox"]');
-            if (checkbox) {
-                const naturalHeight = checkbox.offsetHeight;
-                if (naturalHeight && naturalHeight > 0) {
-                    checkboxSize = Math.round(naturalHeight);
-                    iconSize = Math.round(checkboxSize * 0.85);
-                    console.log(`[ScalePlus Checkbox Size] Measured checkbox natural height: ${naturalHeight}px (pre-clamp)`);
+            // Prefer the row selector header for the true row height at first render
+            const rowHeader = document.querySelector('th.ui-iggrid-rowselector-class');
+            if (rowHeader) {
+                const rect = rowHeader.getBoundingClientRect();
+                if (rect && rect.height) {
+                    checkboxSize = Math.round(rect.height);
+                    iconSize = Math.max(checkboxSize - 4, Math.round(checkboxSize * 0.85));
+                    console.log(`[ScalePlus Checkbox Size] Measured initial row header: ${rect.height}px, checkbox: ${checkboxSize}px, icon: ${iconSize}px`);
+                }
+            } else {
+                // Fallback: measure an existing checkbox if present
+                const checkbox = document.querySelector('span[name="chk"][data-role="checkbox"]');
+                if (checkbox) {
+                    const h = checkbox.getBoundingClientRect().height;
+                    if (h) {
+                        checkboxSize = Math.round(h);
+                        iconSize = Math.max(checkboxSize - 4, Math.round(checkboxSize * 0.85));
+                        console.log(`[ScalePlus Checkbox Size] Measured fallback checkbox: ${h}px, checkbox: ${checkboxSize}px, icon: ${iconSize}px`);
+                    }
                 }
             }
-
-            // Clamp sizes to avoid runaway heights when Scale inflates rows
-            checkboxSize = Math.min(maxSize, Math.max(minSize, checkboxSize));
-            iconSize = Math.min(checkboxSize - 2, Math.max(checkboxSize - 6, iconSize));
 
             this.sizes = { checkbox: checkboxSize, icon: iconSize };
         },
@@ -100,42 +104,28 @@
             const checkboxSize = this.sizes?.checkbox || 30;
             const iconSize = this.sizes?.icon || 26;
             
-            // Lock row height to prevent layout shifts during checkbox state changes
-            // Target the actual row container (.ui-iggrid-row or tr element) and ALL possible row parents
-            const rowHeight = checkboxSize; // Use exact checkbox size, no buffer
+            // Lock row height to the measured initial size
+            const rowHeight = checkboxSize;
             
             const checkboxStyles = `
         /* Bigger Checkboxes - Make row selection checkboxes larger and easier to click */
         
-        /* LOCK ROW HEIGHT - Prevent Scale's layout engine from changing row height on checkbox state change */
-        /* Lock on multiple selectors to catch all row types */
+        /* LOCK ROW HEIGHT - single source of truth based on initial measurement */
         body.scaleplus-bigger-checkboxes tr,
         body.scaleplus-bigger-checkboxes .ui-iggrid-row,
         body.scaleplus-bigger-checkboxes .ui-iggrid-record,
         body.scaleplus-bigger-checkboxes .ui-iggrid-altrecord,
         body.scaleplus-bigger-checkboxes .ui-iggrid-virtualrecordsrow,
         body.scaleplus-bigger-checkboxes .ui-iggrid-tablebody tr,
-        body.scaleplus-bigger-checkboxes [data-id] {
-            height: ${rowHeight}px !important;
-            min-height: ${rowHeight}px !important;
-            max-height: ${rowHeight}px !important;
-            line-height: ${rowHeight}px !important;
-        }
-        
-        /* Also lock on table cells - they control actual row height */
+        body.scaleplus-bigger-checkboxes [data-id],
         body.scaleplus-bigger-checkboxes td,
         body.scaleplus-bigger-checkboxes th {
             height: ${rowHeight}px !important;
             min-height: ${rowHeight}px !important;
             max-height: ${rowHeight}px !important;
+            line-height: ${rowHeight}px !important;
             padding: 0 !important;
             margin: 0 !important;
-        }
-        
-        /* Remove ALL spacing from rows and cells */
-        body.scaleplus-bigger-checkboxes tr {
-            margin: 0 !important;
-            padding: 0 !important;
             border-spacing: 0 !important;
         }
         

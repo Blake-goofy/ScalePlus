@@ -298,6 +298,7 @@
                 font-size: 14px;
                 opacity: 0.7;
                 transition: opacity 0.2s;
+                color: black;
             }
             .scaleplus-help-link:hover {
                 opacity: 1;

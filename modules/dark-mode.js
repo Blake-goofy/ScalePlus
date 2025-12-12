@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScalePlus Dark Mode Module
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.3
 // @description  Dark mode styling for ScalePlus and RF pages
 // @author       Blake
 // @grant        none

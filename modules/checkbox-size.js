@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScalePlus Checkbox Size Module
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Enlarges grid row checkboxes for easier clicking
 // @author       Blake
 // @grant        none
@@ -323,6 +323,54 @@
             this.measureSizes();
             this.injectStyles();
             this.applyCheckboxSize();
+            this.enforceRowHeights();
+        },
+
+        enforceRowHeights() {
+            // Aggressively enforce consistent row heights by directly manipulating inline styles
+            // This overrides any JavaScript-based height changes Scale makes
+            if (!this.isScalePage()) return;
+            if (!window.ScalePlusSettings?.isEnabled(window.ScalePlusSettings.SETTINGS.BIGGER_CHECKBOXES)) return;
+
+            const checkboxSize = this.sizes?.checkbox || 30;
+
+            // Apply inline styles to all existing rows to override any Scale JS changes
+            const applyInlineStyles = () => {
+                const rows = document.querySelectorAll('body.scaleplus-bigger-checkboxes tr[data-id]');
+                rows.forEach(row => {
+                    row.style.setProperty('height', `${checkboxSize}px`, 'important');
+                    row.style.setProperty('max-height', `${checkboxSize}px`, 'important');
+                    row.style.setProperty('min-height', `${checkboxSize}px`, 'important');
+                    row.style.setProperty('border', '0', 'important');
+
+                    const rowHeader = row.querySelector('th.ui-iggrid-rowselector-class');
+                    if (rowHeader) {
+                        rowHeader.style.setProperty('height', `${checkboxSize}px`, 'important');
+                        rowHeader.style.setProperty('max-height', `${checkboxSize}px`, 'important');
+                        rowHeader.style.setProperty('min-height', `${checkboxSize}px`, 'important');
+                        rowHeader.style.setProperty('border', '0', 'important');
+                    }
+                });
+            };
+
+            // Apply immediately
+            applyInlineStyles();
+
+            // Watch for any DOM changes and reapply
+            if (this.heightEnforcer) {
+                this.heightEnforcer.disconnect();
+            }
+
+            this.heightEnforcer = new MutationObserver(() => {
+                applyInlineStyles();
+            });
+
+            this.heightEnforcer.observe(document.body, {
+                childList: true,
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['style', 'class', 'data-chk']
+            });
         },
 
         applyCheckboxSize() {
@@ -336,6 +384,9 @@
             if (!window.ScalePlusSettings?.isEnabled(window.ScalePlusSettings.SETTINGS.BIGGER_CHECKBOXES)) {
                 console.log('[ScalePlus Checkbox Size] Feature disabled');
                 document.body.classList.remove('scaleplus-bigger-checkboxes');
+                if (this.heightEnforcer) {
+                    this.heightEnforcer.disconnect();
+                }
                 return;
             }
 

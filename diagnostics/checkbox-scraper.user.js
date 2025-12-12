@@ -44,7 +44,9 @@
                 overflow: styles.overflow,
                 position: styles.position,
                 bgColor: styles.backgroundColor,
-                borderColor: styles.borderTopColor
+                borderColor: styles.borderTopColor,
+                // Check for inline styles
+                inlineStyle: element.getAttribute('style') || 'none'
             };
         }
         

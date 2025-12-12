@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScalePlus Checkbox Size Module
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.3
 // @description  Enlarges grid row checkboxes for easier clicking
 // @author       Blake
 // @grant        none
@@ -102,12 +102,12 @@
         
         /* Make checkbox container fit within 36.5938px row height */
         /* Remove top/bottom borders to fill full height with no gaps */
-        /* Size to fit comfortably within the largest Scale row */
+        /* Size to exactly match the largest Scale row */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] {
-            width: 35px !important;
-            height: 35px !important;
-            min-width: 35px !important;
-            min-height: 35px !important;
+            width: 35.5938px !important;
+            height: 35.5938px !important;
+            min-width: 35.5938px !important;
+            min-height: 35.5938px !important;
             display: inline-block !important;
             padding: 0 !important;
             margin: 0 !important;
@@ -121,10 +121,10 @@
         
         /* Scale the inner icon to fill the checkbox */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] .ui-icon {
-            width: 30px !important;
-            height: 30px !important;
+            width: 31px !important;
+            height: 31px !important;
             display: block !important;
-            background-size: 30px 30px !important;
+            background-size: 31px 31px !important;
             margin: 0 !important;
             position: absolute !important;
             top: 50% !important;

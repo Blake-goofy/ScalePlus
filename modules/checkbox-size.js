@@ -107,25 +107,39 @@
         /* Bigger Checkboxes - Make row selection checkboxes larger and easier to click */
         
         /* LOCK row height to prevent expansion when checkbox state changes */
+        /* Force borders to 0 on all sides regardless of checked state - Scale adds 1px border when checked */
         body.scaleplus-bigger-checkboxes tr[data-id] {
             margin: 0 !important;
             padding: 0 !important;
             border-spacing: 0 !important;
             height: ${checkboxSize}px !important;
             max-height: ${checkboxSize}px !important;
+            min-height: ${checkboxSize}px !important;
+            border: 0 !important;
+            border-top: 0 !important;
+            border-right: 0 !important;
+            border-bottom: 0 !important;
+            border-left: 0 !important;
         }
         
         /* Make the row header cell fill vertically and remove ALL padding/gaps */
+        /* Force consistent border (remove Scale's dynamic bottom border on unchecked) */
         body.scaleplus-bigger-checkboxes tr th.ui-iggrid-rowselector-class {
             padding: 0 !important;
             margin: 0 !important;
             vertical-align: top !important;
             height: ${checkboxSize}px !important;
             max-height: ${checkboxSize}px !important;
+            min-height: ${checkboxSize}px !important;
             line-height: 0 !important;
             border-spacing: 0 !important;
             font-size: 0 !important;
             overflow: hidden !important;
+            border: 0 !important;
+            border-top: 0 !important;
+            border-right: 0 !important;
+            border-bottom: 0 !important;
+            border-left: 0 !important;
         }
         
         /* Remove margin from the expand/collapse icon */
@@ -137,17 +151,22 @@
             height: 100% !important;
         }
         
-        /* Make checkbox container EXACTLY match the row height - fill 100% of cell */
-        /* Remove top/bottom borders to fill full 31.36px height with no gaps */
-        /* Make it square - reduce height by 1px to prevent row expansion */
+        /* Make checkbox container EXACTLY match the row height - fill 100% of cell with NO gaps */
+        /* Use border-box to include borders in the size calculation */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] {
             width: ${checkboxSize}px !important;
             height: ${checkboxSize}px !important;
             min-width: ${checkboxSize}px !important;
             min-height: ${checkboxSize}px !important;
+            max-width: ${checkboxSize}px !important;
+            max-height: ${checkboxSize}px !important;
             display: inline-block !important;
             padding: 0 !important;
             margin: 0 !important;
+            margin-top: 0 !important;
+            margin-right: 0 !important;
+            margin-bottom: 0 !important;
+            margin-left: 0 !important;
             cursor: pointer !important;
             vertical-align: top !important;
             box-sizing: border-box !important;

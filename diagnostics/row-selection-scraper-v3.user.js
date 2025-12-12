@@ -90,9 +90,16 @@
             console.log(`  Computed color: ${color}`);
             console.log(`  Classes: "${cell.className}"`);
             
+            // Check for inline styles
+            if (cell.style.backgroundColor || cell.style.color) {
+                console.log('  ⚠️ INLINE STYLES DETECTED:');
+                if (cell.style.backgroundColor) console.log(`    background-color: ${cell.style.backgroundColor}`);
+                if (cell.style.color) console.log(`    color: ${cell.style.color}`);
+            }
+            
             // Check for problem
-            const isLightBackground = bg.includes('rgb(255') || bg.includes('rgb(254') || bg.includes('rgb(253');
-            const isDarkText = color.includes('rgb(0') || color.includes('rgb(1') || color.includes('rgb(2');
+            const isLightBackground = bg.includes('rgb(255') || bg.includes('rgb(254') || bg.includes('rgb(253') || bg.includes('rgb(143, 190, 245)') || bg.includes('rgb(245, 245, 245)');
+            const isDarkText = color.includes('rgb(0, 0, 0)') || color.includes('rgb(55, 58, 60)');
             
             if (isLightBackground || isDarkText) {
                 console.log('  ⚠️ PROBLEM DETECTED - Light colors in dark mode!');
@@ -137,8 +144,8 @@
 
         console.log('Grid found! Starting monitoring...\n');
         
-        // Report every 2 seconds
-        setInterval(reportSelectedRows, 2000);
+        // Report every 5 seconds
+        setInterval(reportSelectedRows, 5000);
         
         // Also report immediately when selection changes
         const observer = new MutationObserver(function(mutations) {

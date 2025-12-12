@@ -136,6 +136,17 @@
         
         /* Selected rows - comprehensive coverage for all jQuery UI states */
         
+        /* CRITICAL: Override active row and focus states that cause light backgrounds */
+        body.scaleplus-dark-mode #ListPaneDataGrid tr.ui-iggrid-activerow td,
+        body.scaleplus-dark-mode #ListPaneDataGrid tr.ui-iggrid-activerow th,
+        body.scaleplus-dark-mode #ListPaneDataGrid tr.ui-state-focus td,
+        body.scaleplus-dark-mode #ListPaneDataGrid tr.ui-state-focus th,
+        body.scaleplus-dark-mode #ListPaneDataGrid tr.ui-iggrid-activerow.ui-state-focus td,
+        body.scaleplus-dark-mode #ListPaneDataGrid tr.ui-iggrid-activerow.ui-state-focus th {
+            background-color: rgba(91, 163, 224, 0.25) !important;
+            color: #ffffff !important;
+        }
+        
         /* Override ui-state-default on selected cells */
         body.scaleplus-dark-mode #ListPaneDataGrid .ui-state-default.ui-iggrid-selectedcell,
         body.scaleplus-dark-mode #ListPaneDataGrid .ui-state-default.ui-state-active,
@@ -167,6 +178,13 @@
             color: #ffffff !important;
         }
         
+        /* Combine active row states with aria-selected for extra coverage */
+        body.scaleplus-dark-mode #ListPaneDataGrid tr.ui-iggrid-activerow[aria-selected="true"] td,
+        body.scaleplus-dark-mode #ListPaneDataGrid tr.ui-state-focus[aria-selected="true"] td {
+            background-color: rgba(91, 163, 224, 0.25) !important;
+            color: #ffffff !important;
+        }
+        
         /* Row selector column should also get selected row styling */
         body.scaleplus-dark-mode #ListPaneDataGrid tr[aria-selected="true"] th.ui-iggrid-rowselector-class,
         body.scaleplus-dark-mode #ListPaneDataGrid tr[aria-selected="true"] th.ui-state-default {
@@ -176,6 +194,15 @@
         /* Override any ui-widget-content background on selected cells */
         body.scaleplus-dark-mode #ListPaneDataGrid .ui-widget-content.ui-iggrid-selectedcell,
         body.scaleplus-dark-mode #ListPaneDataGrid .ui-widget-content.ui-state-active {
+            background-color: rgba(91, 163, 224, 0.25) !important;
+            color: #ffffff !important;
+        }
+        
+        /* Match Infragistics CSS specificity: .ui-iggrid td.ui-state-active */
+        body.scaleplus-dark-mode .ui-iggrid td.ui-state-active,
+        body.scaleplus-dark-mode .ui-iggrid .ui-ig-altrecord td.ui-state-active,
+        body.scaleplus-dark-mode .ui-iggrid th.ui-iggrid-rowselector-class.ui-state-active,
+        body.scaleplus-dark-mode .ui-iggrid .ui-ig-altrecord th.ui-iggrid-rowselector-class.ui-state-active {
             background-color: rgba(91, 163, 224, 0.25) !important;
             color: #ffffff !important;
         }

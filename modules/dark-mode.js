@@ -134,7 +134,19 @@
             background-color: #252525 !important;
         }
         
-        /* Selected rows */
+        /* Selected rows - comprehensive coverage for all jQuery UI states */
+        
+        /* Override ui-state-default on selected cells */
+        body.scaleplus-dark-mode #ListPaneDataGrid .ui-state-default.ui-iggrid-selectedcell,
+        body.scaleplus-dark-mode #ListPaneDataGrid .ui-state-default.ui-state-active,
+        body.scaleplus-dark-mode #ListPaneDataGrid td.ui-state-default,
+        body.scaleplus-dark-mode #ListPaneDataGrid th.ui-state-default {
+            background-color: rgba(91, 163, 224, 0.25) !important;
+            color: #ffffff !important;
+            border-color: #5ba3e0 !important;
+        }
+        
+        /* Base selected cell styling */
         body.scaleplus-dark-mode #ListPaneDataGrid .ui-iggrid-selectedcell {
             background-color: rgba(91, 163, 224, 0.25) !important;
             color: #ffffff !important;
@@ -146,15 +158,26 @@
             border-color: #5ba3e0 !important;
         }
         
-        /* Ensure selected rows override other styles */
-        body.scaleplus-dark-mode #ListPaneDataGrid tr[aria-selected="true"] td {
+        /* Target aria-selected rows with maximum specificity */
+        body.scaleplus-dark-mode #ListPaneDataGrid tr[aria-selected="true"] td,
+        body.scaleplus-dark-mode #ListPaneDataGrid tr[aria-selected="true"] td.ui-state-default,
+        body.scaleplus-dark-mode #ListPaneDataGrid tr[aria-selected="true"] td.ui-widget-content,
+        body.scaleplus-dark-mode #ListPaneDataGrid tbody tr[aria-selected="true"] td {
             background-color: rgba(91, 163, 224, 0.25) !important;
             color: #ffffff !important;
         }
         
         /* Row selector column should also get selected row styling */
-        body.scaleplus-dark-mode #ListPaneDataGrid tr[aria-selected="true"] th.ui-iggrid-rowselector-class {
+        body.scaleplus-dark-mode #ListPaneDataGrid tr[aria-selected="true"] th.ui-iggrid-rowselector-class,
+        body.scaleplus-dark-mode #ListPaneDataGrid tr[aria-selected="true"] th.ui-state-default {
             background-color: rgba(91, 163, 224, 0.25) !important;
+        }
+        
+        /* Override any ui-widget-content background on selected cells */
+        body.scaleplus-dark-mode #ListPaneDataGrid .ui-widget-content.ui-iggrid-selectedcell,
+        body.scaleplus-dark-mode #ListPaneDataGrid .ui-widget-content.ui-state-active {
+            background-color: rgba(91, 163, 224, 0.25) !important;
+            color: #ffffff !important;
         }
         
         /* Row selector checkboxes - scope to body only (do not affect header checkbox) */

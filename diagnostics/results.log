@@ -1,193 +1,5 @@
-loadbeforeinsight?v=R6hctzFg7Oy9sYbugHsUiE0_OD5T9Q6nOK8Y9k4YtS01:9 [Violation] 'DOMContentLoaded' handler took 188ms
-[Violation] Forced reflow while executing JavaScript took 34ms
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:66 [ScalePlus Settings] Module initialized
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:100 [ScalePlus Dark Mode] Module initialized
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:515 [ScalePlus Utilities] Module initialized
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:592 [ScalePlus Search Pane] Module initialized
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:612 [ScalePlus Search Pane] Search pane already visible, not clicking
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:659 [ScalePlus Favorites] Module initialized
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:744 [ScalePlus Favorites] Star set to yellow - default filter active for form 2723
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:1333 [ScalePlus Context Menu] Module initialized
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:1765 [ScalePlus Keyboard] Module initialized
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2097 [ScalePlus Environment Labels] Module initialized
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2152 [ScalePlus Environment Labels] Added Production label
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2200 [ScalePlus Advanced Criteria] Module initialized
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2295 [ScalePlus Advanced Criteria] Modified grid to show condition column
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2345 [ScalePlus Advanced Criteria] Observer set up
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2377 [ScalePlus Tooltips] Module initialized
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2481 [ScalePlus Checkbox Size] Module initialized
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2772 [ScalePlus Checkbox Size] Bigger checkboxes applied
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3502 [ScalePlus Settings UI] Module loaded
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3464 [ScalePlus Settings UI] Initializing...
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3465 [ScalePlus Settings UI] Document ready state: interactive
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3475 [ScalePlus Settings UI] Document already ready, trying immediately
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3423 [ScalePlus Settings UI] Looking for ConfigureWorkStation button... FOUND
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3431 [ScalePlus Settings UI] Intercepting ConfigureWorkStation button
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3457 [ScalePlus Settings UI] Configure Workstation button intercepted successfully
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3480 [ScalePlus Settings UI] Setting up MutationObserver to watch for button
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3538 [ScalePlus] Main script initializing - Modular version 1.1
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3567 [ScalePlus] All modules loaded successfully
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:3572 [ScalePlus] Initialization complete
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2545 [ScalePlus Checkbox Size] Measured row header: 34.59375px, setting checkbox: 35px, icon: 31px
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2545 [ScalePlus Checkbox Size] Measured row header: 34.59375px, setting checkbox: 35px, icon: 31px
-userscript.html?name=ScalePlus.user.js&id=2e6343c3-e2d7-4282-8f5c-50e52b943bd0:2772 [ScalePlus Checkbox Size] Bigger checkboxes applied
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:18 === ScalePlus Checkbox Diagnostic Tool v1.3 - Continuous Monitor ===
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:19 Monitoring row heights every 1 second. Manually toggle checkboxes with your mouse.
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:20 
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:68 Type: window.stopMonitor() to stop monitoring
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 1] Row: 35px | Checkbox: 35px | BG: rgb(79, 147, 228) | State: CHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 2] Row: 35px | Checkbox: 35px | BG: rgb(79, 147, 228) | State: CHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 3] Row: 35px | Checkbox: 35px | BG: rgb(79, 147, 228) | State: CHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 4] Row: 35px | Checkbox: 35px | BG: rgb(215, 215, 220) | State: UNCHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:59 ⚠️ CHECKBOX BG COLOR CHANGED: rgb(79, 147, 228) -> rgb(215, 215, 220)
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:59
-setInterval
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:27
-setTimeout
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:17
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:75
-At @ VM7903:10
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-window.__f__mj25aszz.n9 @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-At @ VM7903:10
-r.setMessageListener.r @ VM7903:90
-(anonymous) @ VM7903:93
-_ @ VM7903:22
-$t @ content.js:9
-h @ content.js:65
-d @ content.js:68
-(anonymous) @ content.js:68
-Xn @ content.js:15
-send @ content.js:68
-w @ content.js:63
-(anonymous) @ content.js:64
-(anonymous) @ content.js:22
-setTimeout
-(anonymous) @ content.js:22
-(anonymous) @ content.js:2
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 5] Row: 35px | Checkbox: 35px | BG: rgb(215, 215, 220) | State: UNCHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 6] Row: 35px | Checkbox: 35px | BG: rgb(215, 215, 220) | State: UNCHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 7] Row: 35px | Checkbox: 35px | BG: rgb(215, 215, 220) | State: UNCHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 8] Row: 35px | Checkbox: 35px | BG: rgb(215, 215, 220) | State: UNCHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 9] Row: 35px | Checkbox: 35px | BG: rgb(215, 215, 220) | State: UNCHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 10] Row: 35px | Checkbox: 35px | BG: rgb(79, 147, 228) | State: CHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:59 ⚠️ CHECKBOX BG COLOR CHANGED: rgb(215, 215, 220) -> rgb(79, 147, 228)
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:59
-setInterval
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:27
-setTimeout
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:17
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:75
-At @ VM7903:10
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-window.__f__mj25aszz.n9 @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-At @ VM7903:10
-r.setMessageListener.r @ VM7903:90
-(anonymous) @ VM7903:93
-_ @ VM7903:22
-$t @ content.js:9
-h @ content.js:65
-d @ content.js:68
-(anonymous) @ content.js:68
-Xn @ content.js:15
-send @ content.js:68
-w @ content.js:63
-(anonymous) @ content.js:64
-(anonymous) @ content.js:22
-setTimeout
-(anonymous) @ content.js:22
-(anonymous) @ content.js:2
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 11] Row: 35px | Checkbox: 35px | BG: rgb(79, 147, 228) | State: CHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 12] Row: 35px | Checkbox: 35px | BG: rgb(79, 147, 228) | State: CHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 13] Row: 35px | Checkbox: 35px | BG: rgb(79, 147, 228) | State: CHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 14] Row: 35px | Checkbox: 35px | BG: rgb(79, 147, 228) | State: CHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 15] Row: 35px | Checkbox: 35px | BG: rgb(79, 147, 228) | State: CHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 16] Row: 35px | Checkbox: 35px | BG: rgb(79, 147, 228) | State: CHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 17] Row: 35px | Checkbox: 35px | BG: rgb(79, 147, 228) | State: CHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 18] Row: 35px | Checkbox: 35px | BG: rgb(79, 147, 228) | State: CHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 19] Row: 35px | Checkbox: 35px | BG: rgb(215, 215, 220) | State: UNCHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:59 ⚠️ CHECKBOX BG COLOR CHANGED: rgb(79, 147, 228) -> rgb(215, 215, 220)
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:59
-setInterval
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:27
-setTimeout
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:17
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:75
-At @ VM7903:10
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-window.__f__mj25aszz.n9 @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-At @ VM7903:10
-r.setMessageListener.r @ VM7903:90
-(anonymous) @ VM7903:93
-_ @ VM7903:22
-$t @ content.js:9
-h @ content.js:65
-d @ content.js:68
-(anonymous) @ content.js:68
-Xn @ content.js:15
-send @ content.js:68
-w @ content.js:63
-(anonymous) @ content.js:64
-(anonymous) @ content.js:22
-setTimeout
-(anonymous) @ content.js:22
-(anonymous) @ content.js:2
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 20] Row: 35px | Checkbox: 35px | BG: rgb(215, 215, 220) | State: UNCHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 21] Row: 35px | Checkbox: 35px | BG: rgb(215, 215, 220) | State: UNCHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 22] Row: 36.5938px | Checkbox: 35px | BG: rgb(232, 232, 236) | State: UNCHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:53 ⚠️ ROW HEIGHT CHANGED: 35px -> 36.5938px
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:53
-setInterval
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:27
-setTimeout
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:17
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:75
-At @ VM7903:10
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-window.__f__mj25aszz.n9 @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-At @ VM7903:10
-r.setMessageListener.r @ VM7903:90
-(anonymous) @ VM7903:93
-_ @ VM7903:22
-$t @ content.js:9
-h @ content.js:65
-d @ content.js:68
-(anonymous) @ content.js:68
-Xn @ content.js:15
-send @ content.js:68
-w @ content.js:63
-(anonymous) @ content.js:64
-(anonymous) @ content.js:22
-setTimeout
-(anonymous) @ content.js:22
-(anonymous) @ content.js:2
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:59 ⚠️ CHECKBOX BG COLOR CHANGED: rgb(215, 215, 220) -> rgb(232, 232, 236)
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:59
-setInterval
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:27
-setTimeout
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:17
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:75
-At @ VM7903:10
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-window.__f__mj25aszz.n9 @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-At @ VM7903:10
-r.setMessageListener.r @ VM7903:90
-(anonymous) @ VM7903:93
-_ @ VM7903:22
-$t @ content.js:9
-h @ content.js:65
-d @ content.js:68
-(anonymous) @ content.js:68
-Xn @ content.js:15
-send @ content.js:68
-w @ content.js:63
-(anonymous) @ content.js:64
-(anonymous) @ content.js:22
-setTimeout
-(anonymous) @ content.js:22
-(anonymous) @ content.js:2
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 23] Row: 36.5938px | Checkbox: 35px | BG: rgb(215, 215, 220) | State: UNCHECKED
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 12] Row: 56.8594px | Checkbox: 43px | BG: rgb(232, 232, 236) | State: UNCHECKED
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 13] Row: 56.8594px | Checkbox: 43px | BG: rgb(215, 215, 220) | State: UNCHECKED
 userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:59 ⚠️ CHECKBOX BG COLOR CHANGED: rgb(232, 232, 236) -> rgb(215, 215, 220)
 (anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:59
 setInterval
@@ -195,13 +7,13 @@ setInterval
 setTimeout
 (anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:17
 (anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:75
-At @ VM7903:10
+At @ VM8220:10
 (anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-window.__f__mj25aszz.n9 @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-At @ VM7903:10
-r.setMessageListener.r @ VM7903:90
-(anonymous) @ VM7903:93
-_ @ VM7903:22
+window.__f__mj23us80.6z @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
+At @ VM8220:10
+r.setMessageListener.r @ VM8220:90
+(anonymous) @ VM8220:93
+_ @ VM8220:22
 $t @ content.js:9
 h @ content.js:65
 d @ content.js:68
@@ -214,25 +26,102 @@ w @ content.js:63
 setTimeout
 (anonymous) @ content.js:22
 (anonymous) @ content.js:2
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 24] Row: 36.5938px | Checkbox: 35px | BG: rgb(215, 215, 220) | State: UNCHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 25] Row: 36.5938px | Checkbox: 35px | BG: rgb(215, 215, 220) | State: UNCHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 26] Row: 36.5938px | Checkbox: 35px | BG: rgb(215, 215, 220) | State: UNCHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 27] Row: 36.5938px | Checkbox: 35px | BG: rgb(215, 215, 220) | State: UNCHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 28] Row: 35px | Checkbox: 35px | BG: rgb(79, 147, 228) | State: CHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:53 ⚠️ ROW HEIGHT CHANGED: 36.5938px -> 35px
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 14] Row: 56.8594px | Checkbox: 43px | BG: rgb(232, 232, 236) | State: UNCHECKED
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:59 ⚠️ CHECKBOX BG COLOR CHANGED: rgb(215, 215, 220) -> rgb(232, 232, 236)
+(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:59
+setInterval
+(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:27
+setTimeout
+(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:17
+(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:75
+At @ VM8220:10
+(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
+window.__f__mj23us80.6z @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
+At @ VM8220:10
+r.setMessageListener.r @ VM8220:90
+(anonymous) @ VM8220:93
+_ @ VM8220:22
+$t @ content.js:9
+h @ content.js:65
+d @ content.js:68
+(anonymous) @ content.js:68
+Xn @ content.js:15
+send @ content.js:68
+w @ content.js:63
+(anonymous) @ content.js:64
+(anonymous) @ content.js:22
+setTimeout
+(anonymous) @ content.js:22
+(anonymous) @ content.js:2
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 15] Row: 56.8594px | Checkbox: 43px | BG: rgb(79, 147, 228) | State: CHECKED
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:59 ⚠️ CHECKBOX BG COLOR CHANGED: rgb(232, 232, 236) -> rgb(79, 147, 228)
+(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:59
+setInterval
+(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:27
+setTimeout
+(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:17
+(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:75
+At @ VM8220:10
+(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
+window.__f__mj23us80.6z @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
+At @ VM8220:10
+r.setMessageListener.r @ VM8220:90
+(anonymous) @ VM8220:93
+_ @ VM8220:22
+$t @ content.js:9
+h @ content.js:65
+d @ content.js:68
+(anonymous) @ content.js:68
+Xn @ content.js:15
+send @ content.js:68
+w @ content.js:63
+(anonymous) @ content.js:64
+(anonymous) @ content.js:22
+setTimeout
+(anonymous) @ content.js:22
+(anonymous) @ content.js:2
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 16] Row: 56.8594px | Checkbox: 43px | BG: rgb(215, 215, 220) | State: UNCHECKED
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:59 ⚠️ CHECKBOX BG COLOR CHANGED: rgb(79, 147, 228) -> rgb(215, 215, 220)
+(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:59
+setInterval
+(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:27
+setTimeout
+(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:17
+(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:75
+At @ VM8220:10
+(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
+window.__f__mj23us80.6z @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
+At @ VM8220:10
+r.setMessageListener.r @ VM8220:90
+(anonymous) @ VM8220:93
+_ @ VM8220:22
+$t @ content.js:9
+h @ content.js:65
+d @ content.js:68
+(anonymous) @ content.js:68
+Xn @ content.js:15
+send @ content.js:68
+w @ content.js:63
+(anonymous) @ content.js:64
+(anonymous) @ content.js:22
+setTimeout
+(anonymous) @ content.js:22
+(anonymous) @ content.js:2
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 17] Row: 54.8594px | Checkbox: 43px | BG: rgb(79, 147, 228) | State: CHECKED
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:53 ⚠️ ROW HEIGHT CHANGED: 56.8594px -> 54.8594px
 (anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:53
 setInterval
 (anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:27
 setTimeout
 (anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:17
 (anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:75
-At @ VM7903:10
+At @ VM8220:10
 (anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-window.__f__mj25aszz.n9 @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-At @ VM7903:10
-r.setMessageListener.r @ VM7903:90
-(anonymous) @ VM7903:93
-_ @ VM7903:22
+window.__f__mj23us80.6z @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
+At @ VM8220:10
+r.setMessageListener.r @ VM8220:90
+(anonymous) @ VM8220:93
+_ @ VM8220:22
 $t @ content.js:9
 h @ content.js:65
 d @ content.js:68
@@ -252,13 +141,13 @@ setInterval
 setTimeout
 (anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:17
 (anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:75
-At @ VM7903:10
+At @ VM8220:10
 (anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-window.__f__mj25aszz.n9 @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-At @ VM7903:10
-r.setMessageListener.r @ VM7903:90
-(anonymous) @ VM7903:93
-_ @ VM7903:22
+window.__f__mj23us80.6z @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
+At @ VM8220:10
+r.setMessageListener.r @ VM8220:90
+(anonymous) @ VM8220:93
+_ @ VM8220:22
 $t @ content.js:9
 h @ content.js:65
 d @ content.js:68
@@ -271,21 +160,24 @@ w @ content.js:63
 setTimeout
 (anonymous) @ content.js:22
 (anonymous) @ content.js:2
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 29] Row: 36.5938px | Checkbox: 35px | BG: rgb(215, 215, 220) | State: UNCHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:53 ⚠️ ROW HEIGHT CHANGED: 35px -> 36.5938px
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 18] Row: 54.8594px | Checkbox: 43px | BG: rgb(79, 147, 228) | State: CHECKED
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 19] Row: 54.8594px | Checkbox: 43px | BG: rgb(79, 147, 228) | State: CHECKED
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 20] Row: 54.8594px | Checkbox: 43px | BG: rgb(79, 147, 228) | State: CHECKED
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 21] Row: 56.8594px | Checkbox: 43px | BG: rgb(79, 147, 228) | State: CHECKED
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:53 ⚠️ ROW HEIGHT CHANGED: 54.8594px -> 56.8594px
 (anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:53
 setInterval
 (anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:27
 setTimeout
 (anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:17
 (anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:75
-At @ VM7903:10
+At @ VM8220:10
 (anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-window.__f__mj25aszz.n9 @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-At @ VM7903:10
-r.setMessageListener.r @ VM7903:90
-(anonymous) @ VM7903:93
-_ @ VM7903:22
+window.__f__mj23us80.6z @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
+At @ VM8220:10
+r.setMessageListener.r @ VM8220:90
+(anonymous) @ VM8220:93
+_ @ VM8220:22
 $t @ content.js:9
 h @ content.js:65
 d @ content.js:68
@@ -298,61 +190,4 @@ w @ content.js:63
 setTimeout
 (anonymous) @ content.js:22
 (anonymous) @ content.js:2
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:59 ⚠️ CHECKBOX BG COLOR CHANGED: rgb(79, 147, 228) -> rgb(215, 215, 220)
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:59
-setInterval
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:27
-setTimeout
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:17
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:75
-At @ VM7903:10
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-window.__f__mj25aszz.n9 @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-At @ VM7903:10
-r.setMessageListener.r @ VM7903:90
-(anonymous) @ VM7903:93
-_ @ VM7903:22
-$t @ content.js:9
-h @ content.js:65
-d @ content.js:68
-(anonymous) @ content.js:68
-Xn @ content.js:15
-send @ content.js:68
-w @ content.js:63
-(anonymous) @ content.js:64
-(anonymous) @ content.js:22
-setTimeout
-(anonymous) @ content.js:22
-(anonymous) @ content.js:2
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 30] Row: 36.5938px | Checkbox: 35px | BG: rgb(232, 232, 236) | State: UNCHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:59 ⚠️ CHECKBOX BG COLOR CHANGED: rgb(215, 215, 220) -> rgb(232, 232, 236)
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:59
-setInterval
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:27
-setTimeout
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:17
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:75
-At @ VM7903:10
-(anonymous) @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-window.__f__mj25aszz.n9 @ userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:1
-At @ VM7903:10
-r.setMessageListener.r @ VM7903:90
-(anonymous) @ VM7903:93
-_ @ VM7903:22
-$t @ content.js:9
-h @ content.js:65
-d @ content.js:68
-(anonymous) @ content.js:68
-Xn @ content.js:15
-send @ content.js:68
-w @ content.js:63
-(anonymous) @ content.js:64
-(anonymous) @ content.js:22
-setTimeout
-(anonymous) @ content.js:22
-(anonymous) @ content.js:2
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 31] Row: 36.5938px | Checkbox: 35px | BG: rgb(232, 232, 236) | State: UNCHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 32] Row: 36.5938px | Checkbox: 35px | BG: rgb(232, 232, 236) | State: UNCHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 33] Row: 36.5938px | Checkbox: 35px | BG: rgb(232, 232, 236) | State: UNCHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 34] Row: 36.5938px | Checkbox: 35px | BG: rgb(232, 232, 236) | State: UNCHECKED
-userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 35] Row: 36.5938px | Checkbox: 35px | BG: rgb(232, 232, 236) | State: UNCHECKED
+userscript.html?name=ScalePlus-Checkbox-Diagnostic-Tool.user.js&id=32a097b3-1809-4150-b0c3-e1a99bed585c:49 [Sample 22] Row: 56.8594px | Checkbox: 43px | BG: rgb(79, 147, 228) | State: CHECKED

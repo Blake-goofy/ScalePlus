@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScalePlus Dark Mode Module
 // @namespace    http://tampermonkey.net/
-// @version      1.3
+// @version      1.4
 // @description  Dark mode styling for ScalePlus and RF pages
 // @author       Blake
 // @grant        none
@@ -124,44 +124,37 @@
             color: #5ba3e0 !important;
         }
         
-        /* Selected rows - must come BEFORE hover to allow proper override */
-        body.scaleplus-dark-mode #ListPaneDataGrid td.ui-iggrid-selectedcell,
-        body.scaleplus-dark-mode #ListPaneDataGrid td.ui-state-active {
-            background-color: rgba(91, 163, 224, 0.25) !important;
+        /* Hovered rows - subtle highlight */
+        body.scaleplus-dark-mode #ListPaneDataGrid tr:hover td {
+            background-color: #252525 !important;
+        }
+        
+        /* Row selector column (th with role=rowheader) should also get hover effect */
+        body.scaleplus-dark-mode #ListPaneDataGrid tr:hover th.ui-iggrid-rowselector-class {
+            background-color: #252525 !important;
+        }
+        
+        /* Selected rows */
+        body.scaleplus-dark-mode #ListPaneDataGrid .ui-iggrid-selectedcell {
+            background-color: #293B4A !important;
             color: #ffffff !important;
         }
         
-        body.scaleplus-dark-mode #ListPaneDataGrid td.ui-state-active {
-            border-color: #5ba3e0 !important;
+        body.scaleplus-dark-mode #ListPaneDataGrid .ui-state-active {
+            background-color: #293B4A !important;
+            color: #ffffff !important;
+            border-color: #4a7aab !important;
         }
         
         /* Ensure selected rows override other styles */
         body.scaleplus-dark-mode #ListPaneDataGrid tr[aria-selected="true"] td {
-            background-color: rgba(91, 163, 224, 0.25) !important;
+            background-color: #293B4A !important;
             color: #ffffff !important;
         }
         
         /* Row selector column should also get selected row styling */
         body.scaleplus-dark-mode #ListPaneDataGrid tr[aria-selected="true"] th.ui-iggrid-rowselector-class {
-            background-color: rgba(91, 163, 224, 0.25) !important;
-        }
-        
-        /* Hovered rows - subtle highlight (comes after selected to not override on hover) */
-        body.scaleplus-dark-mode #ListPaneDataGrid tr:hover td:not(.ui-iggrid-selectedcell):not(.ui-state-active) {
-            background-color: #252525 !important;
-        }
-        
-        /* Row selector column (th with role=rowheader) should also get hover effect */
-        body.scaleplus-dark-mode #ListPaneDataGrid tr:hover th.ui-iggrid-rowselector-class:not(.ui-state-active) {
-            background-color: #252525 !important;
-        }
-        
-        /* Selected cells should keep their color even when row is hovered */
-        body.scaleplus-dark-mode #ListPaneDataGrid tr:hover td.ui-iggrid-selectedcell,
-        body.scaleplus-dark-mode #ListPaneDataGrid tr:hover td.ui-state-active,
-        body.scaleplus-dark-mode #ListPaneDataGrid tr[aria-selected="true"]:hover td {
-            background-color: rgba(91, 163, 224, 0.25) !important;
-            color: #ffffff !important;
+            background-color: #293B4A !important;
         }
         
         /* Row selector checkboxes - scope to body only (do not affect header checkbox) */

@@ -282,61 +282,22 @@
         },
 
         enforceRowHeights() {
-            // NEW APPROACH: Let Scale control row heights, make checkbox fill whatever height the row has
+            // Simplified: Just use CSS with fixed size, no dynamic resizing
+            // The CSS already sizes checkboxes based on measureSizes()
             if (!this.isScalePage()) return;
             if (!window.ScalePlusSettings?.isEnabled(window.ScalePlusSettings.SETTINGS.BIGGER_CHECKBOXES)) return;
 
-            // Dynamically size checkboxes to match their parent row height
-            const resizeCheckboxes = () => {
-                const rows = document.querySelectorAll('body.scaleplus-bigger-checkboxes tr[data-id]');
-                rows.forEach(row => {
-                    const rowHeader = row.querySelector('th.ui-iggrid-rowselector-class');
-                    const checkbox = row.querySelector('span[name="chk"][data-role="checkbox"]');
-                    
-                    if (rowHeader && checkbox) {
-                        // Get the actual computed height of the row header
-                        const headerHeight = rowHeader.getBoundingClientRect().height;
-                        if (headerHeight > 0) {
-                            // Make checkbox exactly match the row header height
-                            checkbox.style.setProperty('width', `${headerHeight}px`, 'important');
-                            checkbox.style.setProperty('height', `${headerHeight}px`, 'important');
-                            
-                            // Scale the icon proportionally
-                            const icon = checkbox.querySelector('.ui-icon');
-                            if (icon) {
-                                const iconSize = Math.round(headerHeight * 0.85);
-                                icon.style.setProperty('width', `${iconSize}px`, 'important');
-                                icon.style.setProperty('height', `${iconSize}px`, 'important');
-                                icon.style.setProperty('background-size', `${iconSize}px ${iconSize}px`, 'important');
-                            }
-                        }
-                    }
-                });
-            };
-
-            // Apply immediately
-            resizeCheckboxes();
-
-            // Watch for checkbox state changes and resize dynamically
+            // Clean up any existing observers/intervals
             if (this.heightEnforcer) {
                 this.heightEnforcer.disconnect();
+                this.heightEnforcer = null;
             }
-
-            this.heightEnforcer = new MutationObserver(() => {
-                resizeCheckboxes();
-            });
-
-            this.heightEnforcer.observe(document.body, {
-                subtree: true,
-                attributes: true,
-                attributeFilter: ['data-chk', 'class']
-            });
-
-            // Also check periodically in case we miss something
             if (this.resizeInterval) {
                 clearInterval(this.resizeInterval);
+                this.resizeInterval = null;
             }
-            this.resizeInterval = setInterval(resizeCheckboxes, 500);
+            
+            // Don't do anything else - let CSS handle it
         },
 
         applyCheckboxSize() {

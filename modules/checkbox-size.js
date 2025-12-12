@@ -104,93 +104,48 @@
             const iconSize = this.sizes?.icon || 26;
             
             const checkboxStyles = `
-        /* Bigger Checkboxes - Make row selection checkboxes larger and easier to click */
+        /* Bigger Checkboxes - Make checkboxes dynamically fill row height */
         
-        /* LOCK row height to prevent expansion when checkbox state changes */
-        /* Force borders to 0 on all sides regardless of checked state - Scale adds 1px border when checked */
+        /* Let rows be whatever height Scale wants - don't fight it */
         body.scaleplus-bigger-checkboxes tr[data-id] {
+            /* Just clean up spacing */
             margin: 0 !important;
             padding: 0 !important;
-            border-spacing: 0 !important;
-            height: ${checkboxSize}px !important;
-            max-height: ${checkboxSize}px !important;
-            min-height: ${checkboxSize}px !important;
-            border: 0 !important;
-            border-top: 0 !important;
-            border-right: 0 !important;
-            border-bottom: 0 !important;
-            border-left: 0 !important;
         }
         
-        /* Make the row header cell fill vertically and remove ALL padding/gaps */
-        /* Force consistent border (remove Scale's dynamic bottom border on unchecked) */
+        /* Row header - clean up padding but let Scale control height */
         body.scaleplus-bigger-checkboxes tr th.ui-iggrid-rowselector-class {
             padding: 0 !important;
             margin: 0 !important;
-            vertical-align: top !important;
-            height: ${checkboxSize}px !important;
-            max-height: ${checkboxSize}px !important;
-            min-height: ${checkboxSize}px !important;
+            vertical-align: middle !important;
             line-height: 0 !important;
-            border-spacing: 0 !important;
-            font-size: 0 !important;
             overflow: hidden !important;
-            border: 0 !important;
-            border-top: 0 !important;
-            border-right: 0 !important;
-            border-bottom: 0 !important;
-            border-left: 0 !important;
         }
         
-        /* Remove margin from the expand/collapse icon */
-        body.scaleplus-bigger-checkboxes tr th.ui-iggrid-rowselector-class .ui-icon-triangle-1-e {
-            margin: 0 !important;
-            padding: 0 !important;
-            vertical-align: top !important;
-            display: inline-block !important;
-            height: 100% !important;
-        }
-        
-        /* Make checkbox container EXACTLY match the row height - fill 100% of cell with NO gaps */
-        /* Use border-box to include borders in the size calculation */
+        /* Checkbox container - size will be set dynamically via JS to match row height */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] {
-            width: ${checkboxSize}px !important;
-            height: ${checkboxSize}px !important;
-            min-width: ${checkboxSize}px !important;
-            min-height: ${checkboxSize}px !important;
-            max-width: ${checkboxSize}px !important;
-            max-height: ${checkboxSize}px !important;
             display: inline-block !important;
             padding: 0 !important;
             margin: 0 !important;
-            margin-top: 0 !important;
-            margin-right: 0 !important;
-            margin-bottom: 0 !important;
-            margin-left: 0 !important;
             cursor: pointer !important;
-            vertical-align: top !important;
+            vertical-align: middle !important;
             box-sizing: border-box !important;
             position: relative !important;
             border-top: none !important;
             border-bottom: none !important;
+            /* Size set dynamically via JS */
         }
         
-        /* Scale the inner icon to fill the checkbox */
-        /* CRITICAL: Force margin to 0 on ALL sides to prevent row height changes between states */
+        /* Icon - size set dynamically via JS, centered */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] .ui-icon {
-            width: ${iconSize}px !important;
-            height: ${iconSize}px !important;
             display: block !important;
-            background-size: ${iconSize}px ${iconSize}px !important;
             margin: 0 !important;
-            margin-top: 0 !important;
-            margin-right: 0 !important;
-            margin-bottom: 0 !important;
-            margin-left: 0 !important;
+            padding: 0 !important;
             position: absolute !important;
             top: 50% !important;
             left: 50% !important;
             transform: translate(-50%, -50%) !important;
+            /* Size set dynamically via JS */
         }
         
         /* Light mode - Use dynamically extracted colors from Scale's native checkboxes */
@@ -327,50 +282,61 @@
         },
 
         enforceRowHeights() {
-            // Aggressively enforce consistent row heights by directly manipulating inline styles
-            // This overrides any JavaScript-based height changes Scale makes
+            // NEW APPROACH: Let Scale control row heights, make checkbox fill whatever height the row has
             if (!this.isScalePage()) return;
             if (!window.ScalePlusSettings?.isEnabled(window.ScalePlusSettings.SETTINGS.BIGGER_CHECKBOXES)) return;
 
-            const checkboxSize = this.sizes?.checkbox || 30;
-
-            // Apply inline styles to all existing rows to override any Scale JS changes
-            const applyInlineStyles = () => {
+            // Dynamically size checkboxes to match their parent row height
+            const resizeCheckboxes = () => {
                 const rows = document.querySelectorAll('body.scaleplus-bigger-checkboxes tr[data-id]');
                 rows.forEach(row => {
-                    row.style.setProperty('height', `${checkboxSize}px`, 'important');
-                    row.style.setProperty('max-height', `${checkboxSize}px`, 'important');
-                    row.style.setProperty('min-height', `${checkboxSize}px`, 'important');
-                    row.style.setProperty('border', '0', 'important');
-
                     const rowHeader = row.querySelector('th.ui-iggrid-rowselector-class');
-                    if (rowHeader) {
-                        rowHeader.style.setProperty('height', `${checkboxSize}px`, 'important');
-                        rowHeader.style.setProperty('max-height', `${checkboxSize}px`, 'important');
-                        rowHeader.style.setProperty('min-height', `${checkboxSize}px`, 'important');
-                        rowHeader.style.setProperty('border', '0', 'important');
+                    const checkbox = row.querySelector('span[name="chk"][data-role="checkbox"]');
+                    
+                    if (rowHeader && checkbox) {
+                        // Get the actual computed height of the row header
+                        const headerHeight = rowHeader.getBoundingClientRect().height;
+                        if (headerHeight > 0) {
+                            // Make checkbox exactly match the row header height
+                            checkbox.style.setProperty('width', `${headerHeight}px`, 'important');
+                            checkbox.style.setProperty('height', `${headerHeight}px`, 'important');
+                            
+                            // Scale the icon proportionally
+                            const icon = checkbox.querySelector('.ui-icon');
+                            if (icon) {
+                                const iconSize = Math.round(headerHeight * 0.85);
+                                icon.style.setProperty('width', `${iconSize}px`, 'important');
+                                icon.style.setProperty('height', `${iconSize}px`, 'important');
+                                icon.style.setProperty('background-size', `${iconSize}px ${iconSize}px`, 'important');
+                            }
+                        }
                     }
                 });
             };
 
             // Apply immediately
-            applyInlineStyles();
+            resizeCheckboxes();
 
-            // Watch for any DOM changes and reapply
+            // Watch for checkbox state changes and resize dynamically
             if (this.heightEnforcer) {
                 this.heightEnforcer.disconnect();
             }
 
             this.heightEnforcer = new MutationObserver(() => {
-                applyInlineStyles();
+                resizeCheckboxes();
             });
 
             this.heightEnforcer.observe(document.body, {
-                childList: true,
                 subtree: true,
                 attributes: true,
-                attributeFilter: ['style', 'class', 'data-chk']
+                attributeFilter: ['data-chk', 'class']
             });
+
+            // Also check periodically in case we miss something
+            if (this.resizeInterval) {
+                clearInterval(this.resizeInterval);
+            }
+            this.resizeInterval = setInterval(resizeCheckboxes, 500);
         },
 
         applyCheckboxSize() {
@@ -386,6 +352,9 @@
                 document.body.classList.remove('scaleplus-bigger-checkboxes');
                 if (this.heightEnforcer) {
                     this.heightEnforcer.disconnect();
+                }
+                if (this.resizeInterval) {
+                    clearInterval(this.resizeInterval);
                 }
                 return;
             }

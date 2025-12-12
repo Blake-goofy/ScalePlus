@@ -157,12 +157,17 @@
         }
         
         /* Scale the inner icon to fill the checkbox */
+        /* CRITICAL: Force margin to 0 on ALL sides to prevent row height changes between states */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] .ui-icon {
             width: ${iconSize}px !important;
             height: ${iconSize}px !important;
             display: block !important;
             background-size: ${iconSize}px ${iconSize}px !important;
             margin: 0 !important;
+            margin-top: 0 !important;
+            margin-right: 0 !important;
+            margin-bottom: 0 !important;
+            margin-left: 0 !important;
             position: absolute !important;
             top: 50% !important;
             left: 50% !important;

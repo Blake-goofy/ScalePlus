@@ -1,4 +1,4 @@
-# 🛠️ ScalePlus - Enhanced Scale Application Experience
+# ScalePlus - Enhanced Scale Application Experience
 
 ScalePlus is a comprehensive userscript that enhances the Scale application with powerful features and improved workflow. All functionality is consolidated into a single script with an intuitive settings interface.
 
@@ -6,13 +6,53 @@ ScalePlus is a comprehensive userscript that enhances the Scale application with
 
 ---
 
+## Installation
+
+### Prerequisites
+- **Tampermonkey** browser extension (available for Chrome, Firefox, Safari, Edge)
+- Access to Scale application environments
+
+### Install Steps
+1. **Install Tampermonkey Extension**
+   - Click here: [Chrome Web Store](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
+   - Or search for "Tampermonkey" in your browser's extension store
+
+2. **Enable Developer Mode (Important!)**
+   - Click the **Extensions** icon in your browser toolbar
+   - Find **Tampermonkey** and click **Details**
+   - In the top-right corner, enable **Developer Mode**
+   - Make sure **User Scripts** are turned on (toggle switch)
+
+3. **Restart Browser**
+   - Close and reopen your browser to ensure all settings are applied
+
+4. **Install ScalePlus Script**
+   - Click here: [main.user.js](https://github.com/Blake-goofy/ScalePlus/raw/refs/heads/main/main.user.js)
+   - Tampermonkey will automatically prompt you to install
+   - Click **Install**
+
+---
+
 ## Quick Start Guide
 
-1. **Install** ScalePlus using the steps below
-2. **Enable** desired features in the settings by clicking the person icon in top right then **Configure workstation**
+1. **Enable** desired features in the settings by clicking the person icon in top right then **Configure workstation**
 ![ScalePlus Settings](images/configure.png)
-3. **Set Default Filters** by clicking stars next to your favorite saved searches
-4. **Enjoy** enhanced productivity with keyboard shortcuts and automation!
+2. **Set Default Filters** by clicking stars next to your favorite saved searches
+3. **Enjoy** enhanced productivity with keyboard shortcuts and automation!
+
+---
+
+## Bigger Checkboxes
+
+![Bigger Checkboxes](images/big-check.png)
+
+The **Bigger Checkboxes** feature enlarges grid row checkboxes for easier clicking and selection.
+
+### Features
+- **Larger Click Target**: Checkboxes sized to 35.5938px to fill the full row height
+- **Better Visibility**: Easier to see and select rows in the grid
+- **Consistent Styling**: Maintains Scale's native checkbox colors and behavior
+- **Dark Mode Support**: Automatically adapts styling for dark mode
 
 ---
 
@@ -143,34 +183,7 @@ The **Advanced Criteria Enhance** feature provides enhances the advanced criteri
 
 ---
 
-## 🔧 Installation
-
-### Prerequisites
-- **Tampermonkey** browser extension (available for Chrome, Firefox, Safari, Edge)
-- Access to Scale application environments
-
-### Install Steps
-1. **Install Tampermonkey Extension**
-   - Click here: [Chrome Web Store](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
-   - Or search for "Tampermonkey" in your browser's extension store
-
-2. **Enable Developer Mode (Important!)**
-   - Click the **Extensions** icon in your browser toolbar
-   - Find **Tampermonkey** and click **Details**
-   - In the top-right corner, enable **Developer Mode**
-   - Make sure **User Scripts** are turned on (toggle switch)
-
-3. **Restart Browser**
-   - Close and reopen your browser to ensure all settings are applied
-
-4. **Install ScalePlus Script**
-   - Click here: [main.user.js](https://github.com/Blake-goofy/ScalePlus/raw/refs/heads/main/main.user.js)
-   - Tampermonkey will automatically prompt you to install
-   - Click **Install**
-
----
-
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### Settings Not Appearing
 - Ensure you're on a Scale application page

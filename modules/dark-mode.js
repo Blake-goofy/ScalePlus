@@ -136,25 +136,25 @@
         
         /* Selected rows */
         body.scaleplus-dark-mode #ListPaneDataGrid .ui-iggrid-selectedcell {
-            background-color: #2d4a6b !important;
+            background-color: rgba(91, 163, 224, 0.25) !important;
             color: #ffffff !important;
         }
         
         body.scaleplus-dark-mode #ListPaneDataGrid .ui-state-active {
-            background-color: #2d4a6b !important;
+            background-color: rgba(91, 163, 224, 0.25) !important;
             color: #ffffff !important;
-            border-color: #4a7aab !important;
+            border-color: #5ba3e0 !important;
         }
         
         /* Ensure selected rows override other styles */
         body.scaleplus-dark-mode #ListPaneDataGrid tr[aria-selected="true"] td {
-            background-color: #2d4a6b !important;
+            background-color: rgba(91, 163, 224, 0.25) !important;
             color: #ffffff !important;
         }
         
         /* Row selector column should also get selected row styling */
         body.scaleplus-dark-mode #ListPaneDataGrid tr[aria-selected="true"] th.ui-iggrid-rowselector-class {
-            background-color: #2d4a6b !important;
+            background-color: rgba(91, 163, 224, 0.25) !important;
         }
         
         /* Row selector checkboxes - scope to body only (do not affect header checkbox) */

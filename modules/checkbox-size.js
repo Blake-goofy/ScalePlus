@@ -182,17 +182,17 @@
         /* Dark mode checked state */
         body.scaleplus-dark-mode.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"],
         body.scaleplus-dark-mode.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active {
-            background-color: rgba(79, 147, 228, 0.3) !important;
-            border-left-color: rgba(79, 147, 228, 0.6) !important;
-            border-right-color: rgba(79, 147, 228, 0.6) !important;
+            background-color: rgba(91, 163, 224, 0.3) !important;
+            border-left-color: rgba(91, 163, 224, 0.6) !important;
+            border-right-color: rgba(91, 163, 224, 0.6) !important;
         }
         
         /* Dark mode checked hover state */
         body.scaleplus-dark-mode.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"]:hover,
         body.scaleplus-dark-mode.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active:hover {
-            background-color: rgba(79, 147, 228, 0.4) !important;
-            border-left-color: rgba(79, 147, 228, 0.7) !important;
-            border-right-color: rgba(79, 147, 228, 0.7) !important;
+            background-color: rgba(91, 163, 224, 0.4) !important;
+            border-left-color: rgba(91, 163, 224, 0.7) !important;
+            border-right-color: rgba(91, 163, 224, 0.7) !important;
         }
             `;
 

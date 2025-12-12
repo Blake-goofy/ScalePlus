@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScalePlus Checkbox Size Module
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.0
 // @description  Enlarges grid row checkboxes for easier clicking
 // @author       Blake
 // @grant        none
@@ -17,7 +17,7 @@
             this.extractColors();
             this.injectStyles();
             this.applyCheckboxSize();
-            // Wait for rows to render, then measure and lock their height
+            // Re-measure after rows render to avoid gaps on varying row heights
             this.waitForRowHeader();
         },
 
@@ -62,30 +62,29 @@
         },
 
         measureSizes() {
-            const fallbackCheckbox = 35;
-            const fallbackIcon = 30;
+            // Derive checkbox and icon sizes from the live row header height to avoid gaps
+            const fallbackCheckbox = 30;
+            const fallbackIcon = 26;
 
             let checkboxSize = fallbackCheckbox;
             let iconSize = fallbackIcon;
 
-            // Prefer the row selector header for the true row height at first render
             const rowHeader = document.querySelector('th.ui-iggrid-rowselector-class');
             if (rowHeader) {
                 const rect = rowHeader.getBoundingClientRect();
                 if (rect && rect.height) {
-                    checkboxSize = Math.round(rect.height);
+                    // Leave a tiny margin to avoid forcing row expansion
+                    checkboxSize = Math.max(20, Math.round(rect.height - 2));
                     iconSize = Math.max(checkboxSize - 4, Math.round(checkboxSize * 0.85));
-                    console.log(`[ScalePlus Checkbox Size] Measured initial row header: ${rect.height}px, checkbox: ${checkboxSize}px, icon: ${iconSize}px`);
                 }
             } else {
-                // Fallback: measure an existing checkbox if present
+                // Fall back to any checkbox we can find
                 const checkbox = document.querySelector('span[name="chk"][data-role="checkbox"]');
                 if (checkbox) {
-                    const h = checkbox.getBoundingClientRect().height;
-                    if (h) {
-                        checkboxSize = Math.round(h);
+                    const rect = checkbox.getBoundingClientRect();
+                    if (rect && rect.height) {
+                        checkboxSize = Math.max(20, Math.round(rect.height));
                         iconSize = Math.max(checkboxSize - 4, Math.round(checkboxSize * 0.85));
-                        console.log(`[ScalePlus Checkbox Size] Measured fallback checkbox: ${h}px, checkbox: ${checkboxSize}px, icon: ${iconSize}px`);
                     }
                 }
             }
@@ -104,29 +103,16 @@
             const checkboxSize = this.sizes?.checkbox || 30;
             const iconSize = this.sizes?.icon || 26;
             
-            // Lock row height to the measured initial size
-            const rowHeight = checkboxSize;
-            
             const checkboxStyles = `
         /* Bigger Checkboxes - Make row selection checkboxes larger and easier to click */
         
-        /* LOCK ROW HEIGHT - single source of truth based on initial measurement */
-        body.scaleplus-bigger-checkboxes tr,
-        body.scaleplus-bigger-checkboxes .ui-iggrid-row,
-        body.scaleplus-bigger-checkboxes .ui-iggrid-record,
-        body.scaleplus-bigger-checkboxes .ui-iggrid-altrecord,
-        body.scaleplus-bigger-checkboxes .ui-iggrid-virtualrecordsrow,
-        body.scaleplus-bigger-checkboxes .ui-iggrid-tablebody tr,
-        body.scaleplus-bigger-checkboxes [data-id],
-        body.scaleplus-bigger-checkboxes td,
-        body.scaleplus-bigger-checkboxes th {
-            height: ${rowHeight}px !important;
-            min-height: ${rowHeight}px !important;
-            max-height: ${rowHeight}px !important;
-            line-height: ${rowHeight}px !important;
-            padding: 0 !important;
+        /* LOCK row height to prevent expansion when checkbox state changes */
+        body.scaleplus-bigger-checkboxes tr[data-id] {
             margin: 0 !important;
+            padding: 0 !important;
             border-spacing: 0 !important;
+            height: ${checkboxSize}px !important;
+            max-height: ${checkboxSize}px !important;
         }
         
         /* Make the row header cell fill vertically and remove ALL padding/gaps */
@@ -134,7 +120,8 @@
             padding: 0 !important;
             margin: 0 !important;
             vertical-align: top !important;
-            height: 100% !important;
+            height: ${checkboxSize}px !important;
+            max-height: ${checkboxSize}px !important;
             line-height: 0 !important;
             border-spacing: 0 !important;
             font-size: 0 !important;
@@ -151,7 +138,8 @@
         }
         
         /* Make checkbox container EXACTLY match the row height - fill 100% of cell */
-        /* Remove top/bottom borders to fill full height with no gaps */
+        /* Remove top/bottom borders to fill full 31.36px height with no gaps */
+        /* Make it square - reduce height by 1px to prevent row expansion */
         body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] {
             width: ${checkboxSize}px !important;
             height: ${checkboxSize}px !important;
@@ -184,45 +172,46 @@
         /* Light mode - Use dynamically extracted colors from Scale's native checkboxes */
         /* Only left/right borders to fill full row height with no gaps */
         /* Use a subtly darker gray background to make it visible as clickable */
-        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"] {
+        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"]:not(.scaleplus-dark-mode *) {
             background-color: rgb(232, 232, 236) !important;
             border-left: 1px solid ${uncheckedBorder} !important;
             border-right: 1px solid ${uncheckedBorder} !important;
+            /* Force consistent dimensions */
+            width: ${checkboxSize}px !important;
+            height: ${checkboxSize}px !important;
         }
         
         /* Light mode hover state - darker for feedback */
-        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"]:hover {
+        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"]:not(.scaleplus-dark-mode *):hover {
             background-color: rgb(215, 215, 220) !important;
             border-left-color: ${uncheckedBorder} !important;
             border-right-color: ${uncheckedBorder} !important;
+            /* Force consistent dimensions */
+            width: ${checkboxSize}px !important;
+            height: ${checkboxSize}px !important;
         }
         
         /* Light mode checked state - Use extracted checkbox blue from Scale (keeps same border!) */
-        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"] {
+        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"]:not(.scaleplus-dark-mode *),
+        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active:not(.scaleplus-dark-mode *) {
             background-color: ${checkedBg} !important;
             border-left-color: ${checkedBorder} !important;
             border-right-color: ${checkedBorder} !important;
-        }
-        
-        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active {
-            background-color: ${checkedBg} !important;
-            border-left-color: ${checkedBorder} !important;
-            border-right-color: ${checkedBorder} !important;
+            /* Force consistent dimensions */
+            width: ${checkboxSize}px !important;
+            height: ${checkboxSize}px !important;
         }
         
         /* Light mode checked hover state - slightly darker */
-        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"]:hover {
+        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"][data-chk="on"]:not(.scaleplus-dark-mode *):hover,
+        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active:not(.scaleplus-dark-mode *):hover {
             background-color: ${checkedBg} !important;
             border-left-color: ${checkedBorder} !important;
             border-right-color: ${checkedBorder} !important;
             filter: brightness(0.9) !important;
-        }
-        
-        body.scaleplus-bigger-checkboxes span[name="chk"][data-role="checkbox"].ui-state-active:hover {
-            background-color: ${checkedBg} !important;
-            border-left-color: ${checkedBorder} !important;
-            border-right-color: ${checkedBorder} !important;
-            filter: brightness(0.9) !important;
+            /* Force consistent dimensions */
+            width: ${checkboxSize}px !important;
+            height: ${checkboxSize}px !important;
         }
         
         /* Dark mode - Keep existing dark mode styling but with larger size, only left/right borders */
@@ -230,6 +219,9 @@
             background-color: rgba(255, 255, 255, 0.08) !important;
             border-left: 1px solid rgba(255, 255, 255, 0.2) !important;
             border-right: 1px solid rgba(255, 255, 255, 0.2) !important;
+            /* Force consistent dimensions */
+            width: ${checkboxSize}px !important;
+            height: ${checkboxSize}px !important;
         }
         
         /* Dark mode hover state */
@@ -237,6 +229,9 @@
             background-color: rgba(255, 255, 255, 0.12) !important;
             border-left-color: rgba(255, 255, 255, 0.3) !important;
             border-right-color: rgba(255, 255, 255, 0.3) !important;
+            /* Force consistent dimensions */
+            width: ${checkboxSize}px !important;
+            height: ${checkboxSize}px !important;
         }
         
         /* Dark mode checked state */
@@ -245,6 +240,9 @@
             background-color: rgba(79, 147, 228, 0.3) !important;
             border-left-color: rgba(79, 147, 228, 0.6) !important;
             border-right-color: rgba(79, 147, 228, 0.6) !important;
+            /* Force consistent dimensions */
+            width: ${checkboxSize}px !important;
+            height: ${checkboxSize}px !important;
         }
         
         /* Dark mode checked hover state */
@@ -253,6 +251,9 @@
             background-color: rgba(79, 147, 228, 0.4) !important;
             border-left-color: rgba(79, 147, 228, 0.7) !important;
             border-right-color: rgba(79, 147, 228, 0.7) !important;
+            /* Force consistent dimensions */
+            width: ${checkboxSize}px !important;
+            height: ${checkboxSize}px !important;
         }
             `;
 

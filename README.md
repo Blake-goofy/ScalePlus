@@ -49,7 +49,7 @@ ScalePlus is a comprehensive userscript that enhances the Scale application with
 The **Bigger Checkboxes** feature enlarges grid row checkboxes for easier clicking and selection.
 
 ### Features
-- **Larger Click Target**: Checkboxes sized to 35.5938px to fill the full row height
+- **Larger Click Target**: Checkboxes sized to fill the full row height
 - **Better Visibility**: Easier to see and select rows in the grid
 - **Consistent Styling**: Maintains Scale's native checkbox colors and behavior
 - **Dark Mode Support**: Automatically adapts styling for dark mode

@@ -65,32 +65,32 @@
                             <div class="scaleplus-setting">
                                 <label for="middle-click-toggle">Enhance middle click:</label>
                                 <input type="checkbox" id="middle-click-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
-                                <span class="scaleplus-setting-desc">Middle click on grid items to copy text, middle click or Ctrl+click on favorites to open in new tab <a href="https://github.com/Blake-goofy/ScalePlus#right-click-copy" target="_blank" class="scaleplus-help-link">📖</a></span>
+                                <span class="scaleplus-setting-desc">Middle click on grid items to copy text, middle click or Ctrl+click on favorites to open in new tab <a href="https://github.com/Blake-goofy/ScalePlus#right-click-copy" target="_blank" class="scaleplus-help-link">[?]</a></span>
                             </div>
                             <div class="scaleplus-setting">
                                 <label for="right-click-toggle">Right-click menu:</label>
                                 <input type="checkbox" id="right-click-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
-                                <span class="scaleplus-setting-desc">Right-click on grid items and favorites for additional options <a href="https://github.com/Blake-goofy/ScalePlus#right-click-copy" target="_blank" class="scaleplus-help-link">📖</a></span>
+                                <span class="scaleplus-setting-desc">Right-click on grid items and favorites for additional options <a href="https://github.com/Blake-goofy/ScalePlus#right-click-copy" target="_blank" class="scaleplus-help-link">[?]</a></span>
                             </div>
                             <div class="scaleplus-setting">
                                 <label for="adv-criteria-indicator-toggle">Enhance advanced criteria:</label>
                                 <input type="checkbox" id="adv-criteria-indicator-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
-                                <span class="scaleplus-setting-desc">Show count in header and condition column in advanced criteria grid <a href="https://github.com/Blake-goofy/ScalePlus#advanced-criteria-enhance" target="_blank" class="scaleplus-help-link">📖</a></span>
+                                <span class="scaleplus-setting-desc">Show count in header and condition column in advanced criteria grid <a href="https://github.com/Blake-goofy/ScalePlus#advanced-criteria-enhance" target="_blank" class="scaleplus-help-link">[?]</a></span>
                             </div>
                             <div class="scaleplus-setting">
                                 <label for="default-filter-toggle">Enhance favorites:</label>
                                 <input type="checkbox" id="default-filter-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
-                                <span class="scaleplus-setting-desc">Star defaults + relative date/time favorites & pending-filter tab restore <a href="https://github.com/Blake-goofy/ScalePlus#default-state-management" target="_blank" class="scaleplus-help-link">📖</a></span>
+                                <span class="scaleplus-setting-desc">Star defaults + relative date/time favorites & pending-filter tab restore <a href="https://github.com/Blake-goofy/ScalePlus#default-state-management" target="_blank" class="scaleplus-help-link">[?]</a></span>
                             </div>
                             <div class="scaleplus-setting">
                                 <label for="dark-mode-toggle">Dark mode:</label>
                                 <input type="checkbox" id="dark-mode-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
-                                <span class="scaleplus-setting-desc">Apply dark theme to the results grid area <a href="https://github.com/Blake-goofy/ScalePlus#dark-mode" target="_blank" class="scaleplus-help-link">📖</a></span>
+                                <span class="scaleplus-setting-desc">Apply dark theme to the results grid area <a href="https://github.com/Blake-goofy/ScalePlus#dark-mode" target="_blank" class="scaleplus-help-link">[?]</a></span>
                             </div>
                             <div class="scaleplus-setting">
                                 <label for="bigger-checkboxes-toggle">Bigger checkboxes:</label>
                                 <input type="checkbox" id="bigger-checkboxes-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
-                                <span class="scaleplus-setting-desc">Enlarge row selection checkboxes for easier clicking <a href="https://github.com/Blake-goofy/ScalePlus#bigger-checkboxes" target="_blank" class="scaleplus-help-link">📖</a></span>
+                                <span class="scaleplus-setting-desc">Enlarge row selection checkboxes for easier clicking <a href="https://github.com/Blake-goofy/ScalePlus#bigger-checkboxes" target="_blank" class="scaleplus-help-link">[?]</a></span>
                             </div>
                         </div>
 
@@ -113,7 +113,7 @@
                             <div class="scaleplus-setting">
                                 <label for="env-labels-toggle">Environment labels:</label>
                                 <input type="checkbox" id="env-labels-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
-                                <span class="scaleplus-setting-desc">Show environment label in navbar <a href="https://github.com/Blake-goofy/ScalePlus#environment-labels" target="_blank" class="scaleplus-help-link">📖</a></span>
+                                <span class="scaleplus-setting-desc">Show environment label in navbar <a href="https://github.com/Blake-goofy/ScalePlus#environment-labels" target="_blank" class="scaleplus-help-link">[?]</a></span>
                             </div>
                         </div>
 

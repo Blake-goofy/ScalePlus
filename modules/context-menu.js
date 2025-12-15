@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScalePlus Context Menu Module
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Right-click context menu system
 // @author       Blake
 // @grant        none
@@ -155,6 +155,20 @@
                     box-shadow: inset 0 0 0 2px #5ba3e0 !important;
                     background-color: rgba(91, 163, 224, 0.4) !important;
                     background-image: none !important;
+                }
+                
+                /* Advanced criteria row highlighting */
+                #SearchPaneAdvCritAdvCritGrid tr.advcrit-context-highlight,
+                #SearchPaneAdvCritAdvCritGrid tr.advcrit-context-highlight:hover {
+                    box-shadow: inset 0 0 0 2px #4f93e4 !important;
+                    background-color: rgba(79, 147, 228, 0.2) !important;
+                    position: relative !important;
+                }
+                
+                body.scaleplus-dark-mode #SearchPaneAdvCritAdvCritGrid tr.advcrit-context-highlight,
+                body.scaleplus-dark-mode #SearchPaneAdvCritAdvCritGrid tr.advcrit-context-highlight:hover {
+                    box-shadow: inset 0 0 0 2px #5ba3e0 !important;
+                    background-color: rgba(91, 163, 224, 0.25) !important;
                 }
             `;
 
@@ -416,8 +430,66 @@
             this.show(e.pageX, e.pageY, menuItems, favoriteLink);
         }
 
+        handleAdvCritRightClick(e) {
+            if (e.button !== 2) return;
+
+            if (!window.ScalePlusSettings) return;
+            const rightClickEnabled = window.ScalePlusSettings.isEnabled(window.ScalePlusSettings.SETTINGS.RIGHT_CLICK_MENU);
+            const advCritEnabled = window.ScalePlusSettings.isEnabled(window.ScalePlusSettings.SETTINGS.ADV_CRITERIA_ENHANCEMENT);
+            
+            if (!rightClickEnabled || !advCritEnabled) return;
+
+            // Check if right-click is on an advanced criteria grid row
+            let target = e.target;
+            let row = null;
+
+            while (target && target !== document.body) {
+                if (target.tagName === 'TR' && target.getAttribute('role') === 'row' && 
+                    target.closest('#SearchPaneAdvCritAdvCritGrid')) {
+                    row = target;
+                    break;
+                }
+                target = target.parentElement;
+            }
+
+            if (!row) return;
+
+            e.preventDefault();
+
+            // Highlight the row
+            this.removeHighlight();
+            row.classList.add('advcrit-context-highlight');
+
+            const menuItems = [
+                {
+                    label: 'Edit',
+                    icon: 'fas fa-edit',
+                    action: (target) => {
+                        if (window.ScalePlusAdvancedCriteriaEdit) {
+                            window.ScalePlusAdvancedCriteriaEdit.editRow(target);
+                        }
+                    }
+                },
+                {
+                    label: 'Delete',
+                    icon: 'fas fa-trash',
+                    action: (target) => {
+                        if (window.ScalePlusAdvancedCriteriaEdit) {
+                            window.ScalePlusAdvancedCriteriaEdit.deleteRow(target);
+                        }
+                    }
+                }
+            ];
+
+            this.show(e.pageX, e.pageY, menuItems, row);
+        }
+
         attachRightClickHandlers() {
             document.addEventListener('contextmenu', (e) => {
+                if (!e.defaultPrevented) {
+                    this.handleAdvCritRightClick(e);
+                }
+
                 if (!e.defaultPrevented) {
                     this.handleFavoritesRightClick(e);
                 }

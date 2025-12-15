@@ -1,102 +1,75 @@
-===========================================
-UPDATED: 2024-12-12 - ROW SELECTION FIX
-===========================================
-
-ISSUE SUMMARY:
-- Checkbox selection causes LIGHT/WHITE backgrounds (wrong)
-- Only most recently selected row shows wrong colors
-- Clicking "Frozen" column center works correctly (dark blue)
-- Clicking near cell edges triggers wrong colors
-
-HYPOTHESIS:
-Scale has TWO selection mechanisms:
-1. Row selection (checkbox) - may apply ui-state-default
-2. Cell selection (clicking) - applies ui-iggrid-selectedcell
-
-jQuery UI theme CSS is MORE SPECIFIC than dark mode rules.
-
-CHANGES MADE:
-✓ Updated dark-mode.js with maximum specificity selectors
-✓ Added rules for ui-state-default + selection classes
-✓ Added rules for ui-widget-content + selection classes
-✓ Created row-selection-scraper-v3.user.js (better diagnostics)
-✓ Created selection-indicator.user.js (visual indicator)
-
-TESTING NEEDED:
-1. Install row-selection-scraper-v3.user.js
-2. Reload page with updated ScalePlus
-3. Test checkbox selection
-4. Check console for CSS rules being applied
-5. Report which CSS selector is winning
-
-===========================================
-PREVIOUS DIAGNOSTIC RESULTS (v2)
-===========================================
-
-Good
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:32 
-========== 6:18:38 AM - 1 row(s) selected ==========
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:35 
---- Row 1 (index 0) ---
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:36 Row classes: ""
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:67 ⚠️ PROBLEM CELLS DETECTED (3):
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:69   Cell 0 (TH):
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:70     Background: rgba(91, 163, 224, 0.25)
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:71     Color: rgb(255, 255, 255)
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:72     Classes: "ui-iggrid-rowselector-class ui-iggrid-selectedcell ui-state-active"
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:73     ui-state-active: true
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:74     ui-iggrid-selectedcell: true
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:75     ui-state-hover: false
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:76     ui-state-default: false
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:69   Cell 1 (TD):
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:70     Background: rgba(91, 163, 224, 0.25)
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:71     Color: rgb(255, 255, 255)
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:72     Classes: "ui-iggrid-selectedcell ui-state-active"
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:73     ui-state-active: true
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:74     ui-iggrid-selectedcell: true
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:75     ui-state-hover: false
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:76     ui-state-default: false
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:69   Cell 2 (TD):
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:70     Background: rgba(91, 163, 224, 0.25)
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:71     Color: rgb(255, 255, 255)
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:72     Classes: "ui-iggrid-selectedcell ui-state-active"
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:73     ui-state-active: true
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:74     ui-iggrid-selectedcell: true
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:75     ui-state-hover: false
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:76     ui-state-default: false
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:89 ==========
-
-
-Bad
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:32 
-========== 6:18:56 AM - 1 row(s) selected ==========
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:35 
---- Row 1 (index 0) ---
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:36 Row classes: ""
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:67 ⚠️ PROBLEM CELLS DETECTED (3):
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:69   Cell 0 (TH):
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:70     Background: rgba(91, 163, 224, 0.25)
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:71     Color: rgb(255, 255, 255)
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:72     Classes: "ui-iggrid-rowselector-class ui-iggrid-selectedcell ui-state-active"
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:73     ui-state-active: true
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:74     ui-iggrid-selectedcell: true
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:75     ui-state-hover: false
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:76     ui-state-default: false
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:69   Cell 1 (TD):
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:70     Background: rgba(91, 163, 224, 0.25)
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:71     Color: rgb(255, 255, 255)
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:72     Classes: "ui-iggrid-selectedcell ui-state-active"
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:73     ui-state-active: true
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:74     ui-iggrid-selectedcell: true
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:75     ui-state-hover: false
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:76     ui-state-default: false
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:69   Cell 2 (TD):
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:70     Background: rgba(91, 163, 224, 0.25)
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:71     Color: rgb(255, 255, 255)
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:72     Classes: "ui-iggrid-selectedcell ui-state-active"
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:73     ui-state-active: true
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:74     ui-iggrid-selectedcell: true
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:75     ui-state-hover: false
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:76     ui-state-default: false
-userscript.html?name=ScalePlus-Row-Selection-Diagnostic-Tool.user.js&id=a15d6698-ab18-493a-ac3a-88f34edaa697:89 ==========
-
+2723:1 Blocked aria-hidden on an element because its descendant retained focus. The focus must not be hidden from assistive technology users. Avoid using aria-hidden on a focused element or its ancestor. Consider using the inert attribute instead, which will also prevent focus. For more details, see the aria-hidden section of the WAI-ARIA specification at https://w3c.github.io/aria/#aria-hidden.
+Element with focus: <td.ui-state-hover>
+Ancestor with aria-hidden: <div.ScreenGroupSubAccordion ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-icons accordion-content-active#ScreenGroupSubAccordion3762> <div id=​"ScreenGroupSubAccordion3762" class=​"ScreenGroupSubAccordion ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-icons accordion-content-active" data-name=​"SearchPaneAdvancedCriteria" data-internalid=​"3762" role=​"tabpanel" aria-selected=​"false" aria-expanded=​"false" tabindex=​"-1" aria-labelledby=​"ui-id-15" aria-hidden=​"true" style=​"display:​ block;​">​…​</div>​
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:274 [ScalePlus AdvCrit Context Menu Test] Right-clicked row: <tr data-id=​"23669842-3C14-0912-F2B8-C0D8AAC0A120" role=​"row" tabindex=​"0" class=​"advcrit-context-highlight">​…​</tr>​
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:275 [ScalePlus AdvCrit Context Menu Test] Row data-id: 23669842-3C14-0912-F2B8-C0D8AAC0A120
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:288 [ScalePlus AdvCrit Context Menu Test] Edit clicked for row: <tr data-id=​"23669842-3C14-0912-F2B8-C0D8AAC0A120" role=​"row" tabindex=​"0" class>​…​</tr>​
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:322 [ScalePlus AdvCrit Context Menu Test] Extracted row data: {condition: 'AND', field: 'Template field 1', operand: '=', value: '500', rowId: '23669842-3C14-0912-F2B8-C0D8AAC0A120'}
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:339 [ScalePlus AdvCrit Context Menu Test] Starting edit process for: {condition: 'AND', field: 'Template field 1', operand: '=', value: '500', rowId: '23669842-3C14-0912-F2B8-C0D8AAC0A120'}
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:348 [ScalePlus AdvCrit Context Menu Test] Clicking Add button...
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:355 [ScalePlus AdvCrit Context Menu Test] Setting condition to: AND
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:581 [ScalePlus AdvCrit Context Menu Test] Setting combo value: #SearchPaneAdvCrit_FilterCond AND
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:594 [ScalePlus AdvCrit Context Menu Test] Looking for value: AND
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:634 [ScalePlus AdvCrit Context Menu Test] DataArray length: 2
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:636 [ScalePlus AdvCrit Context Menu Test] First item sample: {Identifier: '10', IdentifierAndDescription: '', Description: 'All are met (AND)', DisplayText: 'All are met (AND)', IsDescUsedForDisplay: true, …}
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:684 [ScalePlus AdvCrit Context Menu Test] Found matching item: {Identifier: '10', IdentifierAndDescription: '', Description: 'All are met (AND)', DisplayText: 'All are met (AND)', IsDescUsedForDisplay: true, …}
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:694 [ScalePlus AdvCrit Context Menu Test] Item index: 0
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:698 [ScalePlus AdvCrit Context Menu Test] Using typing method...
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:718 [ScalePlus AdvCrit Context Menu Test] Dropdown filtered and ready
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:764 [ScalePlus AdvCrit Context Menu Test] Value set successfully: 10
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:361 [ScalePlus AdvCrit Context Menu Test] Setting field to: Template field 1
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:581 [ScalePlus AdvCrit Context Menu Test] Setting combo value: #SearchPaneAdvCrit_Field Template field 1
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:594 [ScalePlus AdvCrit Context Menu Test] Looking for value: Template field 1
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:634 [ScalePlus AdvCrit Context Menu Test] DataArray length: 102
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:636 [ScalePlus AdvCrit Context Menu Test] First item sample: {Identifier: 'ACTIVE', IdentifierAndDescription: '', Description: 'Active', DisplayText: 'Active', IsDescUsedForDisplay: true, …}
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:684 [ScalePlus AdvCrit Context Menu Test] Found matching item: {Identifier: 'TEMPLATE_FIELD1', IdentifierAndDescription: '', Description: 'Template field 1', DisplayText: 'Template field 1', IsDescUsedForDisplay: true, …}
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:694 [ScalePlus AdvCrit Context Menu Test] Item index: 67
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:698 [ScalePlus AdvCrit Context Menu Test] Using typing method...
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:718 [ScalePlus AdvCrit Context Menu Test] Dropdown filtered and ready
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:766 [ScalePlus AdvCrit Context Menu Test] Value may not be set correctly: []
+setComboValue @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:766
+await in setComboValue
+editRow @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:362
+await in editRow
+action @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:289
+(anonymous) @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:205
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:365 [ScalePlus AdvCrit Context Menu Test] Waiting for Operand combo to be enabled...
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:466 [ScalePlus AdvCrit Context Menu Test] Still waiting... disabled class: true disabled attr: true input disabled: true
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:466 [ScalePlus AdvCrit Context Menu Test] Still waiting... disabled class: true disabled attr: true input disabled: true
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:466 [ScalePlus AdvCrit Context Menu Test] Still waiting... disabled class: true disabled attr: true input disabled: true
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:466 [ScalePlus AdvCrit Context Menu Test] Still waiting... disabled class: true disabled attr: true input disabled: true
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:466 [ScalePlus AdvCrit Context Menu Test] Still waiting... disabled class: true disabled attr: true input disabled: true
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:466 [ScalePlus AdvCrit Context Menu Test] Still waiting... disabled class: true disabled attr: true input disabled: true
+sharedinsight?v=eMb9M50gaA-G-LRWP5sL4gtMf72lSVvC996rzIp_SyU1:1 [ScalePlus AdvCrit Context Menu Test] Timeout - combo never became enabled: #SearchPaneAdvCrit_Operand
+console.error @ sharedinsight?v=eMb9M50gaA-G-LRWP5sL4gtMf72lSVvC996rzIp_SyU1:1
+(anonymous) @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:474
+setInterval
+(anonymous) @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:448
+waitForComboEnabled @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:446
+editRow @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:366
+await in editRow
+action @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:289
+(anonymous) @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:205
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:477 [ScalePlus AdvCrit Context Menu Test] Final state: {classes: 'ui-igcombo-wrapper ui-igCombo-disabled ui-state-disabled', ariaDisabled: 'true', hasDisabledInput: true}
+userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:483 Uncaught (in promise) Error: Timeout waiting for combo to be enabled: #SearchPaneAdvCrit_Operand
+    at userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:483:32
+(anonymous) @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:483
+setInterval
+(anonymous) @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:448
+waitForComboEnabled @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:446
+editRow @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:366
+await in editRow
+action @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:289
+(anonymous) @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:205
+loadbeforeinsight?v=R6hctzFg7Oy9sYbugHsUiE0_OD5T9Q6nOK8Y9k4YtS01:3291  POST https://scale20.byjasco.com/general/scaleapi/logsapi/log 401 (Unauthorized)
+g.offline.g.send @ loadbeforeinsight?v=R6hctzFg7Oy9sYbugHsUiE0_OD5T9Q6nOK8Y9k4YtS01:3291
+window.onerror @ sharedinsight?v=eMb9M50gaA-G-LRWP5sL4gtMf72lSVvC996rzIp_SyU1:1
+console.error @ sharedinsight?v=eMb9M50gaA-G-LRWP5sL4gtMf72lSVvC996rzIp_SyU1:1
+(anonymous) @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:474
+setInterval
+(anonymous) @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:448
+waitForComboEnabled @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:446
+editRow @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:366
+await in editRow
+action @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:289
+(anonymous) @ userscript.html?name=ScalePlus-Advanced-Criteria-Context-Menu-Test.user.js&id=85efb393-6788-473b-a889-881347510cab:205

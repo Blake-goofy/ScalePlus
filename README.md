@@ -180,6 +180,7 @@ The **Advanced Criteria Enhance** feature provides enhances the advanced criteri
 ### Enhanced Search Interface
 - **Improved Layout**: Added the condition column
 - **Visual Enhancements**: Shows the number of advanced criteria currently applied
+- **Right click menu**: Allows edit or delete actions on the selected row
 
 ---
 

@@ -66,7 +66,7 @@ Dark mode transforms the results grid into a modern, eye-friendly dark theme tha
 - **Results Grid**: Complete dark theme for the main data grid with carefully chosen colors
 - **Loading Spinner**: Custom animated blue spinner that replaces the default loading indicator
 - **Links**: Blue accent colors for links that maintain readability
-- **Icons**: Remain unchanges, but still look good in dark mode
+- **Icons**: Remain unchanged, but still look good in dark mode
 
 ---
 

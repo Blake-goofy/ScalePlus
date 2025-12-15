@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScalePlus Advanced Criteria Edit Module
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Edit functionality for advanced criteria rows
 // @author       Blake
 // @grant        none
@@ -18,6 +18,8 @@
 
     class ScalePlusAdvancedCriteriaEditClass {
         constructor() {
+            this.activeDeleteListener = null; // Track the active delete listener
+            this.activeCancelListener = null; // Track the cancel listener
             console.log('[ScalePlus AdvCrit Edit] Module loaded');
         }
 
@@ -27,6 +29,29 @@
                 return;
             }
             console.log('[ScalePlus AdvCrit Edit] Module initialized');
+        }
+
+        /**
+         * Clean up any existing event listeners
+         */
+        cleanupListeners() {
+            if (this.activeDeleteListener) {
+                const saveButton = document.querySelector('#SearchPaneAdvCrit_SaveButton');
+                if (saveButton) {
+                    saveButton.removeEventListener('click', this.activeDeleteListener);
+                    console.log('[ScalePlus AdvCrit Edit] Cleaned up old delete listener from Save button');
+                }
+                this.activeDeleteListener = null;
+            }
+            
+            if (this.activeCancelListener) {
+                const cancelButton = document.querySelector('#SearchPaneAdvCrit_CancelButton');
+                if (cancelButton) {
+                    cancelButton.removeEventListener('click', this.activeCancelListener);
+                    console.log('[ScalePlus AdvCrit Edit] Cleaned up cancel listener');
+                }
+                this.activeCancelListener = null;
+            }
         }
 
         /**
@@ -133,6 +158,8 @@
 
             // Step 6: Enable Save button and bind custom behavior
             const saveButton = document.querySelector('#SearchPaneAdvCrit_SaveButton');
+            const cancelButton = document.querySelector('#SearchPaneAdvCrit_CancelButton');
+            
             if (saveButton) {
                 console.log('[ScalePlus AdvCrit Edit] Force-enabling Save button...');
                 
@@ -141,16 +168,32 @@
                 
                 console.log('[ScalePlus AdvCrit Edit] Save button enabled. Binding delete behavior...');
                 
-                // Bind a one-time event listener to delete the original row when Save is clicked
-                const deleteOriginalRow = () => {
+                // Clean up any existing listeners first
+                this.cleanupListeners();
+                
+                // Create and store the delete listener
+                this.activeDeleteListener = () => {
                     console.log('[ScalePlus AdvCrit Edit] Save clicked, deleting original row...');
                     setTimeout(() => {
                         this.deleteRow(row);
                     }, 500);
-                    saveButton.removeEventListener('click', deleteOriginalRow);
+                    // Clean up listeners after execution
+                    this.cleanupListeners();
                 };
                 
-                saveButton.addEventListener('click', deleteOriginalRow);
+                // Create and store the cancel listener to clean up if user cancels
+                this.activeCancelListener = () => {
+                    console.log('[ScalePlus AdvCrit Edit] Cancel clicked, cleaning up listeners...');
+                    this.cleanupListeners();
+                };
+                
+                saveButton.addEventListener('click', this.activeDeleteListener);
+                
+                if (cancelButton) {
+                    cancelButton.addEventListener('click', this.activeCancelListener);
+                    console.log('[ScalePlus AdvCrit Edit] Cancel button listener attached');
+                }
+                
                 console.log('[ScalePlus AdvCrit Edit] Edit form ready - user can now modify and click Save');
             } else {
                 console.error('[ScalePlus AdvCrit Edit] Save button not found');

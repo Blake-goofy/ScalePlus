@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScalePlus Context Menu Module
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @description  Right-click context menu system
 // @author       Blake
 // @grant        none
@@ -283,8 +283,11 @@
         }
 
         removeHighlight() {
-            const highlighted = document.querySelectorAll('.scaleplus-context-highlight');
-            highlighted.forEach(el => el.classList.remove('scaleplus-context-highlight'));
+            const highlighted = document.querySelectorAll('.scaleplus-context-highlight, .advcrit-context-highlight');
+            highlighted.forEach(el => {
+                el.classList.remove('scaleplus-context-highlight');
+                el.classList.remove('advcrit-context-highlight');
+            });
         }
 
         highlightCell(cell) {

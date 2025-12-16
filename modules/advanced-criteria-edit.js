@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScalePlus Advanced Criteria Edit Module
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @description  Edit functionality for advanced criteria rows
 // @author       Blake
 // @grant        none
@@ -172,10 +172,12 @@
                 this.cleanupListeners();
                 
                 // Create and store the delete listener
+                // Store the row ID instead of the DOM element to avoid stale references
+                const rowIdToDelete = rowData.rowId;
                 this.activeDeleteListener = () => {
-                    console.log('[ScalePlus AdvCrit Edit] Save clicked, deleting original row...');
+                    console.log('[ScalePlus AdvCrit Edit] Save clicked, deleting original row with ID:', rowIdToDelete);
                     setTimeout(() => {
-                        this.deleteRow(row);
+                        this.deleteRow(rowIdToDelete);
                     }, 500);
                     // Clean up listeners after execution
                     this.cleanupListeners();
@@ -201,20 +203,51 @@
         }
 
         /**
-         * Delete an advanced criteria row
+         * Delete an advanced criteria row by its data-id
          */
-        deleteRow(row) {
-            if (!row) {
+        deleteRow(rowOrId) {
+            if (!rowOrId) {
                 console.error('[ScalePlus AdvCrit Edit] No row to delete');
                 return;
             }
 
-            console.log('[ScalePlus AdvCrit Edit] Attempting to delete row:', row);
+            // Get the row ID (either from the element or if it's already an ID string)
+            const rowId = typeof rowOrId === 'string' ? rowOrId : rowOrId.getAttribute('data-id');
+            
+            if (!rowId) {
+                console.error('[ScalePlus AdvCrit Edit] Could not get row ID');
+                return;
+            }
 
+            console.log('[ScalePlus AdvCrit Edit] Attempting to delete row with ID:', rowId);
+
+            // Find the row by its data-id (ensures we get the current DOM element)
+            const row = document.querySelector(`#SearchPaneAdvCritAdvCritGrid tr[data-id="${rowId}"]`);
+            
+            if (!row) {
+                console.error('[ScalePlus AdvCrit Edit] Could not find row with ID:', rowId);
+                return;
+            }
+
+            console.log('[ScalePlus AdvCrit Edit] Found row to delete:', row);
+
+            // Try jQuery approach first (most reliable)
+            if (window.$ && typeof $.ig !== 'undefined') {
+                try {
+                    console.log('[ScalePlus AdvCrit Edit] Using jQuery approach with row ID:', rowId);
+                    $('#SearchPaneAdvCritAdvCritGrid').igGridUpdating('deleteRow', rowId);
+                    console.log('[ScalePlus AdvCrit Edit] jQuery delete executed successfully');
+                    return;
+                } catch (err) {
+                    console.error('[ScalePlus AdvCrit Edit] jQuery delete failed, trying UI approach:', err);
+                }
+            }
+
+            // Fallback to UI click approach
             const deleteButton = document.querySelector('#SearchPaneAdvCritAdvCritGrid_updating_deletehover');
             
             if (deleteButton) {
-                console.log('[ScalePlus AdvCrit Edit] Found delete button, clicking...');
+                console.log('[ScalePlus AdvCrit Edit] Found delete button, using UI click approach...');
                 
                 const firstCell = row.querySelector('td[role="gridcell"]');
                 if (firstCell) {
@@ -230,20 +263,11 @@
                             console.log('[ScalePlus AdvCrit Edit] Clicked delete button');
                         }
                     }, 100);
+                } else {
+                    console.error('[ScalePlus AdvCrit Edit] Could not find first cell in row');
                 }
             } else {
                 console.error('[ScalePlus AdvCrit Edit] Could not find delete button');
-                
-                if (window.$ && typeof $.ig !== 'undefined') {
-                    try {
-                        const rowId = row.getAttribute('data-id');
-                        console.log('[ScalePlus AdvCrit Edit] Trying jQuery approach with row ID:', rowId);
-                        $('#SearchPaneAdvCritAdvCritGrid').igGridUpdating('deleteRow', rowId);
-                        console.log('[ScalePlus AdvCrit Edit] jQuery delete executed');
-                    } catch (err) {
-                        console.error('[ScalePlus AdvCrit Edit] jQuery delete failed:', err);
-                    }
-                }
             }
         }
 

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScalePlus Settings Module
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Settings management for ScalePlus
 // @author       Blake
 // @grant        none
@@ -25,6 +25,8 @@
             F5_BEHAVIOR: 'scaleplus_f5_behavior',
             ENV_QA_NAME: 'scaleplus_env_qa_name',
             ENV_PROD_NAME: 'scaleplus_env_prod_name',
+            ENV_QA_COLOR: 'scaleplus_env_qa_color',
+            ENV_PROD_COLOR: 'scaleplus_env_prod_color',
             DARK_MODE: 'scaleplus_dark_mode',
             BIGGER_CHECKBOXES: 'scaleplus_bigger_checkboxes'
         },
@@ -40,6 +42,8 @@
             scaleplus_f5_behavior: 'false',
             scaleplus_env_qa_name: 'QA ENVIRONMENT',
             scaleplus_env_prod_name: 'PRODUCTION ENVIRONMENT',
+            scaleplus_env_qa_color: '#d0b132',
+            scaleplus_env_prod_color: '#c0392b',
             scaleplus_dark_mode: 'false',
             scaleplus_bigger_checkboxes: 'true'
         },

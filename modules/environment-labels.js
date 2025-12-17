@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScalePlus Environment Labels Module
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  QA/Production environment labels
 // @author       Blake
 // @grant        none
@@ -42,9 +42,13 @@
                           window.ScalePlusSettings.DEFAULTS[window.ScalePlusSettings.SETTINGS.ENV_QA_NAME];
             const prodName = window.ScalePlusSettings.getSetting(window.ScalePlusSettings.SETTINGS.ENV_PROD_NAME) || 
                             window.ScalePlusSettings.DEFAULTS[window.ScalePlusSettings.SETTINGS.ENV_PROD_NAME];
+            const qaColor = window.ScalePlusSettings.getSetting(window.ScalePlusSettings.SETTINGS.ENV_QA_COLOR) || 
+                           window.ScalePlusSettings.DEFAULTS[window.ScalePlusSettings.SETTINGS.ENV_QA_COLOR];
+            const prodColor = window.ScalePlusSettings.getSetting(window.ScalePlusSettings.SETTINGS.ENV_PROD_COLOR) || 
+                             window.ScalePlusSettings.DEFAULTS[window.ScalePlusSettings.SETTINGS.ENV_PROD_COLOR];
             
             const labelText = isProd ? prodName : qaName;
-            const bgColor = isProd ? '#c0392b' : '#d0b132';
+            const bgColor = isProd ? prodColor : qaColor;
             const borderColor = bgColor;
             
             label.textContent = labelText;

@@ -1,10 +1,9 @@
 // ==UserScript==
 // @name         ScalePlus Settings UI Module
-// @namespace    https://github.com/ShutterSeeker/scaleplus-userscripts
-// @version      1.1
+// @namespace    http://tampermonkey.net/
+// @version      1.2
 // @description  Settings modal interface for ScalePlus
 // @author       Blake
-// @match        https://*/Scale/*
 // @grant        none
 // ==/UserScript==
 
@@ -24,7 +23,7 @@
         window.ScalePlusSettingsUI = {
             init: () => {},
             createSettingsModal: () => {},
-            addConfigureButton: () => {}
+            addScalePlusSettingsButton: () => {}
         };
         return;
     }
@@ -121,10 +120,14 @@
                             <div class="scaleplus-env-setting">
                                 <label for="qa-name">QA Name:</label>
                                 <input type="text" id="qa-name" placeholder="QA ENVIRONMENT">
+                                <input type="text" id="qa-color" placeholder="#d0b132" maxlength="7" class="color-input">
+                                <div id="qa-color-preview" class="color-preview"></div>
                             </div>
                             <div class="scaleplus-env-setting">
                                 <label for="prod-name">Prod Name:</label>
                                 <input type="text" id="prod-name" placeholder="PRODUCTION ENVIRONMENT">
+                                <input type="text" id="prod-color" placeholder="#c0392b" maxlength="7" class="color-input">
+                                <div id="prod-color-preview" class="color-preview"></div>
                             </div>
                         </div>
                     </div>
@@ -370,6 +373,19 @@
                 flex: 1 1 auto;
                 min-width: 200px;
             }
+            .scaleplus-env-setting input.color-input {
+                max-width: 100px;
+                min-width: 80px;
+                flex: 0 0 auto;
+                font-family: monospace;
+            }
+            .scaleplus-env-setting .color-preview {
+                width: 30px;
+                height: 30px;
+                border: 2px solid #999999;
+                flex: 0 0 auto;
+                transition: background-color 0.2s ease;
+            }
             @media (max-width: 600px) {
                 .scaleplus-env-names .scaleplus-setting,
                 .scaleplus-env-setting {
@@ -459,9 +475,44 @@
 
         const qaNameInput = modal.querySelector('#qa-name');
         const prodNameInput = modal.querySelector('#prod-name');
+        const qaColorInput = modal.querySelector('#qa-color');
+        const prodColorInput = modal.querySelector('#prod-color');
+        const qaColorPreview = modal.querySelector('#qa-color-preview');
+        const prodColorPreview = modal.querySelector('#prod-color-preview');
 
         qaNameInput.value = localStorage.getItem(SETTINGS.ENV_QA_NAME) || DEFAULTS[SETTINGS.ENV_QA_NAME];
         prodNameInput.value = localStorage.getItem(SETTINGS.ENV_PROD_NAME) || DEFAULTS[SETTINGS.ENV_PROD_NAME];
+        qaColorInput.value = localStorage.getItem(SETTINGS.ENV_QA_COLOR) || DEFAULTS[SETTINGS.ENV_QA_COLOR];
+        prodColorInput.value = localStorage.getItem(SETTINGS.ENV_PROD_COLOR) || DEFAULTS[SETTINGS.ENV_PROD_COLOR];
+
+        // Helper function to validate hex color
+        const isValidHexColor = (color) => {
+            return /^#[0-9A-Fa-f]{6}$/.test(color);
+        };
+
+        // Helper function to update color preview and environment label
+        const updateColorPreview = (input, preview, isProduction) => {
+            const color = input.value.trim();
+            if (isValidHexColor(color)) {
+                preview.style.backgroundColor = color;
+                // Update the actual environment label if it exists
+                const envLabel = document.getElementById('scaleplus-env-label');
+                const isProd = window.location.hostname === 'scale20.byjasco.com';
+                if (envLabel && isProd === isProduction) {
+                    envLabel.style.backgroundColor = color;
+                    const navBar = document.getElementById('topNavigationBar');
+                    if (navBar) {
+                        navBar.style.borderBottom = `6px solid ${color}`;
+                    }
+                }
+            } else {
+                preview.style.backgroundColor = '#cccccc';
+            }
+        };
+
+        // Initialize preview colors
+        updateColorPreview(qaColorInput, qaColorPreview, false);
+        updateColorPreview(prodColorInput, prodColorPreview, true);
 
         // Handle toggle changes
         $('#search-toggle').on('change', function(event) {
@@ -633,6 +684,18 @@
             localStorage.setItem(SETTINGS.ENV_PROD_NAME, prodNameInput.value);
         });
 
+        qaColorInput.addEventListener('input', () => {
+            const color = qaColorInput.value.trim();
+            localStorage.setItem(SETTINGS.ENV_QA_COLOR, color);
+            updateColorPreview(qaColorInput, qaColorPreview, false);
+        });
+
+        prodColorInput.addEventListener('input', () => {
+            const color = prodColorInput.value.trim();
+            localStorage.setItem(SETTINGS.ENV_PROD_COLOR, color);
+            updateColorPreview(prodColorInput, prodColorPreview, true);
+        });
+
         // Initialize bootstrap toggles
         $('#search-toggle, #enter-toggle, #middle-click-toggle, #right-click-toggle, #f5-toggle, #tab-duplicator-toggle, #default-filter-toggle, #env-labels-toggle, #adv-criteria-indicator-toggle, #dark-mode-toggle, #bigger-checkboxes-toggle').bootstrapToggle();
 
@@ -649,47 +712,67 @@
         $(darkModeToggle).bootstrapToggle(darkModeToggle.checked ? 'on' : 'off');
     };
 
-    const addConfigureButton = () => {
-        const targetButton = document.getElementById('ConfigureWorkStation');
+    const addScalePlusSettingsButton = () => {
+        // Find the ConfigureWorkStation button to insert our button near it
+        const configureButton = document.getElementById('ConfigureWorkStation');
         
-        console.log('[ScalePlus Settings UI] Looking for ConfigureWorkStation button...', targetButton ? 'FOUND' : 'NOT FOUND');
-        
-        if (targetButton) {
-            if (targetButton.hasAttribute('data-scaleplus-intercepted')) {
-                console.log('[ScalePlus Settings UI] Button already intercepted, skipping');
-                return;
-            }
-            
-            console.log('[ScalePlus Settings UI] Intercepting ConfigureWorkStation button');
-            
-            // Intercept the native Configure Workstation button
-            targetButton.setAttribute('data-scaleplus-intercepted', 'true');
-            
-            // Use capture phase to intercept before Scale's handlers
-            targetButton.addEventListener('click', (e) => {
-                console.log('[ScalePlus Settings UI] Button clicked! Intercepting...');
-                e.preventDefault();
-                e.stopPropagation();
-                e.stopImmediatePropagation();
-                
-                console.log('[ScalePlus Settings UI] Opening ScalePlus settings modal');
-                
-                const existingModal = document.getElementById('scaleplus-settings-modal');
-                if (existingModal) {
-                    existingModal.remove();
-                    const existingStyle = document.querySelector('style[data-scaleplus-modal]');
-                    if (existingStyle) existingStyle.remove();
-                }
-                createSettingsModal();
-                $('#scaleplus-settings-modal').modal('show');
-                
-                return false;
-            }, true); // Use capture phase
-            
-            console.log('[ScalePlus Settings UI] Configure Workstation button intercepted successfully');
-        } else {
+        if (!configureButton) {
             console.log('[ScalePlus Settings UI] ConfigureWorkStation button not found yet, will retry');
+            return false;
         }
+        
+        // Check if we already added our button
+        if (document.getElementById('ScalePlusSettings')) {
+            console.log('[ScalePlus Settings UI] ScalePlus Settings button already exists, skipping');
+            return true;
+        }
+        
+        console.log('[ScalePlus Settings UI] Adding ScalePlus Settings button');
+        
+        // Find the parent list item
+        const configureListItem = configureButton.closest('li');
+        if (!configureListItem) {
+            console.log('[ScalePlus Settings UI] Could not find parent list item, will retry');
+            return false;
+        }
+        
+        // Create new button in the same style as Configure Workstation
+        const scalePlusListItem = document.createElement('li');
+        scalePlusListItem.innerHTML = `
+            <a id="ScalePlusSettings" 
+               data-resourcekey="SCALEPLUSSETTINGS" 
+               data-resourcevalue="ScalePlus Settings" 
+               href="#" 
+               data-scaleplus-settings="true">
+                ScalePlus Settings
+            </a>
+        `;
+        
+        // Insert after the Configure Workstation button
+        configureListItem.parentNode.insertBefore(scalePlusListItem, configureListItem.nextSibling);
+        
+        // Add click handler to open our modal
+        const scalePlusButton = document.getElementById('ScalePlusSettings');
+        scalePlusButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log('[ScalePlus Settings UI] Opening ScalePlus settings modal');
+            
+            const existingModal = document.getElementById('scaleplus-settings-modal');
+            if (existingModal) {
+                existingModal.remove();
+                const existingStyle = document.querySelector('style[data-scaleplus-modal]');
+                if (existingStyle) existingStyle.remove();
+            }
+            createSettingsModal();
+            $('#scaleplus-settings-modal').modal('show');
+            
+            return false;
+        });
+        
+        console.log('[ScalePlus Settings UI] ScalePlus Settings button added successfully');
+        return true;
     };
 
     const init = () => {
@@ -701,20 +784,21 @@
             console.log('[ScalePlus Settings UI] Waiting for DOMContentLoaded...');
             document.addEventListener('DOMContentLoaded', () => {
                 console.log('[ScalePlus Settings UI] DOMContentLoaded fired');
-                addConfigureButton();
+                addScalePlusSettingsButton();
             });
         } else {
             console.log('[ScalePlus Settings UI] Document already ready, trying immediately');
-            addConfigureButton();
+            addScalePlusSettingsButton();
         }
         
         // Also watch for the button to appear dynamically
         console.log('[ScalePlus Settings UI] Setting up MutationObserver to watch for button');
         const observer = new MutationObserver((mutations) => {
-            const targetButton = document.getElementById('ConfigureWorkStation');
-            if (targetButton && !targetButton.hasAttribute('data-scaleplus-intercepted')) {
-                console.log('[ScalePlus Settings UI] Button appeared via mutation, intercepting now');
-                addConfigureButton();
+            const configureButton = document.getElementById('ConfigureWorkStation');
+            const scalePlusButton = document.getElementById('ScalePlusSettings');
+            if (configureButton && !scalePlusButton) {
+                console.log('[ScalePlus Settings UI] ConfigureWorkStation button appeared, adding ScalePlus button');
+                addScalePlusSettingsButton();
             }
         });
         
@@ -728,7 +812,7 @@
     window.ScalePlusSettingsUI = {
         init,
         createSettingsModal,
-        addConfigureButton
+        addScalePlusSettingsButton
     };
 
     console.log('[ScalePlus Settings UI] Module loaded');

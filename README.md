@@ -36,17 +36,22 @@ ScalePlus is a userscript that enhances the Scale application with powerful feat
 
 ---
 
-## Bigger Checkboxes
+## Right-Click Copy
 
-![Bigger Checkboxes](images/big-check.png)
+![Right-Click Copy](images/right-click-copy.png)
 
-The **Bigger Checkboxes** feature enlarges grid row checkboxes for easier clicking and selection.
+The **Right-Click Copy** feature provides quick access to copy functionality for grid items:
 
-### Features
-- **Larger Click Target**: Checkboxes sized to fill the full row height
-- **Better Visibility**: Easier to see and select rows in the grid
-- **Consistent Styling**: Maintains Scale's native checkbox colors and behavior
-- **Dark Mode Support**: Automatically adapts styling for dark mode
+### Copy Grid Content
+- **Right-click** on any grid cell to open a context menu
+- **Copy** option extracts and copies the cell's text content
+- **Smart Text Extraction**: Automatically handles links and nested content
+- **Visual Feedback**: Shows a tooltip confirming what was copied
+
+### Enhanced Workflow
+- **Keyboard Alternative**: Middle-click also copies grid content
+- **Clipboard Integration**: Seamlessly integrates with system clipboard
+- **No Page Disruption**: Copy operations don't interfere with normal page behavior
 
 ---
 
@@ -61,6 +66,20 @@ Dark mode transforms the results grid into a modern, eye-friendly dark theme tha
 - **Loading Spinner**: Custom animated blue spinner that replaces the default loading indicator
 - **Links**: Blue accent colors for links that maintain readability
 - **Icons**: Remain unchanged, but still look good in dark mode
+
+---
+
+## Bigger Checkboxes
+
+![Bigger Checkboxes](images/big-check.png)
+
+The **Bigger Checkboxes** feature enlarges grid row checkboxes for easier clicking and selection.
+
+### Features
+- **Larger Click Target**: Checkboxes sized to fill the full row height
+- **Better Visibility**: Easier to see and select rows in the grid
+- **Consistent Styling**: Maintains Scale's native checkbox colors and behavior
+- **Dark Mode Support**: Automatically adapts styling for dark mode
 
 ---
 
@@ -88,25 +107,6 @@ The **Default Filter** feature provides intelligent automation:
 ### Middle-Click Favorites
 - **Quick Access**: Middle-click any favorite filter to open it in a new tab
 - **Automatic Application**: The selected favorite automatically applies when the new tab loads
-
----
-
-## Right-Click Copy
-
-![Right-Click Copy](images/right-click-copy.png)
-
-The **Right-Click Copy** feature provides quick access to copy functionality for grid items:
-
-### Copy Grid Content
-- **Right-click** on any grid cell to open a context menu
-- **Copy** option extracts and copies the cell's text content
-- **Smart Text Extraction**: Automatically handles links and nested content
-- **Visual Feedback**: Shows a tooltip confirming what was copied
-
-### Enhanced Workflow
-- **Keyboard Alternative**: Middle-click also copies grid content
-- **Clipboard Integration**: Seamlessly integrates with system clipboard
-- **No Page Disruption**: Copy operations don't interfere with normal page behavior
 
 ---
 

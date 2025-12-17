@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScalePlus Settings Module
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @description  Settings management for ScalePlus
 // @author       Blake
 // @grant        none
@@ -36,7 +36,7 @@
             scaleplus_custom_enter: 'true',
             scaleplus_middle_click: 'true',
             scaleplus_right_click_menu: 'true',
-            scaleplus_tab_duplicator: 'false',
+            scaleplus_tab_duplicator: 'true',
             scaleplus_default_filter: 'true',
             scaleplus_adv_criteria_enhancement: 'true',
             scaleplus_f5_behavior: 'false',
@@ -45,7 +45,7 @@
             scaleplus_env_qa_color: '#d0b132',
             scaleplus_env_prod_color: '#c0392b',
             scaleplus_dark_mode: 'false',
-            scaleplus_bigger_checkboxes: 'true'
+            scaleplus_bigger_checkboxes: 'false'
         },
 
         init() {
@@ -58,12 +58,9 @@
                 }
             }
 
-            // Ensure advanced settings are false by default if not set
+            // Ensure F5 behavior is false by default if not set
             if (localStorage.getItem(this.SETTINGS.F5_BEHAVIOR) === null) {
                 localStorage.setItem(this.SETTINGS.F5_BEHAVIOR, 'false');
-            }
-            if (localStorage.getItem(this.SETTINGS.TAB_DUPLICATOR) === null) {
-                localStorage.setItem(this.SETTINGS.TAB_DUPLICATOR, 'false');
             }
 
             console.log('[ScalePlus Settings] Module initialized');
@@ -78,7 +75,13 @@
         },
 
         isEnabled(settingKey) {
-            return localStorage.getItem(settingKey) !== 'false';
+            const value = localStorage.getItem(settingKey);
+            // If value is null (not set), use the default
+            if (value === null) {
+                return this.DEFAULTS[settingKey] === 'true';
+            }
+            // Otherwise check if it's not 'false'
+            return value !== 'false';
         }
     };
 

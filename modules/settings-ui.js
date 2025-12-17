@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ScalePlus Settings UI Module
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.3
 // @description  Settings modal interface for ScalePlus
 // @author       Blake
 // @grant        none
@@ -50,87 +50,97 @@
                             <h4 class="modal-title">ScalePlus Settings</h4>
                         </div>
                         <div class="modal-body" data-controltype="modalDialogBody">
-                            <div class="scaleplus-basic-settings">
-                            <div class="scaleplus-setting">
-                                <label for="search-toggle">Always show search:</label>
-                                <input type="checkbox" id="search-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
-                                <span class="scaleplus-setting-desc">Automatically show the search pane when the page loads</span>
-                            </div>
-                            <div class="scaleplus-setting">
-                                <label for="enter-toggle">Custom enter behavior:</label>
-                                <input type="checkbox" id="enter-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
-                                <span class="scaleplus-setting-desc">When enabled, Enter triggers Play/Stop</span>
-                            </div>
-                            <div class="scaleplus-setting">
-                                <label for="middle-click-toggle">Enhance middle click:</label>
-                                <input type="checkbox" id="middle-click-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
-                                <span class="scaleplus-setting-desc">Middle click on grid items to copy text, middle click or Ctrl+click on favorites to open in new tab <a href="https://github.com/Blake-goofy/ScalePlus#right-click-copy" target="_blank" class="scaleplus-help-link">[?]</a></span>
-                            </div>
-                            <div class="scaleplus-setting">
-                                <label for="right-click-toggle">Right-click menu:</label>
-                                <input type="checkbox" id="right-click-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
-                                <span class="scaleplus-setting-desc">Right-click on grid items and favorites for additional options <a href="https://github.com/Blake-goofy/ScalePlus#right-click-copy" target="_blank" class="scaleplus-help-link">[?]</a></span>
-                            </div>
-                            <div class="scaleplus-setting">
-                                <label for="adv-criteria-indicator-toggle">Enhance advanced criteria:</label>
-                                <input type="checkbox" id="adv-criteria-indicator-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
-                                <span class="scaleplus-setting-desc">Show count in header and condition column in advanced criteria grid <a href="https://github.com/Blake-goofy/ScalePlus#advanced-criteria-enhance" target="_blank" class="scaleplus-help-link">[?]</a></span>
-                            </div>
-                            <div class="scaleplus-setting">
-                                <label for="default-filter-toggle">Enhance favorites:</label>
-                                <input type="checkbox" id="default-filter-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
-                                <span class="scaleplus-setting-desc">Star defaults + relative date/time favorites & pending-filter tab restore <a href="https://github.com/Blake-goofy/ScalePlus#default-state-management" target="_blank" class="scaleplus-help-link">[?]</a></span>
-                            </div>
-                            <div class="scaleplus-setting">
-                                <label for="dark-mode-toggle">Dark mode:</label>
-                                <input type="checkbox" id="dark-mode-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
-                                <span class="scaleplus-setting-desc">Apply dark theme to the results grid area <a href="https://github.com/Blake-goofy/ScalePlus#dark-mode" target="_blank" class="scaleplus-help-link">[?]</a></span>
-                            </div>
-                            <div class="scaleplus-setting">
-                                <label for="bigger-checkboxes-toggle">Bigger checkboxes:</label>
-                                <input type="checkbox" id="bigger-checkboxes-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
-                                <span class="scaleplus-setting-desc">Enlarge row selection checkboxes for easier clicking <a href="https://github.com/Blake-goofy/ScalePlus#bigger-checkboxes" target="_blank" class="scaleplus-help-link">[?]</a></span>
-                            </div>
-                        </div>
+                            <!-- Main Settings Page -->
+                            <div id="scaleplus-main-page" class="scaleplus-settings-page">
+                                <div class="scaleplus-setting">
+                                    <label for="right-click-toggle">Right-click menu:</label>
+                                    <input type="checkbox" id="right-click-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
+                                    <span class="scaleplus-setting-desc">Right-click on grid items and favorites for additional options <a href="https://github.com/Blake-goofy/ScalePlus#right-click-copy" target="_blank" class="scaleplus-help-link">[?]</a></span>
+                                </div>
+                                <div class="scaleplus-setting">
+                                    <label for="dark-mode-toggle">Dark mode:</label>
+                                    <input type="checkbox" id="dark-mode-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
+                                    <span class="scaleplus-setting-desc">Apply dark theme to the results grid area <a href="https://github.com/Blake-goofy/ScalePlus#dark-mode" target="_blank" class="scaleplus-help-link">[?]</a></span>
+                                </div>
+                                <div class="scaleplus-setting">
+                                    <label for="bigger-checkboxes-toggle">Bigger checkboxes:</label>
+                                    <input type="checkbox" id="bigger-checkboxes-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
+                                    <span class="scaleplus-setting-desc">Enlarge row selection checkboxes for easier clicking <a href="https://github.com/Blake-goofy/ScalePlus#bigger-checkboxes" target="_blank" class="scaleplus-help-link">[?]</a></span>
+                                </div>
+                                <div class="scaleplus-setting">
+                                    <label for="f5-toggle">Custom F5 behavior:</label>
+                                    <input type="checkbox" id="f5-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
+                                    <span class="scaleplus-setting-desc">When enabled, F5 triggers Play/Stop instead of page refresh</span>
+                                </div>
+                                <div class="scaleplus-setting">
+                                    <label for="env-labels-toggle">Environment labels:</label>
+                                    <input type="checkbox" id="env-labels-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
+                                    <span class="scaleplus-setting-desc">Show environment label in navbar <a href="https://github.com/Blake-goofy/ScalePlus#environment-labels" target="_blank" class="scaleplus-help-link">[?]</a></span>
+                                </div>
 
-                        <div class="scaleplus-divider">
-                            <div class="scaleplus-advanced-label">Advanced settings</div>
-                            <div class="scaleplus-divider-line"></div>
-                        </div>
+                                <div class="scaleplus-env-names">
+                                    <div class="scaleplus-env-setting">
+                                        <label for="qa-name">QA Name:</label>
+                                        <input type="text" id="qa-name" placeholder="QA ENVIRONMENT">
+                                        <input type="text" id="qa-color" placeholder="#d0b132" maxlength="7" class="color-input">
+                                        <div id="qa-color-preview" class="color-preview"></div>
+                                    </div>
+                                    <div class="scaleplus-env-setting">
+                                        <label for="prod-name">Prod Name:</label>
+                                        <input type="text" id="prod-name" placeholder="PRODUCTION ENVIRONMENT">
+                                        <input type="text" id="prod-color" placeholder="#c0392b" maxlength="7" class="color-input">
+                                        <div id="prod-color-preview" class="color-preview"></div>
+                                    </div>
+                                </div>
 
-                        <div class="scaleplus-advanced-settings">
-                            <div class="scaleplus-setting">
-                                <label for="f5-toggle">Custom F5 behavior:</label>
-                                <input type="checkbox" id="f5-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
-                                <span class="scaleplus-setting-desc">When enabled, F5 triggers Play/Stop instead of page refresh</span>
+                                <div class="scaleplus-more-settings-link">
+                                    <a href="#" id="scaleplus-show-more">More settings &gt;</a>
+                                </div>
                             </div>
-                            <div class="scaleplus-setting">
-                                <label for="tab-duplicator-toggle">Tab duplicator:</label>
-                                <input type="checkbox" id="tab-duplicator-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
-                                <span class="scaleplus-setting-desc">Ctrl+D to duplicate current tab</span>
-                            </div>
-                            <div class="scaleplus-setting">
-                                <label for="env-labels-toggle">Environment labels:</label>
-                                <input type="checkbox" id="env-labels-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
-                                <span class="scaleplus-setting-desc">Show environment label in navbar <a href="https://github.com/Blake-goofy/ScalePlus#environment-labels" target="_blank" class="scaleplus-help-link">[?]</a></span>
-                            </div>
-                        </div>
 
-                        <div class="scaleplus-env-names">
-                            <div class="scaleplus-env-setting">
-                                <label for="qa-name">QA Name:</label>
-                                <input type="text" id="qa-name" placeholder="QA ENVIRONMENT">
-                                <input type="text" id="qa-color" placeholder="#d0b132" maxlength="7" class="color-input">
-                                <div id="qa-color-preview" class="color-preview"></div>
-                            </div>
-                            <div class="scaleplus-env-setting">
-                                <label for="prod-name">Prod Name:</label>
-                                <input type="text" id="prod-name" placeholder="PRODUCTION ENVIRONMENT">
-                                <input type="text" id="prod-color" placeholder="#c0392b" maxlength="7" class="color-input">
-                                <div id="prod-color-preview" class="color-preview"></div>
+                            <!-- More Settings Page (rarely disabled features) -->
+                            <div id="scaleplus-more-page" class="scaleplus-settings-page" style="display: none;">
+                                <div class="scaleplus-setting">
+                                    <label for="search-toggle">Always show search:</label>
+                                    <input type="checkbox" id="search-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
+                                    <span class="scaleplus-setting-desc">Automatically show the search pane when the page loads</span>
+                                </div>
+                                <div class="scaleplus-setting">
+                                    <label for="enter-toggle">Custom enter behavior:</label>
+                                    <input type="checkbox" id="enter-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
+                                    <span class="scaleplus-setting-desc">When enabled, Enter triggers Play/Stop</span>
+                                </div>
+                                <div class="scaleplus-setting">
+                                    <label for="middle-click-toggle">Enhance middle click:</label>
+                                    <input type="checkbox" id="middle-click-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
+                                    <span class="scaleplus-setting-desc">Middle click on grid items to copy text, middle click or Ctrl+click on favorites to open in new tab <a href="https://github.com/Blake-goofy/ScalePlus#right-click-copy" target="_blank" class="scaleplus-help-link">[?]</a></span>
+                                </div>
+                                <div class="scaleplus-setting">
+                                    <label for="adv-criteria-indicator-toggle">Enhance advanced criteria:</label>
+                                    <input type="checkbox" id="adv-criteria-indicator-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
+                                    <span class="scaleplus-setting-desc">Show count in header and condition column in advanced criteria grid <a href="https://github.com/Blake-goofy/ScalePlus#advanced-criteria-enhance" target="_blank" class="scaleplus-help-link">[?]</a></span>
+                                </div>
+                                <div class="scaleplus-setting">
+                                    <label for="default-filter-toggle">Enhance favorites:</label>
+                                    <input type="checkbox" id="default-filter-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
+                                    <span class="scaleplus-setting-desc">Star defaults + relative date/time favorites & pending-filter tab restore <a href="https://github.com/Blake-goofy/ScalePlus#default-state-management" target="_blank" class="scaleplus-help-link">[?]</a></span>
+                                </div>
+                                <div class="scaleplus-setting">
+                                    <label for="tab-duplicator-toggle">Tab duplicator:</label>
+                                    <input type="checkbox" id="tab-duplicator-toggle" data-toggle="toggle" data-on="On" data-off="Off" data-width="100">
+                                    <span class="scaleplus-setting-desc">Ctrl+D to duplicate current tab</span>
+                                </div>
+
+                                <div class="scaleplus-reset-settings">
+                                    <button id="scaleplus-reset-btn" class="btn btn-warning">Reset All Settings to Defaults</button>
+                                    <span class="scaleplus-reset-desc">This will reset all toggle switches above to their default values. Your saved favorites and default filters will not be affected.</span>
+                                </div>
+
+                                <div class="scaleplus-back-link">
+                                    <a href="#" id="scaleplus-show-main">&lt; Back</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     <div class="modal-footer" data-controltype="modalDialogFooter">
                         <button id="scaleplus-close-btn" class="btn btn-default" data-dismiss="modal" data-resourcekey="BTN_CLOSE" data-resourcevalue="Close">Close</button>
                     </div>
@@ -139,46 +149,6 @@
         </div>
         `;
         document.body.appendChild(modal);
-
-        // Sample colors from Scale's UI
-        const headerBg = '#494e5e';
-        const bodyBg = '#f4f4f8';
-        const footerBg = '#494e5e';
-        const textColor = '#ffffff';
-        const buttonBg = '#4f93e4';
-        const buttonColor = '#ffffff';
-
-        // Apply sampled colors
-        const modalContent = modal.querySelector('.modal-content');
-        const modalHeader = modal.querySelector('.modal-header');
-        const modalBody = modal.querySelector('.modal-body');
-        const modalFooter = modal.querySelector('.modal-footer');
-        const cancelBtn = modal.querySelector('#scaleplus-close-btn');
-        const labels = modal.querySelectorAll('label');
-        const inputs = modal.querySelectorAll('input[type="text"]');
-
-        // Use light background for modal to ensure visibility
-        const darkText = '#000000';
-        if (modalContent) modalContent.style.backgroundColor = bodyBg;
-        if (modalHeader) {
-            modalHeader.style.backgroundColor = headerBg;
-            modalHeader.style.color = textColor;
-        }
-        if (modalBody) {
-            modalBody.style.backgroundColor = bodyBg;
-            modalBody.style.color = darkText;
-        }
-        if (modalFooter) {
-            modalFooter.style.backgroundColor = footerBg;
-            modalFooter.style.color = textColor;
-        }
-        if (cancelBtn) {
-            cancelBtn.style.backgroundColor = buttonBg;
-            cancelBtn.style.color = buttonColor;
-        }
-        labels.forEach(label => {
-            label.style.color = darkText;
-        });
 
         // Add styles
         const style = document.createElement('style');
@@ -194,90 +164,27 @@
                 box-shadow: 0 4px 20px rgba(0,0,0,0.3);
                 border: none;
             }
-            .modal-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 15px 20px;
-                background-color: #494e5e !important;
-                color: white;
-                width: 100%;
-                box-sizing: border-box;
-                flex-shrink: 0;
-                position: relative;
-                z-index: 1;
-                margin: 0;
-                border-bottom: 1px solid #ddd;
+            /* Let Scale's native modal-header styles apply */
+            #scaleplus-settings-modal .modal-header {
+                /* Only override positioning/layout, not colors */
             }
-            .modal-header .close {
-                margin: 0;
-                color: white !important;
-                opacity: 0.8;
-                font-size: 28px;
-                line-height: 1;
-                cursor: pointer;
-                background: none;
-                border: none;
-                padding: 0;
-                width: 30px;
-                height: 30px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                position: absolute;
-                right: 15px;
-                top: 50%;
-                transform: translateY(-50%);
+            #scaleplus-settings-modal .modal-header .close {
+                /* Let Scale's native close button styles apply */
             }
-            .modal-header .close:hover {
-                opacity: 1;
-                color: white;
+            #scaleplus-settings-modal .modal-header .modal-title {
+                /* Let Scale's native modal-title styles apply */
             }
-            .modal-header h4 {
-                margin: 0;
-                flex: 1;
-                text-align: center;
-                color: white;
-                font-size: 18px;
-                font-weight: 500;
-                padding-right: 30px;
-            }
-            .modal-body {
+            #scaleplus-settings-modal .modal-body {
                 padding: 20px !important;
                 overflow-y: auto !important;
-                flex: 1;
-                background-color: #f4f4f8 !important;
-                color: #000000 !important;
-                position: relative;
-                z-index: 0;
                 max-height: calc(100vh - 200px) !important;
             }
-            .modal-footer {
-                padding: 10px 20px;
-                display: flex;
-                justify-content: flex-end;
-                flex-shrink: 0;
-                border-top: 1px solid #ddd;
-                background-color: #494e5e !important;
-                color: white;
-                width: 100%;
-                box-sizing: border-box;
-                position: relative;
-                z-index: 1;
-                margin: 0;
+            /* Let Scale's native modal-footer styles apply */
+            #scaleplus-settings-modal .modal-footer {
+                /* Only override layout if needed */
             }
-            .modal-footer .btn {
-                border: none;
-                padding: 8px 16px;
-                cursor: pointer;
-                font-size: 14px;
-                background-color: #4f93e4;
-                color: white;
-                border-radius: 0;
-                margin-left: 10px;
-            }
-            .modal-footer .btn:hover {
-                background-color: #3a7bc8;
+            #scaleplus-settings-modal .modal-footer .btn {
+                /* Let Scale's native button styles apply */
             }
             .scaleplus-setting {
                 display: flex;
@@ -287,24 +194,22 @@
             .scaleplus-setting label {
                 flex: 1;
                 font-weight: bold;
-                color: #000000;
             }
             .scaleplus-setting-desc {
                 font-size: 12px;
                 flex: 2;
                 margin-left: 20px;
-                color: #666666 !important;
+                opacity: 0.7;
             }
             .scaleplus-help-link {
                 margin-left: 5px;
                 text-decoration: none;
                 font-size: 14px;
-                opacity: 0.7;
-                transition: opacity 0.2s;
-                color: black;
+                color: #2563eb !important;
+                opacity: 1 !important;
             }
             .scaleplus-help-link:hover {
-                opacity: 1;
+                color: #1d4ed8 !important;
             }
             .scaleplus-env-names {
                 margin-left: 0;
@@ -317,7 +222,6 @@
             .scaleplus-env-names .scaleplus-setting label {
                 flex: 1;
                 font-weight: bold;
-                color: #000000;
                 margin-bottom: 0;
             }
             .scaleplus-env-names input {
@@ -326,9 +230,6 @@
                 width: 100%;
                 max-width: 300px;
                 display: inline-block;
-                background-color: #ffffff !important;
-                color: #666666 !important;
-                border: 1px solid #999999 !important;
                 flex: 2;
             }
             .scaleplus-divider {
@@ -339,10 +240,11 @@
                 font-size: 12px;
                 margin-bottom: 10px;
                 text-align: left;
-                color: #666666 !important;
+                opacity: 0.7;
             }
             .scaleplus-divider-line {
-                border-top: 1px solid #555;
+                border-top: 1px solid currentColor;
+                opacity: 0.3;
                 margin-bottom: 15px;
             }
             .scaleplus-env-setting {
@@ -358,7 +260,6 @@
                 min-width: 120px;
                 max-width: 200px;
                 display: inline-block;
-                color: #000000;
                 flex: 0 0 auto;
             }
             .scaleplus-env-setting input {
@@ -367,9 +268,6 @@
                 width: 100%;
                 max-width: 300px;
                 display: inline-block;
-                background-color: #ffffff !important;
-                color: #666666 !important;
-                border: 1px solid #999999 !important;
                 flex: 1 1 auto;
                 min-width: 200px;
             }
@@ -385,6 +283,49 @@
                 border: 2px solid #999999;
                 flex: 0 0 auto;
                 transition: background-color 0.2s ease;
+            }
+            .scaleplus-more-settings-link {
+                text-align: right;
+                margin-top: 30px;
+            }
+            .scaleplus-more-settings-link a {
+                color: #2563eb;
+                text-decoration: none;
+                font-size: 14px;
+            }
+            .scaleplus-more-settings-link a:hover {
+                text-decoration: underline;
+                color: #1d4ed8;
+            }
+            .scaleplus-back-link {
+                text-align: left;
+                margin-top: 30px;
+            }
+            .scaleplus-back-link a {
+                color: #2563eb;
+                text-decoration: none;
+                font-size: 14px;
+            }
+            .scaleplus-back-link a:hover {
+                text-decoration: underline;
+                color: #1d4ed8;
+            }
+            .scaleplus-settings-page {
+                min-height: 300px;
+            }
+            .scaleplus-reset-settings {
+                margin-top: 30px;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+            .scaleplus-reset-settings button {
+                flex-shrink: 0;
+            }
+            .scaleplus-reset-desc {
+                font-size: 12px;
+                opacity: 0.7;
+                flex: 1;
             }
             @media (max-width: 600px) {
                 .scaleplus-env-names .scaleplus-setting,
@@ -469,7 +410,7 @@
 
         const biggerCheckboxesToggle = modal.querySelector('#bigger-checkboxes-toggle');
         const currentBiggerCheckboxes = localStorage.getItem(SETTINGS.BIGGER_CHECKBOXES);
-        if (currentBiggerCheckboxes !== 'false') {
+        if (currentBiggerCheckboxes === 'true') {
             biggerCheckboxesToggle.checked = true;
         }
 
@@ -484,6 +425,60 @@
         prodNameInput.value = localStorage.getItem(SETTINGS.ENV_PROD_NAME) || DEFAULTS[SETTINGS.ENV_PROD_NAME];
         qaColorInput.value = localStorage.getItem(SETTINGS.ENV_QA_COLOR) || DEFAULTS[SETTINGS.ENV_QA_COLOR];
         prodColorInput.value = localStorage.getItem(SETTINGS.ENV_PROD_COLOR) || DEFAULTS[SETTINGS.ENV_PROD_COLOR];
+
+        // Page navigation handlers
+        const mainPage = modal.querySelector('#scaleplus-main-page');
+        const morePage = modal.querySelector('#scaleplus-more-page');
+        const showMoreLink = modal.querySelector('#scaleplus-show-more');
+        const showMainLink = modal.querySelector('#scaleplus-show-main');
+
+        showMoreLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            mainPage.style.display = 'none';
+            morePage.style.display = 'block';
+        });
+
+        showMainLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            morePage.style.display = 'none';
+            mainPage.style.display = 'block';
+        });
+
+        // Reset settings button handler
+        const resetBtn = modal.querySelector('#scaleplus-reset-btn');
+        resetBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            if (!confirm('Are you sure you want to reset all settings to their defaults? This will NOT affect your saved favorites or default filters.')) {
+                return;
+            }
+
+            // Clear only the toggle settings from localStorage (not favorites data)
+            const settingsKeys = [
+                SETTINGS.SHOW_SEARCH_PANE,
+                SETTINGS.CUSTOM_ENTER,
+                SETTINGS.MIDDLE_CLICK,
+                SETTINGS.RIGHT_CLICK_MENU,
+                SETTINGS.F5_BEHAVIOR,
+                SETTINGS.TAB_DUPLICATOR,
+                SETTINGS.DEFAULT_FILTER,
+                SETTINGS.ADV_CRITERIA_ENHANCEMENT,
+                SETTINGS.DARK_MODE,
+                SETTINGS.BIGGER_CHECKBOXES,
+                SETTINGS.ENV_LABELS,
+                SETTINGS.ENV_QA_NAME,
+                SETTINGS.ENV_PROD_NAME,
+                SETTINGS.ENV_QA_COLOR,
+                SETTINGS.ENV_PROD_COLOR
+            ];
+
+            settingsKeys.forEach(key => {
+                localStorage.removeItem(key);
+            });
+
+            alert('Settings have been reset to defaults. The page will now reload.');
+            window.location.reload();
+        });
 
         // Helper function to validate hex color
         const isValidHexColor = (color) => {
@@ -748,8 +743,8 @@
             </a>
         `;
         
-        // Insert after the Configure Workstation button
-        configureListItem.parentNode.insertBefore(scalePlusListItem, configureListItem.nextSibling);
+        // Insert before the Configure Workstation button
+        configureListItem.parentNode.insertBefore(scalePlusListItem, configureListItem);
         
         // Add click handler to open our modal
         const scalePlusButton = document.getElementById('ScalePlusSettings');

@@ -1,18 +1,9 @@
 # ScalePlus - Enhanced Scale Application Experience
 
-ScalePlus is a comprehensive userscript that enhances the Scale application with powerful features and improved workflow. All functionality is consolidated into a single script with an intuitive settings interface.
-
-![ScalePlus Settings](images/settings.png)
-
----
+ScalePlus is a userscript that enhances the Scale application with powerful features and improved workflow.
 
 ## Installation
 
-### Prerequisites
-- **Tampermonkey** browser extension (available for Chrome, Firefox, Safari, Edge)
-- Access to Scale application environments
-
-### Install Steps
 1. **Install Tampermonkey Extension**
    - Click here: [Chrome Web Store](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
    - Or search for "Tampermonkey" in your browser's extension store
@@ -23,22 +14,25 @@ ScalePlus is a comprehensive userscript that enhances the Scale application with
    - In the top-right corner, enable **Developer Mode**
    - Make sure **User Scripts** are turned on (toggle switch)
 
-3. **Restart Browser**
-   - Close and reopen your browser to ensure all settings are applied
-
-4. **Install ScalePlus Script**
+3. **Install ScalePlus Script**
    - Click here: [main.user.js](https://github.com/Blake-goofy/ScalePlus/raw/refs/heads/main/main.user.js)
    - Tampermonkey will automatically prompt you to install
    - Click **Install**
+
+4. **Troubleshooting: Restart Browser (if needed)**
+   - If ScalePlus doesn't appear after installation, close and reopen your browser
+   - This ensures all Tampermonkey settings are properly applied
 
 ---
 
 ## Quick Start Guide
 
-1. **Enable** desired features in the settings by clicking the person icon in top right then **Configure workstation**
-![ScalePlus Settings](images/configure.png)
-2. **Set Default Filters** by clicking stars next to your favorite saved searches
-3. **Enjoy** enhanced productivity with keyboard shortcuts and automation!
+1. **Configure ScalePlus** by clicking the person icon in top right, then **ScalePlus Settings**
+![ScalePlus Settings](images/settings.png)
+2. **Review each setting** to understand what features are available - most are enabled by default
+3. **Click the [?] help links** next to settings to jump to detailed documentation sections below
+4. **Explore "More settings"** for features that are rarely disabled
+5. **Enjoy** enhanced productivity with keyboard shortcuts and automation!
 
 ---
 

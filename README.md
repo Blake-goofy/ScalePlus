@@ -182,7 +182,7 @@ The **Advanced Criteria Enhance** feature provides enhances the advanced criteri
 
 ### Settings Not Appearing
 - Ensure you're on a Scale application page
-- Click "Configure workstation" button in the navigation
+- Click "ScalePlus Settings" button in the navigation
 - Refresh the page if needed
 
 ### Features Not Working

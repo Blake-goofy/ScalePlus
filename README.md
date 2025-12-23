@@ -10,6 +10,7 @@ ScalePlus is a userscript that enhances the Scale application with powerful feat
 
 2. **Enable Developer Mode (Important!)**
    - Click the **Extensions** icon in your browser toolbar
+   - Click **Manage extensions**
    - Find **Tampermonkey** and click **Details**
    - In the top-right corner, enable **Developer Mode**
    - Make sure **User Scripts** are turned on (toggle switch)
